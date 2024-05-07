@@ -14,7 +14,7 @@ class MockRemoteCredentialDataSource implements RemoteCredentialDataSource {
   @override
   Future<Either<IFailure, CredentialDto>> login(String phone) async {
     return await TaskEither(() => Future.delayed(
-        const Duration(milliseconds: 300),
+        const Duration(milliseconds: 500),
             () => Either.fromNullable(_mockedAccount[phone],
                 () => const NotFoundFailure(message: 'Пользователя с таким номером не сущетсвует')))
     )

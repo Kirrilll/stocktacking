@@ -37,6 +37,17 @@ Page buildPageWithDefaultTransition<T>({
 GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
       navigatorKey: _rootNavigatorKey,
       initialLocation: _loginPath,
+      refreshListenable: Listenable.merge(guards
+          .map((guard) => guard.listenable)
+          .toList()
+      ),
+      redirect: (_, state) async {
+        for(final guard in guards) {
+          final redirectRes = await guard.redirect(state);
+          if(redirectRes != null) return redirectRes;
+        }
+        return null;
+      },
       routes: [
         GoRoute(
           path: _loginPath,

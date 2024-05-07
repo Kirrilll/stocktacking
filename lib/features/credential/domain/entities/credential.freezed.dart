@@ -92,8 +92,8 @@ class __$$UnauthoresedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnauthoresedImpl implements Unauthoresed {
-  _$UnauthoresedImpl();
+class _$UnauthoresedImpl extends Unauthoresed {
+  _$UnauthoresedImpl() : super._();
 
   @override
   String toString() {
@@ -172,8 +172,9 @@ class _$UnauthoresedImpl implements Unauthoresed {
   }
 }
 
-abstract class Unauthoresed implements Credential {
+abstract class Unauthoresed extends Credential {
   factory Unauthoresed() = _$UnauthoresedImpl;
+  Unauthoresed._() : super._();
 }
 
 /// @nodoc
@@ -214,8 +215,8 @@ class __$$AuthorisedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthorisedImpl implements Authorised {
-  _$AuthorisedImpl(this.accessToken, this.role);
+class _$AuthorisedImpl extends Authorised {
+  _$AuthorisedImpl(this.accessToken, this.role) : super._();
 
   @override
   final String accessToken;
@@ -309,9 +310,10 @@ class _$AuthorisedImpl implements Authorised {
   }
 }
 
-abstract class Authorised implements Credential {
+abstract class Authorised extends Credential {
   factory Authorised(final String accessToken, final Role role) =
       _$AuthorisedImpl;
+  Authorised._() : super._();
 
   String get accessToken;
   Role get role;

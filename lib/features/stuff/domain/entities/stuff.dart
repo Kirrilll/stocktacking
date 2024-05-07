@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stocktacking/features/credential/domain/profile.dart';
 import 'package:stocktacking/features/stock/domain/entities/storage_base.dart';
+
+import '../../../credential/domain/entities/profile.dart';
 
 part 'stuff.freezed.dart';
 

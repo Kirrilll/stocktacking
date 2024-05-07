@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../stock/domain/entities/storage_base.dart';
+import '../../../stock/domain/entities/storage_base.dart';
 
 part 'profile.freezed.dart';
 
