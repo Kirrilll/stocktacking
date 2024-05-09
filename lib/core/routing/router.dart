@@ -8,6 +8,7 @@ import 'package:stocktacking/features/credential/presentation/pages/login_page.d
 import 'package:stocktacking/features/home/presentation/pages/home_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stock_filter_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stocks_page.dart';
+import 'package:stocktacking/features/stuff/presentation/pages/stuff_detail_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_scanning_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/user_stuff_page.dart';
 
@@ -83,7 +84,18 @@ GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
                             buildPageWithDefaultTransition(
                                 context: context,
                                 state: state,
-                                child: const StuffScanningPage()))
+                                child: const StuffScanningPage())
+                    ),
+                    GoRoute(
+                      path: _stuffDetailPath,
+                      parentNavigatorKey: _rootNavigatorKey,
+                      name: stuffDetail,
+                      pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                          context: context,
+                          state: state,
+                          child: StuffDetailPage(int.tryParse(state.pathParameters[stuffIdParam] ?? '') ?? -1)
+                      )
+                    )
                   ]),
               GoRoute(
                   path: _stocksPath,

@@ -14,7 +14,7 @@ class MockStuffRemoteDataSource implements RemoteStuffDataSource {
   @override
   Future<Either<IFailure, List<StuffDto>>> getUsingStuff() async {
     return await TaskEither<IFailure, List<StuffDto>>
-        .rightTask(Task(() => Future.delayed(const Duration(milliseconds: 200), () => _mockedUsingData)))
+        .rightTask(Task(() => Future.delayed(const Duration(milliseconds: 500), () => _mockedUsingData)))
         .run();
   }
 

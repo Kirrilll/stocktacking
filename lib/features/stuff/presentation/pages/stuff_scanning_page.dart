@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/qr_scanner/presentation/qr_scan_view_builder.dart';
 
-class StuffScanningPage extends StatelessWidget {
+class StuffScanningPage extends ConsumerStatefulWidget {
   const StuffScanningPage({super.key});
+
+  @override
+  ConsumerState<StuffScanningPage> createState() => _StuffScanningPageState();
+}
+
+class _StuffScanningPageState extends ConsumerState<StuffScanningPage> {
+
+  QRViewController? _qrViewController;
+  _onCreatedQrView(QRViewController controller) => setState(() => _qrViewController = controller);
+
+  _onScan(Barcode code) {
+    _qrViewController?.pauseCamera();
+    // ref
+    //     .read(certificateNotifierProvider.notifier)
+    //     .getCertificateInfo(code.code ?? '');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +35,9 @@ class StuffScanningPage extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(16))
             ),
             child: QrScannerBuilder(
-                onResult: (_) {},
-                // onCreateQrView: _onCreatedQrView,
-                // controller: _qrViewController,
+                onResult: _onScan,
+                onCreateQrView: _onCreatedQrView,
+                controller: _qrViewController,
                 qrBuilder: (_, scanner, values, actions) => Stack(
                   children: [
                     scanner

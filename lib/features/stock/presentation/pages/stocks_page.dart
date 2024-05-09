@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/routing/constants/routing_names.dart';
+import 'package:stocktacking/features/credential/presentation/widgets/logout_button.dart';
 
 class StocksPage extends StatefulWidget {
   const StocksPage({super.key});
@@ -22,7 +23,7 @@ class _StocksPageState extends State<StocksPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context: context, title: 'Имущество'),
+      appBar: buildAppBar(context: context, title: 'Имущество', actions: [const LogoutButton()]),
       body:  Padding(
           padding: const EdgeInsets.all(14),
           child: Column(

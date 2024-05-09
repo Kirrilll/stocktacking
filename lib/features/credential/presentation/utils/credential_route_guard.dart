@@ -19,7 +19,7 @@ class CredentialRouteGuard implements RouteGuardBase {
     final currLocationPath = state.uri.toString();
     final authLocationPath = state.namedLocation(login);
     if(isAuth && currLocationPath.contains(authLocationPath)) {
-      return state.namedLocation(stuffTacking);
+      return state.namedLocation(userStuff);
     }
     else if(!isAuth && !currLocationPath.contains(authLocationPath)) {
       return authLocationPath;

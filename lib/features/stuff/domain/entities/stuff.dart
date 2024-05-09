@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:stocktacking/features/stock/domain/entities/storage.dart';
 import 'package:stocktacking/features/stock/domain/entities/storage_base.dart';
 
 import '../../../credential/domain/entities/profile.dart';
@@ -22,7 +23,7 @@ class Stuff with _$Stuff {
 
   String get fullStorageName => _getStorageFullName(storage);
 
-  bool get isUsing => storage is Profile;
+  bool get isUsing => storage is User;
 
   String _getStorageFullName(StorageBase storage) {
     final nestedStorage = storage.storage;

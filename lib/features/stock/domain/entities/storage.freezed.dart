@@ -16,23 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$StorageItem {
-  String get title => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title) stock,
     required TResult Function(String title, StorageBase? storage) storage,
+    required TResult Function(String name, int userId) user,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title)? stock,
     TResult? Function(String title, StorageBase? storage)? storage,
+    TResult? Function(String name, int userId)? user,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title)? stock,
     TResult Function(String title, StorageBase? storage)? storage,
+    TResult Function(String name, int userId)? user,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,24 +42,23 @@ mixin _$StorageItem {
   TResult map<TResult extends Object?>({
     required TResult Function(Stock value) stock,
     required TResult Function(Storage value) storage,
+    required TResult Function(User value) user,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Stock value)? stock,
     TResult? Function(Storage value)? storage,
+    TResult? Function(User value)? user,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Stock value)? stock,
     TResult Function(Storage value)? storage,
+    TResult Function(User value)? user,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $StorageItemCopyWith<StorageItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -66,8 +67,6 @@ abstract class $StorageItemCopyWith<$Res> {
   factory $StorageItemCopyWith(
           StorageItem value, $Res Function(StorageItem) then) =
       _$StorageItemCopyWithImpl<$Res, StorageItem>;
-  @useResult
-  $Res call({String title});
 }
 
 /// @nodoc
@@ -79,28 +78,13 @@ class _$StorageItemCopyWithImpl<$Res, $Val extends StorageItem>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? title = null,
-  }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$StockImplCopyWith<$Res>
-    implements $StorageItemCopyWith<$Res> {
+abstract class _$$StockImplCopyWith<$Res> {
   factory _$$StockImplCopyWith(
           _$StockImpl value, $Res Function(_$StockImpl) then) =
       __$$StockImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String title});
 }
@@ -162,6 +146,7 @@ class _$StockImpl extends Stock {
   TResult when<TResult extends Object?>({
     required TResult Function(String title) stock,
     required TResult Function(String title, StorageBase? storage) storage,
+    required TResult Function(String name, int userId) user,
   }) {
     return stock(title);
   }
@@ -171,6 +156,7 @@ class _$StockImpl extends Stock {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title)? stock,
     TResult? Function(String title, StorageBase? storage)? storage,
+    TResult? Function(String name, int userId)? user,
   }) {
     return stock?.call(title);
   }
@@ -180,6 +166,7 @@ class _$StockImpl extends Stock {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title)? stock,
     TResult Function(String title, StorageBase? storage)? storage,
+    TResult Function(String name, int userId)? user,
     required TResult orElse(),
   }) {
     if (stock != null) {
@@ -193,6 +180,7 @@ class _$StockImpl extends Stock {
   TResult map<TResult extends Object?>({
     required TResult Function(Stock value) stock,
     required TResult Function(Storage value) storage,
+    required TResult Function(User value) user,
   }) {
     return stock(this);
   }
@@ -202,6 +190,7 @@ class _$StockImpl extends Stock {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Stock value)? stock,
     TResult? Function(Storage value)? storage,
+    TResult? Function(User value)? user,
   }) {
     return stock?.call(this);
   }
@@ -211,6 +200,7 @@ class _$StockImpl extends Stock {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Stock value)? stock,
     TResult Function(Storage value)? storage,
+    TResult Function(User value)? user,
     required TResult orElse(),
   }) {
     if (stock != null) {
@@ -224,21 +214,17 @@ abstract class Stock extends StorageItem implements StorageBase {
   factory Stock(final String title) = _$StockImpl;
   Stock._() : super._();
 
-  @override
   String get title;
-  @override
   @JsonKey(ignore: true)
   _$$StockImplCopyWith<_$StockImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$StorageImplCopyWith<$Res>
-    implements $StorageItemCopyWith<$Res> {
+abstract class _$$StorageImplCopyWith<$Res> {
   factory _$$StorageImplCopyWith(
           _$StorageImpl value, $Res Function(_$StorageImpl) then) =
       __$$StorageImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String title, StorageBase? storage});
 }
@@ -308,6 +294,7 @@ class _$StorageImpl extends Storage {
   TResult when<TResult extends Object?>({
     required TResult Function(String title) stock,
     required TResult Function(String title, StorageBase? storage) storage,
+    required TResult Function(String name, int userId) user,
   }) {
     return storage(title, this.storage);
   }
@@ -317,6 +304,7 @@ class _$StorageImpl extends Storage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title)? stock,
     TResult? Function(String title, StorageBase? storage)? storage,
+    TResult? Function(String name, int userId)? user,
   }) {
     return storage?.call(title, this.storage);
   }
@@ -326,6 +314,7 @@ class _$StorageImpl extends Storage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title)? stock,
     TResult Function(String title, StorageBase? storage)? storage,
+    TResult Function(String name, int userId)? user,
     required TResult orElse(),
   }) {
     if (storage != null) {
@@ -339,6 +328,7 @@ class _$StorageImpl extends Storage {
   TResult map<TResult extends Object?>({
     required TResult Function(Stock value) stock,
     required TResult Function(Storage value) storage,
+    required TResult Function(User value) user,
   }) {
     return storage(this);
   }
@@ -348,6 +338,7 @@ class _$StorageImpl extends Storage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Stock value)? stock,
     TResult? Function(Storage value)? storage,
+    TResult? Function(User value)? user,
   }) {
     return storage?.call(this);
   }
@@ -357,6 +348,7 @@ class _$StorageImpl extends Storage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Stock value)? stock,
     TResult Function(Storage value)? storage,
+    TResult Function(User value)? user,
     required TResult orElse(),
   }) {
     if (storage != null) {
@@ -371,11 +363,157 @@ abstract class Storage extends StorageItem implements StorageBase {
       _$StorageImpl;
   Storage._() : super._();
 
-  @override
   String get title;
   StorageBase? get storage;
-  @override
   @JsonKey(ignore: true)
   _$$StorageImplCopyWith<_$StorageImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UserImplCopyWith<$Res> {
+  factory _$$UserImplCopyWith(
+          _$UserImpl value, $Res Function(_$UserImpl) then) =
+      __$$UserImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String name, int userId});
+}
+
+/// @nodoc
+class __$$UserImplCopyWithImpl<$Res>
+    extends _$StorageItemCopyWithImpl<$Res, _$UserImpl>
+    implements _$$UserImplCopyWith<$Res> {
+  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? userId = null,
+  }) {
+    return _then(_$UserImpl(
+      null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UserImpl extends User {
+  _$UserImpl(this.name, this.userId) : super._();
+
+  @override
+  final String name;
+  @override
+  final int userId;
+
+  @override
+  String toString() {
+    return 'StorageItem.user(name: $name, userId: $userId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserImpl &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String title) stock,
+    required TResult Function(String title, StorageBase? storage) storage,
+    required TResult Function(String name, int userId) user,
+  }) {
+    return user(name, userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String title)? stock,
+    TResult? Function(String title, StorageBase? storage)? storage,
+    TResult? Function(String name, int userId)? user,
+  }) {
+    return user?.call(name, userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String title)? stock,
+    TResult Function(String title, StorageBase? storage)? storage,
+    TResult Function(String name, int userId)? user,
+    required TResult orElse(),
+  }) {
+    if (user != null) {
+      return user(name, userId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Stock value) stock,
+    required TResult Function(Storage value) storage,
+    required TResult Function(User value) user,
+  }) {
+    return user(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Stock value)? stock,
+    TResult? Function(Storage value)? storage,
+    TResult? Function(User value)? user,
+  }) {
+    return user?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Stock value)? stock,
+    TResult Function(Storage value)? storage,
+    TResult Function(User value)? user,
+    required TResult orElse(),
+  }) {
+    if (user != null) {
+      return user(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class User extends StorageItem implements StorageBase {
+  factory User(final String name, final int userId) = _$UserImpl;
+  User._() : super._();
+
+  String get name;
+  int get userId;
+  @JsonKey(ignore: true)
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

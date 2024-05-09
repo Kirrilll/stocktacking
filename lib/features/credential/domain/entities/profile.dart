@@ -3,7 +3,6 @@ import '../../../stock/domain/entities/storage_base.dart';
 
 part 'profile.freezed.dart';
 
-@Implements<StorageBase>()
 @freezed
 class Profile with _$Profile {
 

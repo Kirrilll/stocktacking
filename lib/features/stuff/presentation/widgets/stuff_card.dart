@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
 
 class StuffCard extends StatelessWidget {
-  const StuffCard({super.key, required this.title, required this.id});
+  const StuffCard({super.key, required this.title, required this.id, required this.onTap});
 
   final String title;
   final int id;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         child: Panel(
             border: Border.all(color: const Color(0x1113181A), width: 1),
             child: Row(
