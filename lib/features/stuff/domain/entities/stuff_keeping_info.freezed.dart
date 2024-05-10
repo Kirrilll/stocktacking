@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$StuffKeepingInfo {
   DateTime get time => throw _privateConstructorUsedError;
-  int get userId => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
+  StorageItem get place => throw _privateConstructorUsedError;
   bool get isBroken => throw _privateConstructorUsedError;
   String? get comment => throw _privateConstructorUsedError;
 
@@ -32,7 +33,14 @@ abstract class $StuffKeepingInfoCopyWith<$Res> {
           StuffKeepingInfo value, $Res Function(StuffKeepingInfo) then) =
       _$StuffKeepingInfoCopyWithImpl<$Res, StuffKeepingInfo>;
   @useResult
-  $Res call({DateTime time, int userId, bool isBroken, String? comment});
+  $Res call(
+      {DateTime time,
+      User user,
+      StorageItem place,
+      bool isBroken,
+      String? comment});
+
+  $StorageItemCopyWith<$Res> get place;
 }
 
 /// @nodoc
@@ -49,7 +57,8 @@ class _$StuffKeepingInfoCopyWithImpl<$Res, $Val extends StuffKeepingInfo>
   @override
   $Res call({
     Object? time = null,
-    Object? userId = null,
+    Object? user = freezed,
+    Object? place = null,
     Object? isBroken = null,
     Object? comment = freezed,
   }) {
@@ -58,10 +67,14 @@ class _$StuffKeepingInfoCopyWithImpl<$Res, $Val extends StuffKeepingInfo>
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      place: null == place
+          ? _value.place
+          : place // ignore: cast_nullable_to_non_nullable
+              as StorageItem,
       isBroken: null == isBroken
           ? _value.isBroken
           : isBroken // ignore: cast_nullable_to_non_nullable
@@ -71,6 +84,14 @@ class _$StuffKeepingInfoCopyWithImpl<$Res, $Val extends StuffKeepingInfo>
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StorageItemCopyWith<$Res> get place {
+    return $StorageItemCopyWith<$Res>(_value.place, (value) {
+      return _then(_value.copyWith(place: value) as $Val);
+    });
   }
 }
 
@@ -82,7 +103,15 @@ abstract class _$$StuffKeepingInfoImplCopyWith<$Res>
       __$$StuffKeepingInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DateTime time, int userId, bool isBroken, String? comment});
+  $Res call(
+      {DateTime time,
+      User user,
+      StorageItem place,
+      bool isBroken,
+      String? comment});
+
+  @override
+  $StorageItemCopyWith<$Res> get place;
 }
 
 /// @nodoc
@@ -97,7 +126,8 @@ class __$$StuffKeepingInfoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? time = null,
-    Object? userId = null,
+    Object? user = freezed,
+    Object? place = null,
     Object? isBroken = null,
     Object? comment = freezed,
   }) {
@@ -106,10 +136,14 @@ class __$$StuffKeepingInfoImplCopyWithImpl<$Res>
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      place: null == place
+          ? _value.place
+          : place // ignore: cast_nullable_to_non_nullable
+              as StorageItem,
       isBroken: null == isBroken
           ? _value.isBroken
           : isBroken // ignore: cast_nullable_to_non_nullable
@@ -127,14 +161,17 @@ class __$$StuffKeepingInfoImplCopyWithImpl<$Res>
 class _$StuffKeepingInfoImpl implements _StuffKeepingInfo {
   const _$StuffKeepingInfoImpl(
       {required this.time,
-      required this.userId,
+      required this.user,
+      required this.place,
       required this.isBroken,
       this.comment});
 
   @override
   final DateTime time;
   @override
-  final int userId;
+  final User user;
+  @override
+  final StorageItem place;
   @override
   final bool isBroken;
   @override
@@ -142,7 +179,7 @@ class _$StuffKeepingInfoImpl implements _StuffKeepingInfo {
 
   @override
   String toString() {
-    return 'StuffKeepingInfo(time: $time, userId: $userId, isBroken: $isBroken, comment: $comment)';
+    return 'StuffKeepingInfo(time: $time, user: $user, place: $place, isBroken: $isBroken, comment: $comment)';
   }
 
   @override
@@ -151,14 +188,16 @@ class _$StuffKeepingInfoImpl implements _StuffKeepingInfo {
         (other.runtimeType == runtimeType &&
             other is _$StuffKeepingInfoImpl &&
             (identical(other.time, time) || other.time == time) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
+            const DeepCollectionEquality().equals(other.user, user) &&
+            (identical(other.place, place) || other.place == place) &&
             (identical(other.isBroken, isBroken) ||
                 other.isBroken == isBroken) &&
             (identical(other.comment, comment) || other.comment == comment));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, time, userId, isBroken, comment);
+  int get hashCode => Object.hash(runtimeType, time,
+      const DeepCollectionEquality().hash(user), place, isBroken, comment);
 
   @JsonKey(ignore: true)
   @override
@@ -171,14 +210,17 @@ class _$StuffKeepingInfoImpl implements _StuffKeepingInfo {
 abstract class _StuffKeepingInfo implements StuffKeepingInfo {
   const factory _StuffKeepingInfo(
       {required final DateTime time,
-      required final int userId,
+      required final User user,
+      required final StorageItem place,
       required final bool isBroken,
       final String? comment}) = _$StuffKeepingInfoImpl;
 
   @override
   DateTime get time;
   @override
-  int get userId;
+  User get user;
+  @override
+  StorageItem get place;
   @override
   bool get isBroken;
   @override

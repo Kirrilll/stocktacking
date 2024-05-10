@@ -1,19 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stocktacking/app/routing_provider.dart';
 import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
+import 'package:stocktacking/core/routing/constants/routing_names.dart';
+import 'package:stocktacking/core/routing/constants/routing_params.dart';
+import 'package:stocktacking/features/stuff/presentation/widgets/stuff_history_button.dart';
 
-class StuffDetailPage extends StatelessWidget {
+class StuffDetailPage extends ConsumerWidget {
 
   final int stuffId;
 
   const StuffDetailPage(this.stuffId, {super.key});
 
+  void Function() _buildOnHistoryTap(WidgetRef ref) => () => ref
+      .read(locationServiceProvider)
+      .goNamed(name: stuffHistory, params: {stuffIdParam: stuffId.toString()});
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Scaffold(
-      appBar: buildAppBar(context: context, title: 'Предмет'),
+      appBar: buildAppBar(
+          context: context,
+          title: 'Предмет',
+          actions: [StuffHistoryButton(onTap: _buildOnHistoryTap(ref))]
+      ),
       bottomNavigationBar:
         Panel(
           child: Row(
@@ -25,7 +38,7 @@ class StuffDetailPage extends StatelessWidget {
                 ),
               )
             ],
-                ),
+          ),
         ),
       body: SingleChildScrollView(
         child: Padding(

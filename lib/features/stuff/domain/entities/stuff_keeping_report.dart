@@ -11,12 +11,13 @@ class StuffKeepingReport with _$StuffKeepingReport {
   const factory StuffKeepingReport({
     required final int id,
     required final int stuffId,
-    required final DateTime takeAt,
     required final StuffKeepingInfo takeInfo,
-    final StuffKeepingReport? putInfo
+    final StuffKeepingInfo? putInfo
   }) = _StuffKeepingReport;
 
   bool get isUsing => putInfo == null;
+
+  bool get isBroken => takeInfo.isBroken || (putInfo?.isBroken ?? false);
 }
 
 

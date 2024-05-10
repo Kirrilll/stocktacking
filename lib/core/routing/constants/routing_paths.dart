@@ -8,3 +8,4 @@ const _stuffTackingPath = 'stuff-tacking';
 const _stuffTackingDetailPath = ':stuffTackingId=$stuffTackingDetailParam';
 const _stuffDetailPath = ':stuffId=$stuffIdParam';
 const _stockFilter = 'stock-filter';
+const _stuffHistoryPath = 'history/:$stuffIdParam';

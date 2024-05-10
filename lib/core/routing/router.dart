@@ -11,6 +11,7 @@ import 'package:stocktacking/features/stock/presentation/pages/stocks_page.dart'
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_detail_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_scanning_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/user_stuff_page.dart';
+import 'package:stocktacking/features/stuff/presentation/pages/using_history_page.dart';
 
 part './constants/routing_paths.dart';
 
@@ -94,6 +95,16 @@ GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
                           context: context,
                           state: state,
                           child: StuffDetailPage(int.tryParse(state.pathParameters[stuffIdParam] ?? '') ?? -1)
+                      )
+                    ),
+                    GoRoute(
+                        path: _stuffHistoryPath,
+                        parentNavigatorKey: _rootNavigatorKey,
+                      name: stuffHistory,
+                      pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                          context: context,
+                          state: state,
+                          child: UsingHistoryPage(stuffId: int.tryParse(state.pathParameters[stuffIdParam] ?? '') ?? -1)
                       )
                     )
                   ]),

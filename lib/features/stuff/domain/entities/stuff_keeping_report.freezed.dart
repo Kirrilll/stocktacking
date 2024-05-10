@@ -18,9 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$StuffKeepingReport {
   int get id => throw _privateConstructorUsedError;
   int get stuffId => throw _privateConstructorUsedError;
-  DateTime get takeAt => throw _privateConstructorUsedError;
   StuffKeepingInfo get takeInfo => throw _privateConstructorUsedError;
-  StuffKeepingReport? get putInfo => throw _privateConstructorUsedError;
+  StuffKeepingInfo? get putInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StuffKeepingReportCopyWith<StuffKeepingReport> get copyWith =>
@@ -36,12 +35,11 @@ abstract class $StuffKeepingReportCopyWith<$Res> {
   $Res call(
       {int id,
       int stuffId,
-      DateTime takeAt,
       StuffKeepingInfo takeInfo,
-      StuffKeepingReport? putInfo});
+      StuffKeepingInfo? putInfo});
 
   $StuffKeepingInfoCopyWith<$Res> get takeInfo;
-  $StuffKeepingReportCopyWith<$Res>? get putInfo;
+  $StuffKeepingInfoCopyWith<$Res>? get putInfo;
 }
 
 /// @nodoc
@@ -59,7 +57,6 @@ class _$StuffKeepingReportCopyWithImpl<$Res, $Val extends StuffKeepingReport>
   $Res call({
     Object? id = null,
     Object? stuffId = null,
-    Object? takeAt = null,
     Object? takeInfo = null,
     Object? putInfo = freezed,
   }) {
@@ -72,10 +69,6 @@ class _$StuffKeepingReportCopyWithImpl<$Res, $Val extends StuffKeepingReport>
           ? _value.stuffId
           : stuffId // ignore: cast_nullable_to_non_nullable
               as int,
-      takeAt: null == takeAt
-          ? _value.takeAt
-          : takeAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       takeInfo: null == takeInfo
           ? _value.takeInfo
           : takeInfo // ignore: cast_nullable_to_non_nullable
@@ -83,7 +76,7 @@ class _$StuffKeepingReportCopyWithImpl<$Res, $Val extends StuffKeepingReport>
       putInfo: freezed == putInfo
           ? _value.putInfo
           : putInfo // ignore: cast_nullable_to_non_nullable
-              as StuffKeepingReport?,
+              as StuffKeepingInfo?,
     ) as $Val);
   }
 
@@ -97,12 +90,12 @@ class _$StuffKeepingReportCopyWithImpl<$Res, $Val extends StuffKeepingReport>
 
   @override
   @pragma('vm:prefer-inline')
-  $StuffKeepingReportCopyWith<$Res>? get putInfo {
+  $StuffKeepingInfoCopyWith<$Res>? get putInfo {
     if (_value.putInfo == null) {
       return null;
     }
 
-    return $StuffKeepingReportCopyWith<$Res>(_value.putInfo!, (value) {
+    return $StuffKeepingInfoCopyWith<$Res>(_value.putInfo!, (value) {
       return _then(_value.copyWith(putInfo: value) as $Val);
     });
   }
@@ -119,14 +112,13 @@ abstract class _$$StuffKeepingReportImplCopyWith<$Res>
   $Res call(
       {int id,
       int stuffId,
-      DateTime takeAt,
       StuffKeepingInfo takeInfo,
-      StuffKeepingReport? putInfo});
+      StuffKeepingInfo? putInfo});
 
   @override
   $StuffKeepingInfoCopyWith<$Res> get takeInfo;
   @override
-  $StuffKeepingReportCopyWith<$Res>? get putInfo;
+  $StuffKeepingInfoCopyWith<$Res>? get putInfo;
 }
 
 /// @nodoc
@@ -142,7 +134,6 @@ class __$$StuffKeepingReportImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? stuffId = null,
-    Object? takeAt = null,
     Object? takeInfo = null,
     Object? putInfo = freezed,
   }) {
@@ -155,10 +146,6 @@ class __$$StuffKeepingReportImplCopyWithImpl<$Res>
           ? _value.stuffId
           : stuffId // ignore: cast_nullable_to_non_nullable
               as int,
-      takeAt: null == takeAt
-          ? _value.takeAt
-          : takeAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       takeInfo: null == takeInfo
           ? _value.takeInfo
           : takeInfo // ignore: cast_nullable_to_non_nullable
@@ -166,7 +153,7 @@ class __$$StuffKeepingReportImplCopyWithImpl<$Res>
       putInfo: freezed == putInfo
           ? _value.putInfo
           : putInfo // ignore: cast_nullable_to_non_nullable
-              as StuffKeepingReport?,
+              as StuffKeepingInfo?,
     ));
   }
 }
@@ -177,7 +164,6 @@ class _$StuffKeepingReportImpl extends _StuffKeepingReport {
   const _$StuffKeepingReportImpl(
       {required this.id,
       required this.stuffId,
-      required this.takeAt,
       required this.takeInfo,
       this.putInfo})
       : super._();
@@ -187,15 +173,13 @@ class _$StuffKeepingReportImpl extends _StuffKeepingReport {
   @override
   final int stuffId;
   @override
-  final DateTime takeAt;
-  @override
   final StuffKeepingInfo takeInfo;
   @override
-  final StuffKeepingReport? putInfo;
+  final StuffKeepingInfo? putInfo;
 
   @override
   String toString() {
-    return 'StuffKeepingReport(id: $id, stuffId: $stuffId, takeAt: $takeAt, takeInfo: $takeInfo, putInfo: $putInfo)';
+    return 'StuffKeepingReport(id: $id, stuffId: $stuffId, takeInfo: $takeInfo, putInfo: $putInfo)';
   }
 
   @override
@@ -205,15 +189,13 @@ class _$StuffKeepingReportImpl extends _StuffKeepingReport {
             other is _$StuffKeepingReportImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.stuffId, stuffId) || other.stuffId == stuffId) &&
-            (identical(other.takeAt, takeAt) || other.takeAt == takeAt) &&
             (identical(other.takeInfo, takeInfo) ||
                 other.takeInfo == takeInfo) &&
             (identical(other.putInfo, putInfo) || other.putInfo == putInfo));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, stuffId, takeAt, takeInfo, putInfo);
+  int get hashCode => Object.hash(runtimeType, id, stuffId, takeInfo, putInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -227,9 +209,8 @@ abstract class _StuffKeepingReport extends StuffKeepingReport {
   const factory _StuffKeepingReport(
       {required final int id,
       required final int stuffId,
-      required final DateTime takeAt,
       required final StuffKeepingInfo takeInfo,
-      final StuffKeepingReport? putInfo}) = _$StuffKeepingReportImpl;
+      final StuffKeepingInfo? putInfo}) = _$StuffKeepingReportImpl;
   const _StuffKeepingReport._() : super._();
 
   @override
@@ -237,11 +218,9 @@ abstract class _StuffKeepingReport extends StuffKeepingReport {
   @override
   int get stuffId;
   @override
-  DateTime get takeAt;
-  @override
   StuffKeepingInfo get takeInfo;
   @override
-  StuffKeepingReport? get putInfo;
+  StuffKeepingInfo? get putInfo;
   @override
   @JsonKey(ignore: true)
   _$$StuffKeepingReportImplCopyWith<_$StuffKeepingReportImpl> get copyWith =>
