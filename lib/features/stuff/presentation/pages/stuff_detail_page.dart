@@ -14,6 +14,19 @@ class StuffDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context: context, title: 'Предмет'),
+      bottomNavigationBar:
+        Panel(
+          child: Row(
+            children:[
+              Expanded(
+                child: ElevatedButton(
+                  child: const Text('Положить'),
+                  onPressed: () {}
+                ),
+              )
+            ],
+                ),
+        ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(14),

@@ -15,6 +15,6 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
   scaffoldBackgroundColor: _lightColorScheme.background,
   expansionTileTheme: _lightExpansionTileTheme,
   inputDecorationTheme: _inputDecorationTheme,
-  progressIndicatorTheme: _progressIndicatorThemeData
+  progressIndicatorTheme: _progressIndicatorThemeData,
   // bottomNavigationBarTheme: _bottomNavigationBarTheme
 );
