@@ -25,13 +25,13 @@ class _UsingHistoryPageState extends State<UsingHistoryPage> {
       stuffId: widget.stuffId,
       takeInfo: StuffKeepingInfo(
           isBroken: false,
-          place: Stock('Склад 2'),
+          place: Stock('Склад 2', 'Южная. д 55', (5.0, 1.3)),
           time: DateTime.now(),
           user: User('Дуров Андрей Павлович', 2)
       ),
       putInfo: StuffKeepingInfo(
           isBroken: false,
-          place: Stock('Склад 3'),
+          place: Stock('Склад 3', 'Южная. д 55', (5.0, 1.3)),
           time: DateTime.now().add(const Duration(hours: 1)),
           user: User('Дуров Андрей Павлович', 2)
       )
@@ -41,13 +41,13 @@ class _UsingHistoryPageState extends State<UsingHistoryPage> {
         stuffId: widget.stuffId,
         takeInfo: StuffKeepingInfo(
             isBroken: false,
-            place: Stock('Склад 2'),
+            place: Stock('Склад 2', 'Южная. д 55', (5.0, 1.3)),
             time: DateTime.now().add(const Duration(days: 1)),
             user: User('Дуров Андрей Павлович', 2)
         ),
         putInfo: StuffKeepingInfo(
             isBroken: true,
-            place: Stock('Склад 3'),
+            place: Stock('Склад 2', 'Южная. д 55', (5.0, 1.3)),
             time: DateTime.now().add(const Duration(days: 1, hours: 3)),
             user: User('Дуров Андрей Павлович', 2)
         )

@@ -11,6 +11,8 @@ sealed class StorageItem with _$StorageItem {
   @Implements<StorageBase>()
   factory StorageItem.stock(
     String title,
+    String address,
+    (double, double) coordinates
   ) = Stock;
 
   @Implements<StorageBase>()

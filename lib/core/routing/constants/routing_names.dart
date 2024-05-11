@@ -7,3 +7,8 @@ const stuffDetail = 'stuffDetail';
 const stockFilter = 'stockFilter';
 const stuffHistory = 'stuffHistory';
 const stuffReport = 'stuffReport';
+
+const stuffCreate = 'stuffCreate';
+const stockCreate = 'stockCreate';
+
+const stuffPhysicalIdentifier = 'stuffPhysicalIdentifier';

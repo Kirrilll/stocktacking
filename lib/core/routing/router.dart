@@ -8,7 +8,9 @@ import 'package:stocktacking/features/credential/presentation/pages/login_page.d
 import 'package:stocktacking/features/home/presentation/pages/home_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stock_filter_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stocks_page.dart';
+import 'package:stocktacking/features/stuff/presentation/pages/stuff_add_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_detail_page.dart';
+import 'package:stocktacking/features/stuff/presentation/pages/stuff_physical_Identifier_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_report_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_scanning_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/user_stuff_page.dart';
@@ -120,6 +122,16 @@ GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
                               stuffId: int.tryParse(state.pathParameters[stuffIdParam] ?? '') ?? -1
                           )
                       )
+                    ),
+                    GoRoute(
+                        path: _stuffPhysicalIdentifierPath,
+                      name: stuffPhysicalIdentifier,
+                      parentNavigatorKey: _rootNavigatorKey,
+                      pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                          context: context,
+                          state: state,
+                          child: StuffPhysicalIdentifier(stuffId: int.tryParse(state.pathParameters[stuffIdParam] ?? '') ?? -1)
+                      )
                     )
                   ]),
               GoRoute(
@@ -140,7 +152,18 @@ GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
                         state: state,
                         child: const StockFilter()
                     )
+                  ),
+                  GoRoute(
+                    path: _stuffAddPath,
+                    name: stuffCreate,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                        context: context,
+                        state: state,
+                        child: const StuffAddPage()
+                    )
                   )
+
                 ]
               )
             ]),

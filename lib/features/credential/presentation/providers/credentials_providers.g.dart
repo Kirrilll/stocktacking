@@ -220,6 +220,21 @@ final isAuthorisedProvider = Provider<bool>.internal(
 );
 
 typedef IsAuthorisedRef = ProviderRef<bool>;
+String _$isStockKeeperHash() => r'dcd3af89d13ff36493cac3023810a4e27def83cd';
+
+/// See also [isStockKeeper].
+@ProviderFor(isStockKeeper)
+final isStockKeeperProvider = Provider<bool>.internal(
+  isStockKeeper,
+  name: r'isStockKeeperProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$isStockKeeperHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef IsStockKeeperRef = ProviderRef<bool>;
 String _$credentialRouteGuardHash() =>
     r'46b32c653edfe605c9664000c295044e94ac9cb9';
 

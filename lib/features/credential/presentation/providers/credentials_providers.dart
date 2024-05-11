@@ -6,6 +6,7 @@ import 'package:stocktacking/features/credential/data/data_sources/mock_remote_c
 import 'package:stocktacking/features/credential/data/data_sources/remote_credential_data_source.dart';
 import 'package:stocktacking/features/credential/data/repositories/credential_repository_impl.dart';
 import 'package:stocktacking/features/credential/domain/entities/credential.dart';
+import 'package:stocktacking/features/credential/domain/entities/role.dart';
 import 'package:stocktacking/features/credential/domain/repositories/credential_repository.dart';
 import 'package:stocktacking/features/credential/presentation/notifiers/credential_notifier.dart';
 import 'package:stocktacking/features/credential/presentation/utils/credential_route_guard.dart';
@@ -45,6 +46,15 @@ Future<void> useLogoutUseCase(UseLogoutUseCaseRef ref) async {
 @Riverpod(keepAlive: true)
 bool isAuthorised(IsAuthorisedRef ref) {
   return ref.watch(credentialNotifierProvider.notifier).credential.isAuthorised;
+}
+
+@Riverpod(keepAlive: true)
+bool isStockKeeper(IsStockKeeperRef ref) {
+  final credential = ref.watch(credentialNotifierProvider);
+  return switch(credential) {
+    Authorised(:final accessToken, :final role) => role == Role.storekeeper,
+    _ => false
+  };
 }
 
 @Riverpod(keepAlive: true)

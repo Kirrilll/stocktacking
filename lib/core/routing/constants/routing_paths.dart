@@ -10,3 +10,7 @@ const _stuffDetailPath = ':stuffId=$stuffIdParam';
 const _stockFilter = 'stock-filter';
 const _stuffHistoryPath = 'history/:$stuffIdParam';
 const _stuffCreateReport = 'report/:$stuffIdParam/:$stuffReportIsPutParam';
+
+const _stuffAddPath = 'stuff-add';
+const _stuffPhysicalIdentifierPath ='stuff-physical-id/:$stuffIdParam';
+const _stockAddPath = 'stock-add';

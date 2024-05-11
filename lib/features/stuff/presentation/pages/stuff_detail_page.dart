@@ -7,7 +7,7 @@ import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
 import 'package:stocktacking/core/routing/constants/routing_names.dart';
 import 'package:stocktacking/core/routing/constants/routing_params.dart';
-import 'package:stocktacking/features/stuff/presentation/widgets/stuff_history_button.dart';
+import '../../../../core/presentation/action_button/action_button.dart';
 
 class StuffDetailPage extends ConsumerWidget {
 
@@ -23,13 +23,20 @@ class StuffDetailPage extends ConsumerWidget {
       .read(locationServiceProvider)
       .goNamed(name: stuffReport, params: {stuffIdParam: stuffId.toString(), stuffReportIsPutParam: true.toString()});
 
+  void Function() _buildOnQrTap(WidgetRef ref) => () => ref
+      .read(locationServiceProvider)
+      .goNamed(name: stuffPhysicalIdentifier, params: {stuffIdParam: stuffId.toString()});
+
   @override
   Widget build(BuildContext context, ref) {
     return Scaffold(
       appBar: buildAppBar(
           context: context,
           title: 'Предмет',
-          actions: [StuffHistoryButton(onTap: _buildOnHistoryTap(ref))]
+          actions: [
+            ActionButton(icon: Icons.history, onTap: _buildOnHistoryTap(ref)),
+            ActionButton(onTap: _buildOnQrTap(ref), icon: Icons.qr_code_outlined)
+          ]
       ),
       bottomNavigationBar:
         Panel(
