@@ -19,6 +19,10 @@ class StuffDetailPage extends ConsumerWidget {
       .read(locationServiceProvider)
       .goNamed(name: stuffHistory, params: {stuffIdParam: stuffId.toString()});
 
+  void Function() _buildOnPutTap(WidgetRef ref) => () => ref
+      .read(locationServiceProvider)
+      .goNamed(name: stuffReport, params: {stuffIdParam: stuffId.toString(), stuffReportIsPutParam: true.toString()});
+
   @override
   Widget build(BuildContext context, ref) {
     return Scaffold(
@@ -33,8 +37,8 @@ class StuffDetailPage extends ConsumerWidget {
             children:[
               Expanded(
                 child: ElevatedButton(
-                  child: const Text('Положить'),
-                  onPressed: () {}
+                  onPressed: _buildOnPutTap(ref),
+                  child: const Text('Положить')
                 ),
               )
             ],

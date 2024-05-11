@@ -9,6 +9,7 @@ import 'package:stocktacking/features/home/presentation/pages/home_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stock_filter_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stocks_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_detail_page.dart';
+import 'package:stocktacking/features/stuff/presentation/pages/stuff_report_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_scanning_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/user_stuff_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/using_history_page.dart';
@@ -105,6 +106,19 @@ GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
                           context: context,
                           state: state,
                           child: UsingHistoryPage(stuffId: int.tryParse(state.pathParameters[stuffIdParam] ?? '') ?? -1)
+                      )
+                    ),
+                    GoRoute(
+                        path: _stuffCreateReport,
+                      name: stuffReport,
+                      parentNavigatorKey: _rootNavigatorKey,
+                      pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                          context: context,
+                          state: state,
+                          child: StuffReportPage(
+                              isPut: bool.tryParse(state.pathParameters[stuffReportIsPutParam] ?? '') ?? false,
+                              stuffId: int.tryParse(state.pathParameters[stuffIdParam] ?? '') ?? -1
+                          )
                       )
                     )
                   ]),
