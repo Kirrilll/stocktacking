@@ -14,8 +14,15 @@ class StuffRepositoryImpl implements StuffRepository {
 
   @override
   Future<Either<IFailure, Stuff>> getStuffById(int id) {
-    // TODO: implement getStuffById
-    throw UnimplementedError();
+    return Future.delayed(const Duration(milliseconds: 1500), () =>  Right(
+      Stuff(
+          id: 3,
+          title: 'Мышь компьютерная',
+          image: 'https://dartoffice.ru/12626052-tm_large_default/mysh-kompyuternaya-logitech-mouse-m100-black-usb.jpg',
+          storage: User('Кирилл Андреевич', 1),
+          categoryId: null
+      )
+    ));
   }
 
   @override
