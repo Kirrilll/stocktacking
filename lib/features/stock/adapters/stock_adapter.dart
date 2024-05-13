@@ -3,6 +3,9 @@ import 'package:stocktacking/features/stock/domain/entities/storage.dart';
 import 'package:stocktacking/features/stock/domain/entities/storage_base.dart';
 
 class StockAdapter {
+
+  const StockAdapter();
+
   StorageBase fromDto(StorageItemDto storageDto) {
     return storageDto.map(
         stock: (stock) => Stock(stock.title, stock.address, (stock.latitude, stock.longitude)),

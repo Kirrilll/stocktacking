@@ -5,10 +5,12 @@ import 'package:stocktacking/features/stuff/domain/entities/stuff.dart';
 
 class StuffAdapter {
 
-  final StuffOptionAdapter _stuffOptionAdapter = StuffOptionAdapter();
-  final StockAdapter _stockAdapter = StockAdapter();
+  final StuffOptionAdapter _stuffOptionAdapter = const StuffOptionAdapter();
+  final StockAdapter _stockAdapter = const StockAdapter();
 
-  Stuff fromAdapter(StuffDto stuffDto) {
+  const StuffAdapter();
+
+  Stuff fromDto(StuffDto stuffDto) {
     return Stuff(
         id: stuffDto.id,
         title: stuffDto.title,

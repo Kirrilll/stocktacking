@@ -25,6 +25,7 @@ mixin _$StuffOption {
     required TResult Function(String code, String title, List<String> value)
         list,
     required TResult Function(String code, String title, String value) text,
+    required TResult Function(String code, String title, bool value) logic,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$StuffOption {
     TResult? Function(String code, String title, num value)? num,
     TResult? Function(String code, String title, List<String> value)? list,
     TResult? Function(String code, String title, String value)? text,
+    TResult? Function(String code, String title, bool value)? logic,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +41,7 @@ mixin _$StuffOption {
     TResult Function(String code, String title, num value)? num,
     TResult Function(String code, String title, List<String> value)? list,
     TResult Function(String code, String title, String value)? text,
+    TResult Function(String code, String title, bool value)? logic,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$StuffOption {
     required TResult Function(OptionNum value) num,
     required TResult Function(OptionList value) list,
     required TResult Function(OptionText value) text,
+    required TResult Function(OptionBoolean value) logic,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +58,7 @@ mixin _$StuffOption {
     TResult? Function(OptionNum value)? num,
     TResult? Function(OptionList value)? list,
     TResult? Function(OptionText value)? text,
+    TResult? Function(OptionBoolean value)? logic,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +66,7 @@ mixin _$StuffOption {
     TResult Function(OptionNum value)? num,
     TResult Function(OptionList value)? list,
     TResult Function(OptionText value)? text,
+    TResult Function(OptionBoolean value)? logic,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -153,9 +159,10 @@ class __$$OptionNumImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OptionNumImpl implements OptionNum {
+class _$OptionNumImpl extends OptionNum {
   _$OptionNumImpl(
-      {required this.code, required this.title, required this.value});
+      {required this.code, required this.title, required this.value})
+      : super._();
 
   @override
   final String code;
@@ -195,6 +202,7 @@ class _$OptionNumImpl implements OptionNum {
     required TResult Function(String code, String title, List<String> value)
         list,
     required TResult Function(String code, String title, String value) text,
+    required TResult Function(String code, String title, bool value) logic,
   }) {
     return num(code, title, value);
   }
@@ -205,6 +213,7 @@ class _$OptionNumImpl implements OptionNum {
     TResult? Function(String code, String title, num value)? num,
     TResult? Function(String code, String title, List<String> value)? list,
     TResult? Function(String code, String title, String value)? text,
+    TResult? Function(String code, String title, bool value)? logic,
   }) {
     return num?.call(code, title, value);
   }
@@ -215,6 +224,7 @@ class _$OptionNumImpl implements OptionNum {
     TResult Function(String code, String title, num value)? num,
     TResult Function(String code, String title, List<String> value)? list,
     TResult Function(String code, String title, String value)? text,
+    TResult Function(String code, String title, bool value)? logic,
     required TResult orElse(),
   }) {
     if (num != null) {
@@ -229,6 +239,7 @@ class _$OptionNumImpl implements OptionNum {
     required TResult Function(OptionNum value) num,
     required TResult Function(OptionList value) list,
     required TResult Function(OptionText value) text,
+    required TResult Function(OptionBoolean value) logic,
   }) {
     return num(this);
   }
@@ -239,6 +250,7 @@ class _$OptionNumImpl implements OptionNum {
     TResult? Function(OptionNum value)? num,
     TResult? Function(OptionList value)? list,
     TResult? Function(OptionText value)? text,
+    TResult? Function(OptionBoolean value)? logic,
   }) {
     return num?.call(this);
   }
@@ -249,6 +261,7 @@ class _$OptionNumImpl implements OptionNum {
     TResult Function(OptionNum value)? num,
     TResult Function(OptionList value)? list,
     TResult Function(OptionText value)? text,
+    TResult Function(OptionBoolean value)? logic,
     required TResult orElse(),
   }) {
     if (num != null) {
@@ -258,11 +271,12 @@ class _$OptionNumImpl implements OptionNum {
   }
 }
 
-abstract class OptionNum implements StuffOption {
+abstract class OptionNum extends StuffOption {
   factory OptionNum(
       {required final String code,
       required final String title,
       required final num value}) = _$OptionNumImpl;
+  OptionNum._() : super._();
 
   @override
   String get code;
@@ -321,12 +335,13 @@ class __$$OptionListImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OptionListImpl implements OptionList {
+class _$OptionListImpl extends OptionList {
   _$OptionListImpl(
       {required this.code,
       required this.title,
       required final List<String> value})
-      : _value = value;
+      : _value = value,
+        super._();
 
   @override
   final String code;
@@ -372,6 +387,7 @@ class _$OptionListImpl implements OptionList {
     required TResult Function(String code, String title, List<String> value)
         list,
     required TResult Function(String code, String title, String value) text,
+    required TResult Function(String code, String title, bool value) logic,
   }) {
     return list(code, title, value);
   }
@@ -382,6 +398,7 @@ class _$OptionListImpl implements OptionList {
     TResult? Function(String code, String title, num value)? num,
     TResult? Function(String code, String title, List<String> value)? list,
     TResult? Function(String code, String title, String value)? text,
+    TResult? Function(String code, String title, bool value)? logic,
   }) {
     return list?.call(code, title, value);
   }
@@ -392,6 +409,7 @@ class _$OptionListImpl implements OptionList {
     TResult Function(String code, String title, num value)? num,
     TResult Function(String code, String title, List<String> value)? list,
     TResult Function(String code, String title, String value)? text,
+    TResult Function(String code, String title, bool value)? logic,
     required TResult orElse(),
   }) {
     if (list != null) {
@@ -406,6 +424,7 @@ class _$OptionListImpl implements OptionList {
     required TResult Function(OptionNum value) num,
     required TResult Function(OptionList value) list,
     required TResult Function(OptionText value) text,
+    required TResult Function(OptionBoolean value) logic,
   }) {
     return list(this);
   }
@@ -416,6 +435,7 @@ class _$OptionListImpl implements OptionList {
     TResult? Function(OptionNum value)? num,
     TResult? Function(OptionList value)? list,
     TResult? Function(OptionText value)? text,
+    TResult? Function(OptionBoolean value)? logic,
   }) {
     return list?.call(this);
   }
@@ -426,6 +446,7 @@ class _$OptionListImpl implements OptionList {
     TResult Function(OptionNum value)? num,
     TResult Function(OptionList value)? list,
     TResult Function(OptionText value)? text,
+    TResult Function(OptionBoolean value)? logic,
     required TResult orElse(),
   }) {
     if (list != null) {
@@ -435,11 +456,12 @@ class _$OptionListImpl implements OptionList {
   }
 }
 
-abstract class OptionList implements StuffOption {
+abstract class OptionList extends StuffOption {
   factory OptionList(
       {required final String code,
       required final String title,
       required final List<String> value}) = _$OptionListImpl;
+  OptionList._() : super._();
 
   @override
   String get code;
@@ -498,9 +520,10 @@ class __$$OptionTextImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OptionTextImpl implements OptionText {
+class _$OptionTextImpl extends OptionText {
   _$OptionTextImpl(
-      {required this.code, required this.title, required this.value});
+      {required this.code, required this.title, required this.value})
+      : super._();
 
   @override
   final String code;
@@ -540,6 +563,7 @@ class _$OptionTextImpl implements OptionText {
     required TResult Function(String code, String title, List<String> value)
         list,
     required TResult Function(String code, String title, String value) text,
+    required TResult Function(String code, String title, bool value) logic,
   }) {
     return text(code, title, value);
   }
@@ -550,6 +574,7 @@ class _$OptionTextImpl implements OptionText {
     TResult? Function(String code, String title, num value)? num,
     TResult? Function(String code, String title, List<String> value)? list,
     TResult? Function(String code, String title, String value)? text,
+    TResult? Function(String code, String title, bool value)? logic,
   }) {
     return text?.call(code, title, value);
   }
@@ -560,6 +585,7 @@ class _$OptionTextImpl implements OptionText {
     TResult Function(String code, String title, num value)? num,
     TResult Function(String code, String title, List<String> value)? list,
     TResult Function(String code, String title, String value)? text,
+    TResult Function(String code, String title, bool value)? logic,
     required TResult orElse(),
   }) {
     if (text != null) {
@@ -574,6 +600,7 @@ class _$OptionTextImpl implements OptionText {
     required TResult Function(OptionNum value) num,
     required TResult Function(OptionList value) list,
     required TResult Function(OptionText value) text,
+    required TResult Function(OptionBoolean value) logic,
   }) {
     return text(this);
   }
@@ -584,6 +611,7 @@ class _$OptionTextImpl implements OptionText {
     TResult? Function(OptionNum value)? num,
     TResult? Function(OptionList value)? list,
     TResult? Function(OptionText value)? text,
+    TResult? Function(OptionBoolean value)? logic,
   }) {
     return text?.call(this);
   }
@@ -594,6 +622,7 @@ class _$OptionTextImpl implements OptionText {
     TResult Function(OptionNum value)? num,
     TResult Function(OptionList value)? list,
     TResult Function(OptionText value)? text,
+    TResult Function(OptionBoolean value)? logic,
     required TResult orElse(),
   }) {
     if (text != null) {
@@ -603,11 +632,12 @@ class _$OptionTextImpl implements OptionText {
   }
 }
 
-abstract class OptionText implements StuffOption {
+abstract class OptionText extends StuffOption {
   factory OptionText(
       {required final String code,
       required final String title,
       required final String value}) = _$OptionTextImpl;
+  OptionText._() : super._();
 
   @override
   String get code;
@@ -618,5 +648,181 @@ abstract class OptionText implements StuffOption {
   @override
   @JsonKey(ignore: true)
   _$$OptionTextImplCopyWith<_$OptionTextImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OptionBooleanImplCopyWith<$Res>
+    implements $StuffOptionCopyWith<$Res> {
+  factory _$$OptionBooleanImplCopyWith(
+          _$OptionBooleanImpl value, $Res Function(_$OptionBooleanImpl) then) =
+      __$$OptionBooleanImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String code, String title, bool value});
+}
+
+/// @nodoc
+class __$$OptionBooleanImplCopyWithImpl<$Res>
+    extends _$StuffOptionCopyWithImpl<$Res, _$OptionBooleanImpl>
+    implements _$$OptionBooleanImplCopyWith<$Res> {
+  __$$OptionBooleanImplCopyWithImpl(
+      _$OptionBooleanImpl _value, $Res Function(_$OptionBooleanImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? code = null,
+    Object? title = null,
+    Object? value = null,
+  }) {
+    return _then(_$OptionBooleanImpl(
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OptionBooleanImpl extends OptionBoolean {
+  _$OptionBooleanImpl(
+      {required this.code, required this.title, required this.value})
+      : super._();
+
+  @override
+  final String code;
+  @override
+  final String title;
+  @override
+  final bool value;
+
+  @override
+  String toString() {
+    return 'StuffOption.logic(code: $code, title: $title, value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OptionBooleanImpl &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, code, title, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OptionBooleanImplCopyWith<_$OptionBooleanImpl> get copyWith =>
+      __$$OptionBooleanImplCopyWithImpl<_$OptionBooleanImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String code, String title, num value) num,
+    required TResult Function(String code, String title, List<String> value)
+        list,
+    required TResult Function(String code, String title, String value) text,
+    required TResult Function(String code, String title, bool value) logic,
+  }) {
+    return logic(code, title, value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String code, String title, num value)? num,
+    TResult? Function(String code, String title, List<String> value)? list,
+    TResult? Function(String code, String title, String value)? text,
+    TResult? Function(String code, String title, bool value)? logic,
+  }) {
+    return logic?.call(code, title, value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String code, String title, num value)? num,
+    TResult Function(String code, String title, List<String> value)? list,
+    TResult Function(String code, String title, String value)? text,
+    TResult Function(String code, String title, bool value)? logic,
+    required TResult orElse(),
+  }) {
+    if (logic != null) {
+      return logic(code, title, value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OptionNum value) num,
+    required TResult Function(OptionList value) list,
+    required TResult Function(OptionText value) text,
+    required TResult Function(OptionBoolean value) logic,
+  }) {
+    return logic(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OptionNum value)? num,
+    TResult? Function(OptionList value)? list,
+    TResult? Function(OptionText value)? text,
+    TResult? Function(OptionBoolean value)? logic,
+  }) {
+    return logic?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OptionNum value)? num,
+    TResult Function(OptionList value)? list,
+    TResult Function(OptionText value)? text,
+    TResult Function(OptionBoolean value)? logic,
+    required TResult orElse(),
+  }) {
+    if (logic != null) {
+      return logic(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OptionBoolean extends StuffOption {
+  factory OptionBoolean(
+      {required final String code,
+      required final String title,
+      required final bool value}) = _$OptionBooleanImpl;
+  OptionBoolean._() : super._();
+
+  @override
+  String get code;
+  @override
+  String get title;
+  @override
+  bool get value;
+  @override
+  @JsonKey(ignore: true)
+  _$$OptionBooleanImplCopyWith<_$OptionBooleanImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

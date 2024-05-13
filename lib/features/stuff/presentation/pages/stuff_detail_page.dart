@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:stocktacking/app/routing_provider.dart';
 import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
 import 'package:stocktacking/core/routing/constants/routing_names.dart';
 import 'package:stocktacking/core/routing/constants/routing_params.dart';
+import 'package:stocktacking/features/stuff/presentation/providers/stuff_providers.dart';
 import '../../../../core/presentation/action_button/action_button.dart';
 
 class StuffDetailPage extends ConsumerWidget {
@@ -29,6 +31,8 @@ class StuffDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final getStuffRes = ref.watch(getStuffByIdProvider.call(stuffId));
+
     return Scaffold(
       appBar: buildAppBar(
           context: context,
@@ -38,37 +42,40 @@ class StuffDetailPage extends ConsumerWidget {
             ActionButton(onTap: _buildOnQrTap(ref), icon: Icons.qr_code_outlined)
           ]
       ),
-      bottomNavigationBar:
-        Panel(
+      bottomNavigationBar: switch(getStuffRes) {
+        AsyncData(:final value) =>  Panel(
           child: Row(
             children:[
               Expanded(
                 child: ElevatedButton(
-                  onPressed: _buildOnPutTap(ref),
-                  child: const Text('Положить')
+                    onPressed: _buildOnPutTap(ref),
+                    child: const Text('Положить')
                 ),
               )
             ],
           ),
         ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Panel(
+        _ => null
+      },
+      body: switch(getStuffRes) {
+        AsyncData(:final value) =>  SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Panel(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text('Название предмета', style: Theme.of(context).textTheme.displayLarge,),
+                      Text(value.title, style: Theme.of(context).textTheme.displayLarge,),
                       const SizedBox(height: 14),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Находится'),
-                          Text('У Павла'),
+                          const Text('Находится'),
+                          Text(value.fullStorageName),
                         ],
                       ),
                       const SizedBox(height: 14),
@@ -76,8 +83,8 @@ class StuffDetailPage extends ConsumerWidget {
                         title: Text('Фото предмета', style: Theme.of(context).textTheme.displayMedium,),
                         childrenPadding: const EdgeInsets.all(16),
                         shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                          side: BorderSide(color: Color(0x1113181A), width: 1)
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                            side: BorderSide(color: Color(0x1113181A), width: 1)
                         ),
                         collapsedShape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -85,31 +92,33 @@ class StuffDetailPage extends ConsumerWidget {
                         ),
                         children: [
                           Image.network(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgQi0IGMdbpbTN-4FXK1YBBT1V4VZz7eQwUHCShgZrGQ&s',
+                            value.image,
                             fit: BoxFit.contain,
                           )
                         ],
                       )
                     ],
                   ),
-              ),
-              const SizedBox(height: 14),
-              Panel(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
+                ),
+                const SizedBox(height: 14),
+                Panel(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
                         Row(
                           children: [
-                            const DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF3FE06C),
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(50),
-                                      bottom:  Radius.circular(50)
-                                  ),
+                            DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: value.isBroken
+                                    ? const Color(0xFFFF4545)
+                                    : const Color(0xFF3FE06C),
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(50),
+                                    bottom:  Radius.circular(50)
                                 ),
-                              child: SizedBox(width: 8, height: 28),
+                              ),
+                              child: const SizedBox(width: 8, height: 28),
                             ),
                             const SizedBox(width: 8),
                             Text(
@@ -118,50 +127,57 @@ class StuffDetailPage extends ConsumerWidget {
                             ),
                           ],
                         ),
-                      const SizedBox(height: 14),
-                      const Text('Неполадок не обнаружено')
-                    ],
-                  )
-              ),
-              const SizedBox(height: 14),
-              Panel(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        'Доп. информация',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                      const SizedBox(height: 14),
-                      ListView.separated(
-                        shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (_, index) => ExpansionTile(
-                              title: Text('Параметр $index', style: Theme.of(context).textTheme.displayMedium),
-                              childrenPadding: const EdgeInsets.all(16),
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                                  side: BorderSide(color: Color(0x1113181A), width: 1)
-                              ),
-                              collapsedShape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                                  side: BorderSide(color: Color(0x1113181A), width: 1)
-                              ),
-                            children: [
-                              Text('Какието-свойства параметра $index')
-                            ]
-                          ),
-                          separatorBuilder: (_, __) => const SizedBox(height: 14),
-                          itemCount: 3
-                      )
-                    ],
-                  )
-              )
-            ],
+                        const SizedBox(height: 14),
+                        value.isBroken
+                            ? Text('Обнаружена неполадка (${value.comment ?? 'Не указано'})')
+                            : const Text('Неполадок не обнаружено')
+                      ],
+                    )
+                ),
+                const SizedBox(height: 14),
+                Panel(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          'Доп. информация',
+                          style: Theme.of(context).textTheme.displayLarge,
+                        ),
+                        const SizedBox(height: 14),
+                        ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (_, index) => ExpansionTile(
+                                title: Text(value.options[index].title, style: Theme.of(context).textTheme.displayMedium),
+                                childrenPadding: const EdgeInsets.all(16),
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                                    side: BorderSide(color: Color(0x1113181A), width: 1)
+                                ),
+                                collapsedShape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                                    side: BorderSide(color: Color(0x1113181A), width: 1)
+                                ),
+                                children: [
+                                  Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(value.options[index].text, textAlign: TextAlign.start,),
+                                  )
+                                ]
+                            ),
+                            separatorBuilder: (_, __) => const SizedBox(height: 14),
+                            itemCount: value.options.length
+                        )
+                      ],
+                    )
+                )
+              ],
+            ),
           ),
         ),
-      ),
+        _ => const Center(child: CircularProgressIndicator())
+      }
     );
   }
 }
