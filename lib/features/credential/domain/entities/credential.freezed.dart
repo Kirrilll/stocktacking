@@ -19,19 +19,22 @@ mixin _$Credential {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthorised,
-    required TResult Function(String accessToken, Role role) authorised,
+    required TResult Function(String accessToken, Role role, Profile? profile)
+        authorised,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unauthorised,
-    TResult? Function(String accessToken, Role role)? authorised,
+    TResult? Function(String accessToken, Role role, Profile? profile)?
+        authorised,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthorised,
-    TResult Function(String accessToken, Role role)? authorised,
+    TResult Function(String accessToken, Role role, Profile? profile)?
+        authorised,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +116,8 @@ class _$UnauthoresedImpl extends Unauthoresed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthorised,
-    required TResult Function(String accessToken, Role role) authorised,
+    required TResult Function(String accessToken, Role role, Profile? profile)
+        authorised,
   }) {
     return unauthorised();
   }
@@ -122,7 +126,8 @@ class _$UnauthoresedImpl extends Unauthoresed {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unauthorised,
-    TResult? Function(String accessToken, Role role)? authorised,
+    TResult? Function(String accessToken, Role role, Profile? profile)?
+        authorised,
   }) {
     return unauthorised?.call();
   }
@@ -131,7 +136,8 @@ class _$UnauthoresedImpl extends Unauthoresed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthorised,
-    TResult Function(String accessToken, Role role)? authorised,
+    TResult Function(String accessToken, Role role, Profile? profile)?
+        authorised,
     required TResult orElse(),
   }) {
     if (unauthorised != null) {
@@ -183,7 +189,9 @@ abstract class _$$AuthorisedImplCopyWith<$Res> {
           _$AuthorisedImpl value, $Res Function(_$AuthorisedImpl) then) =
       __$$AuthorisedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String accessToken, Role role});
+  $Res call({String accessToken, Role role, Profile? profile});
+
+  $ProfileCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -199,6 +207,7 @@ class __$$AuthorisedImplCopyWithImpl<$Res>
   $Res call({
     Object? accessToken = null,
     Object? role = null,
+    Object? profile = freezed,
   }) {
     return _then(_$AuthorisedImpl(
       null == accessToken
@@ -209,23 +218,41 @@ class __$$AuthorisedImplCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as Role,
+      freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileCopyWith<$Res>? get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+
+    return $ProfileCopyWith<$Res>(_value.profile!, (value) {
+      return _then(_value.copyWith(profile: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$AuthorisedImpl extends Authorised {
-  _$AuthorisedImpl(this.accessToken, this.role) : super._();
+  _$AuthorisedImpl(this.accessToken, this.role, this.profile) : super._();
 
   @override
   final String accessToken;
   @override
   final Role role;
+  @override
+  final Profile? profile;
 
   @override
   String toString() {
-    return 'Credential.authorised(accessToken: $accessToken, role: $role)';
+    return 'Credential.authorised(accessToken: $accessToken, role: $role, profile: $profile)';
   }
 
   @override
@@ -235,11 +262,12 @@ class _$AuthorisedImpl extends Authorised {
             other is _$AuthorisedImpl &&
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken) &&
-            (identical(other.role, role) || other.role == role));
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, accessToken, role);
+  int get hashCode => Object.hash(runtimeType, accessToken, role, profile);
 
   @JsonKey(ignore: true)
   @override
@@ -251,29 +279,32 @@ class _$AuthorisedImpl extends Authorised {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthorised,
-    required TResult Function(String accessToken, Role role) authorised,
+    required TResult Function(String accessToken, Role role, Profile? profile)
+        authorised,
   }) {
-    return authorised(accessToken, role);
+    return authorised(accessToken, role, profile);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unauthorised,
-    TResult? Function(String accessToken, Role role)? authorised,
+    TResult? Function(String accessToken, Role role, Profile? profile)?
+        authorised,
   }) {
-    return authorised?.call(accessToken, role);
+    return authorised?.call(accessToken, role, profile);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthorised,
-    TResult Function(String accessToken, Role role)? authorised,
+    TResult Function(String accessToken, Role role, Profile? profile)?
+        authorised,
     required TResult orElse(),
   }) {
     if (authorised != null) {
-      return authorised(accessToken, role);
+      return authorised(accessToken, role, profile);
     }
     return orElse();
   }
@@ -311,12 +342,14 @@ class _$AuthorisedImpl extends Authorised {
 }
 
 abstract class Authorised extends Credential {
-  factory Authorised(final String accessToken, final Role role) =
+  factory Authorised(
+          final String accessToken, final Role role, final Profile? profile) =
       _$AuthorisedImpl;
   Authorised._() : super._();
 
   String get accessToken;
   Role get role;
+  Profile? get profile;
   @JsonKey(ignore: true)
   _$$AuthorisedImplCopyWith<_$AuthorisedImpl> get copyWith =>
       throw _privateConstructorUsedError;

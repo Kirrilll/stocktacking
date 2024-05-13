@@ -23,6 +23,7 @@ mixin _$CredentialDto {
   String get accessToken => throw _privateConstructorUsedError;
   String get refreshToken => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
+  ProfileDto get profileDto => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,13 @@ abstract class $CredentialDtoCopyWith<$Res> {
           CredentialDto value, $Res Function(CredentialDto) then) =
       _$CredentialDtoCopyWithImpl<$Res, CredentialDto>;
   @useResult
-  $Res call({String accessToken, String refreshToken, String role});
+  $Res call(
+      {String accessToken,
+      String refreshToken,
+      String role,
+      ProfileDto profileDto});
+
+  $ProfileDtoCopyWith<$Res> get profileDto;
 }
 
 /// @nodoc
@@ -55,6 +62,7 @@ class _$CredentialDtoCopyWithImpl<$Res, $Val extends CredentialDto>
     Object? accessToken = null,
     Object? refreshToken = null,
     Object? role = null,
+    Object? profileDto = null,
   }) {
     return _then(_value.copyWith(
       accessToken: null == accessToken
@@ -69,7 +77,19 @@ class _$CredentialDtoCopyWithImpl<$Res, $Val extends CredentialDto>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      profileDto: null == profileDto
+          ? _value.profileDto
+          : profileDto // ignore: cast_nullable_to_non_nullable
+              as ProfileDto,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileDtoCopyWith<$Res> get profileDto {
+    return $ProfileDtoCopyWith<$Res>(_value.profileDto, (value) {
+      return _then(_value.copyWith(profileDto: value) as $Val);
+    });
   }
 }
 
@@ -81,7 +101,14 @@ abstract class _$$CredentialDtoImplCopyWith<$Res>
       __$$CredentialDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accessToken, String refreshToken, String role});
+  $Res call(
+      {String accessToken,
+      String refreshToken,
+      String role,
+      ProfileDto profileDto});
+
+  @override
+  $ProfileDtoCopyWith<$Res> get profileDto;
 }
 
 /// @nodoc
@@ -98,6 +125,7 @@ class __$$CredentialDtoImplCopyWithImpl<$Res>
     Object? accessToken = null,
     Object? refreshToken = null,
     Object? role = null,
+    Object? profileDto = null,
   }) {
     return _then(_$CredentialDtoImpl(
       accessToken: null == accessToken
@@ -112,6 +140,10 @@ class __$$CredentialDtoImplCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      profileDto: null == profileDto
+          ? _value.profileDto
+          : profileDto // ignore: cast_nullable_to_non_nullable
+              as ProfileDto,
     ));
   }
 }
@@ -122,7 +154,8 @@ class _$CredentialDtoImpl implements _CredentialDto {
   const _$CredentialDtoImpl(
       {required this.accessToken,
       required this.refreshToken,
-      required this.role});
+      required this.role,
+      required this.profileDto});
 
   factory _$CredentialDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$CredentialDtoImplFromJson(json);
@@ -133,10 +166,12 @@ class _$CredentialDtoImpl implements _CredentialDto {
   final String refreshToken;
   @override
   final String role;
+  @override
+  final ProfileDto profileDto;
 
   @override
   String toString() {
-    return 'CredentialDto(accessToken: $accessToken, refreshToken: $refreshToken, role: $role)';
+    return 'CredentialDto(accessToken: $accessToken, refreshToken: $refreshToken, role: $role, profileDto: $profileDto)';
   }
 
   @override
@@ -148,12 +183,15 @@ class _$CredentialDtoImpl implements _CredentialDto {
                 other.accessToken == accessToken) &&
             (identical(other.refreshToken, refreshToken) ||
                 other.refreshToken == refreshToken) &&
-            (identical(other.role, role) || other.role == role));
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.profileDto, profileDto) ||
+                other.profileDto == profileDto));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, accessToken, refreshToken, role);
+  int get hashCode =>
+      Object.hash(runtimeType, accessToken, refreshToken, role, profileDto);
 
   @JsonKey(ignore: true)
   @override
@@ -173,7 +211,8 @@ abstract class _CredentialDto implements CredentialDto {
   const factory _CredentialDto(
       {required final String accessToken,
       required final String refreshToken,
-      required final String role}) = _$CredentialDtoImpl;
+      required final String role,
+      required final ProfileDto profileDto}) = _$CredentialDtoImpl;
 
   factory _CredentialDto.fromJson(Map<String, dynamic> json) =
       _$CredentialDtoImpl.fromJson;
@@ -184,6 +223,8 @@ abstract class _CredentialDto implements CredentialDto {
   String get refreshToken;
   @override
   String get role;
+  @override
+  ProfileDto get profileDto;
   @override
   @JsonKey(ignore: true)
   _$$CredentialDtoImplCopyWith<_$CredentialDtoImpl> get copyWith =>

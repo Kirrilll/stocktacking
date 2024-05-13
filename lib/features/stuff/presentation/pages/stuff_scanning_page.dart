@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:stocktacking/app/routing_provider.dart';
 import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/qr_scanner/presentation/qr_scan_view_builder.dart';
+import 'package:stocktacking/core/routing/constants/routing_names.dart';
+import 'package:stocktacking/core/routing/constants/routing_params.dart';
 
 class StuffScanningPage extends ConsumerStatefulWidget {
   const StuffScanningPage({super.key});
@@ -18,10 +21,19 @@ class _StuffScanningPageState extends ConsumerState<StuffScanningPage> {
 
   _onScan(Barcode code) {
     _qrViewController?.pauseCamera();
-    debugPrint('SCAN RES - ${code.code}');
-    // ref
-    //     .read(certificateNotifierProvider.notifier)
-    //     .getCertificateInfo(code.code ?? '');
+    debugPrint('DATA - ${code.code}');
+    final data = code.code;
+    if(data != null && num.tryParse(data) != null) {
+      ref
+          .read(locationServiceProvider)
+          .goNamed(name: stuffDetail, params: {stuffIdParam: data});
+    }
+  }
+
+  @override
+  void dispose() {
+    _qrViewController?.dispose();
+    super.dispose();
   }
 
   @override

@@ -19,7 +19,7 @@ class MockStuffRemoteDataSource implements RemoteStuffDataSource {
           const StuffOptionDto(code: 'dpi', title: 'dpi', value: '1200', type: 'num'),
           const StuffOptionDto(code: 'is_gaming', title: 'Игровая', value: 'true', type: 'logic'),
         ],
-        storageDto: UserDto(id: 1, title: 'Кирилл'),
+        storageDto: StorageDto(id: 1, title: 'Шкаф', storageDto: StockDto(id: 1, address: 'ул. Жукова, д. 155', longitude: 0, latitude: 0, title: '5 корпус')),
         isBroken: false
     ),
     StuffDto(
@@ -35,6 +35,7 @@ class MockStuffRemoteDataSource implements RemoteStuffDataSource {
         isBroken: true,
         comment: 'Колесико не работает(('
     ),
+
     StuffDto(
         id: 3,
         imageUrl: 'https://main-cdn.sbermegamarket.ru/big2/hlr-system/291/655/736/111/212/2/600006498697b9.jpeg',
@@ -43,7 +44,7 @@ class MockStuffRemoteDataSource implements RemoteStuffDataSource {
           const StuffOptionDto(code: 'PO', title: 'ПО', value: 'MsSQL, PyCharm, Notepad', type: 'list'),
           const StuffOptionDto(code: 'Videocard', title: 'Видеокарта', value: 'Geforce RTX 4050', type: 'text'),
         ],
-        storageDto: UserDto(id: 1, title: 'Кирилл'),
+        storageDto: UserDto(id: 2, title: 'Павел Федорович'),
         isBroken: false
     ),
   ];

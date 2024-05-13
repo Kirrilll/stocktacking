@@ -9,6 +9,7 @@ class CredentialAdapter {
   //worker, stockkeeper
   Credential fromDto(CredentialDto credentialDto) => Credential.authorised(
       credentialDto.accessToken,
-      credentialDto.role == 'stockkeeper' ? Role.storekeeper : Role.worker
+      credentialDto.role == 'stockkeeper' ? Role.storekeeper : Role.worker,
+      null
   );
 }

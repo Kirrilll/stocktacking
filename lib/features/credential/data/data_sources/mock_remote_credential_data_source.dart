@@ -3,12 +3,13 @@ import 'package:fpdart/src/either.dart';
 import 'package:stocktacking/core/utils/failure.dart';
 import 'package:stocktacking/features/credential/data/data_sources/remote_credential_data_source.dart';
 import 'package:stocktacking/features/credential/data/dtos/credential_dto.dart';
+import 'package:stocktacking/features/credential/data/dtos/profile_dto.dart';
 
 class MockRemoteCredentialDataSource implements RemoteCredentialDataSource {
 
   final Map<String, CredentialDto> _mockedAccount = {
-    '8(999) 888 77 66': const CredentialDto(accessToken: '', refreshToken: '', role: 'worker'),
-    '8(999) 888 77 55': const CredentialDto(accessToken: '', refreshToken: '', role: 'stockkeeper'),
+    '8(999) 888 77 66': const CredentialDto(accessToken: '', refreshToken: '', role: 'worker', profileDto: ProfileDto(id: 1, name: 'Кирилл')),
+    '8(999) 888 77 55': const CredentialDto(accessToken: '', refreshToken: '', role: 'stockkeeper', profileDto: ProfileDto(id: 2, name: 'Федор Алексеевич')),
   };
 
   @override

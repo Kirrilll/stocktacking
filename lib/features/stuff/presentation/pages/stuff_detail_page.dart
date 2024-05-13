@@ -8,6 +8,7 @@ import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
 import 'package:stocktacking/core/routing/constants/routing_names.dart';
 import 'package:stocktacking/core/routing/constants/routing_params.dart';
+import 'package:stocktacking/features/stock/domain/entities/storage.dart';
 import 'package:stocktacking/features/stuff/presentation/providers/stuff_providers.dart';
 import '../../../../core/presentation/action_button/action_button.dart';
 
@@ -29,6 +30,9 @@ class StuffDetailPage extends ConsumerWidget {
       .read(locationServiceProvider)
       .goNamed(name: stuffPhysicalIdentifier, params: {stuffIdParam: stuffId.toString()});
 
+  void Function() _buildOnTakeTap(WidgetRef ref) => () {};
+
+
   @override
   Widget build(BuildContext context, ref) {
     final getStuffRes = ref.watch(getStuffByIdProvider.call(stuffId));
@@ -46,7 +50,13 @@ class StuffDetailPage extends ConsumerWidget {
         AsyncData(:final value) =>  Panel(
           child: Row(
             children:[
-              Expanded(
+              if(!value.isUsing) Expanded(
+                child: ElevatedButton(
+                    onPressed: _buildOnPutTap(ref),
+                    child: const Text('Взять')
+                ),
+              ),
+              if(value.isUsing) Expanded(
                 child: ElevatedButton(
                     onPressed: _buildOnPutTap(ref),
                     child: const Text('Положить')
