@@ -18,15 +18,6 @@ class MockStuffRemoteDataSource implements RemoteStuffDataSource {
         .run();
   }
 
-  @override
-  Future<Either<IFailure, void>> startUsingStuff({required DateTime time, required bool isBroken, String? comment, required int storageId}) async {
-    return Future.delayed(const Duration(milliseconds: 200));
-  }
-
-  @override
-  Future<Either<IFailure, void>> stopUsingStuff({required DateTime time, required bool isBroken, String? comment, required int storageId}) {
-    return Future.delayed(const Duration(milliseconds: 200));
-  }
 
   @override
   Future<Either<IFailure, StuffDto>> getStuffById(int stuffId) async {

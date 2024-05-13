@@ -20,7 +20,8 @@ class StuffRepositoryImpl implements StuffRepository {
           title: 'Мышь компьютерная',
           image: 'https://dartoffice.ru/12626052-tm_large_default/mysh-kompyuternaya-logitech-mouse-m100-black-usb.jpg',
           storage: User('Кирилл Андреевич', 1),
-          categoryId: null
+          categoryId: null,
+        options: []
       )
     ));
   }
@@ -39,7 +40,8 @@ class StuffRepositoryImpl implements StuffRepository {
           title: 'Мышь',
           image: 'https://dartoffice.ru/12626052-tm_large_default/mysh-kompyuternaya-logitech-mouse-m100-black-usb.jpg',
           storage: User('Кирилл Андреевич', 1),
-          categoryId: null
+          categoryId: null,
+          options: []
       )
     ]));
   }

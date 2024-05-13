@@ -19,6 +19,7 @@ mixin _$Stuff {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
+  List<StuffOption> get options => throw _privateConstructorUsedError;
   StorageBase get storage => throw _privateConstructorUsedError;
   int? get categoryId => throw _privateConstructorUsedError;
   bool get isBroken => throw _privateConstructorUsedError;
@@ -37,6 +38,7 @@ abstract class $StuffCopyWith<$Res> {
       {int id,
       String title,
       String image,
+      List<StuffOption> options,
       StorageBase storage,
       int? categoryId,
       bool isBroken,
@@ -59,6 +61,7 @@ class _$StuffCopyWithImpl<$Res, $Val extends Stuff>
     Object? id = null,
     Object? title = null,
     Object? image = null,
+    Object? options = null,
     Object? storage = null,
     Object? categoryId = freezed,
     Object? isBroken = null,
@@ -77,6 +80,10 @@ class _$StuffCopyWithImpl<$Res, $Val extends Stuff>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      options: null == options
+          ? _value.options
+          : options // ignore: cast_nullable_to_non_nullable
+              as List<StuffOption>,
       storage: null == storage
           ? _value.storage
           : storage // ignore: cast_nullable_to_non_nullable
@@ -108,6 +115,7 @@ abstract class _$$StuffImplCopyWith<$Res> implements $StuffCopyWith<$Res> {
       {int id,
       String title,
       String image,
+      List<StuffOption> options,
       StorageBase storage,
       int? categoryId,
       bool isBroken,
@@ -128,6 +136,7 @@ class __$$StuffImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? image = null,
+    Object? options = null,
     Object? storage = null,
     Object? categoryId = freezed,
     Object? isBroken = null,
@@ -146,6 +155,10 @@ class __$$StuffImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      options: null == options
+          ? _value._options
+          : options // ignore: cast_nullable_to_non_nullable
+              as List<StuffOption>,
       storage: null == storage
           ? _value.storage
           : storage // ignore: cast_nullable_to_non_nullable
@@ -173,11 +186,13 @@ class _$StuffImpl extends _Stuff {
       {required this.id,
       required this.title,
       required this.image,
+      required final List<StuffOption> options,
       required this.storage,
       required this.categoryId,
       this.isBroken = false,
       this.comment = null})
-      : super._();
+      : _options = options,
+        super._();
 
   @override
   final int id;
@@ -185,6 +200,14 @@ class _$StuffImpl extends _Stuff {
   final String title;
   @override
   final String image;
+  final List<StuffOption> _options;
+  @override
+  List<StuffOption> get options {
+    if (_options is EqualUnmodifiableListView) return _options;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_options);
+  }
+
   @override
   final StorageBase storage;
   @override
@@ -198,7 +221,7 @@ class _$StuffImpl extends _Stuff {
 
   @override
   String toString() {
-    return 'Stuff(id: $id, title: $title, image: $image, storage: $storage, categoryId: $categoryId, isBroken: $isBroken, comment: $comment)';
+    return 'Stuff(id: $id, title: $title, image: $image, options: $options, storage: $storage, categoryId: $categoryId, isBroken: $isBroken, comment: $comment)';
   }
 
   @override
@@ -209,6 +232,7 @@ class _$StuffImpl extends _Stuff {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality().equals(other._options, _options) &&
             (identical(other.storage, storage) || other.storage == storage) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
@@ -219,7 +243,15 @@ class _$StuffImpl extends _Stuff {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, image, storage, categoryId, isBroken, comment);
+      runtimeType,
+      id,
+      title,
+      image,
+      const DeepCollectionEquality().hash(_options),
+      storage,
+      categoryId,
+      isBroken,
+      comment);
 
   @JsonKey(ignore: true)
   @override
@@ -233,6 +265,7 @@ abstract class _Stuff extends Stuff {
       {required final int id,
       required final String title,
       required final String image,
+      required final List<StuffOption> options,
       required final StorageBase storage,
       required final int? categoryId,
       final bool isBroken,
@@ -245,6 +278,8 @@ abstract class _Stuff extends Stuff {
   String get title;
   @override
   String get image;
+  @override
+  List<StuffOption> get options;
   @override
   StorageBase get storage;
   @override
