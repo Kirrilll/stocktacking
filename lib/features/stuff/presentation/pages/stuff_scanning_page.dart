@@ -18,6 +18,7 @@ class _StuffScanningPageState extends ConsumerState<StuffScanningPage> {
 
   _onScan(Barcode code) {
     _qrViewController?.pauseCamera();
+    debugPrint('SCAN RES - ${code.code}');
     // ref
     //     .read(certificateNotifierProvider.notifier)
     //     .getCertificateInfo(code.code ?? '');

@@ -40,11 +40,6 @@ class _StuffPhysicalIdentifierState extends ConsumerState<StuffPhysicalIdentifie
         .downloadFile(byteData);
   }
 
-  Future<bool> isFileExist() async {
-    File imgFile  = File('/storage/emulated/0/Download/qr-code-${widget.stuffId}.png');
-    return imgFile.exists();
-  }
-
   Future<void> launchFile() async {
     File imgFile  = File('/storage/emulated/0/Download/qr-code-${widget.stuffId}.png');
     // Pers
