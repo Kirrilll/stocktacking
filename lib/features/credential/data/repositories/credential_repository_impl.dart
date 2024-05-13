@@ -13,8 +13,8 @@ class CredentialRepositoryImpl implements CredentialRepository {
   const CredentialRepositoryImpl({required this.remoteCredentialDataSource});
 
   @override
-  Future<Either<IFailure, Credential>> login(String phone) async {
-    return (await remoteCredentialDataSource.login(phone)).map(_credentialAdapter.fromDto);
+  Future<Either<IFailure, Credential>> login(String phone, String password) async {
+    return (await remoteCredentialDataSource.login(phone, password)).map(_credentialAdapter.fromDto);
   }
 
   @override
@@ -25,6 +25,12 @@ class CredentialRepositoryImpl implements CredentialRepository {
   @override
   Future<Either<IFailure, Credential>> restore(String refreshToken) {
     // TODO: implement restore
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<IFailure, String>> changePassword(String password) {
+    // TODO: implement changePassword
     throw UnimplementedError();
   }
 

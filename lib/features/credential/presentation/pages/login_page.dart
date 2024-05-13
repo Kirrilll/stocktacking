@@ -17,6 +17,7 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
 
   final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   void _onTapClear() => _phoneController.clear();
 
@@ -32,7 +33,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   void _onLoginTap() => ref
       .read(loginPageNotifierProvider.notifier)
-      .login(_phoneController.text);
+      .login(_phoneController.text, _passwordController.text);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       child: const Icon(Icons.clear)
                   ),
                 ),
-
+              ),
+            ),
+            const SizedBox(height: 14),
+            TextField(
+              controller: _passwordController,
+              keyboardType: TextInputType.text,
+              obscureText: true,
+              textAlignVertical: TextAlignVertical.center,
+              style: Theme.of(context).textTheme.displayMedium,
+              decoration: InputDecoration(
+                labelText: 'Пароль',
+                suffix: Material(
+                  borderRadius: BorderRadius.circular(50),
+                  child: InkWell(
+                      borderRadius: BorderRadius.circular(50),
+                      onTap: _onTapClear,
+                      child: const Icon(Icons.clear)
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 14),

@@ -25,10 +25,11 @@ CredentialRepository credentialRepository(CredentialRepositoryRef ref) {
 }
 
 @riverpod
-Future<Credential> useLoginUseCase(UseLoginUseCaseRef ref, String phone) async {
+Future<Credential> useLoginUseCase(UseLoginUseCaseRef ref, (String, String) loginParams) async {
+  final (phone, password) = loginParams;
   final credentialRepository = ref.read(credentialRepositoryProvider);
   final credential = ref.read(credentialNotifierProvider.notifier);
-  return (await credentialRepository.login(phone))
+  return (await credentialRepository.login(phone, password))
       .match(
           (l) => throw l,
           (r) =>  credential.credential = r

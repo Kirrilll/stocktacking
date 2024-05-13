@@ -12,7 +12,7 @@ class MockRemoteCredentialDataSource implements RemoteCredentialDataSource {
   };
 
   @override
-  Future<Either<IFailure, CredentialDto>> login(String phone) async {
+  Future<Either<IFailure, CredentialDto>> login(String phone, String password) async {
     return await TaskEither(() => Future.delayed(
         const Duration(milliseconds: 500),
             () => Either.fromNullable(_mockedAccount[phone],
@@ -29,6 +29,11 @@ class MockRemoteCredentialDataSource implements RemoteCredentialDataSource {
   @override
   Future<CredentialDto> restore(String refreshToken) async {
     return _mockedAccount.values.first;
+  }
+
+  @override
+  Future<Either<IFailure, String>> changePassword(String password) {
+    return Future.delayed(const Duration(milliseconds: 500), () => const Right(''));
   }
 
 }

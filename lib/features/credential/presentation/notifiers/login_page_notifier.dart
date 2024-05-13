@@ -20,8 +20,8 @@ class LoginPageNotifier extends _$LoginPageNotifier {
     if(curr is Error) onError(curr.message ?? 'Что-то пошло не так(');
   });
 
-  Future<void> login(String phone) async {
-    ref.listen(useLoginUseCaseProvider.call(phone), (_, curr) {
+  Future<void> login(String phone, String password) async {
+    ref.listen(useLoginUseCaseProvider.call((phone, password)), (_, curr) {
       state = switch(curr) {
         AsyncLoading(:final value) => AsyncState.loading(),
         AsyncError(:final error, :final stackTrace) =>  AsyncState.error(error is IFailure

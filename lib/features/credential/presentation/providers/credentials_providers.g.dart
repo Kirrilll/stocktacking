@@ -41,7 +41,7 @@ final credentialRepositoryProvider =
 );
 
 typedef CredentialRepositoryRef = AutoDisposeProviderRef<CredentialRepository>;
-String _$useLoginUseCaseHash() => r'5f2d8fa4c2d024997220471d5e101f20488148c0';
+String _$useLoginUseCaseHash() => r'b95f2608034c6d4bfca4baff98f477b80a306de8';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -75,10 +75,10 @@ class UseLoginUseCaseFamily extends Family<AsyncValue<Credential>> {
 
   /// See also [useLoginUseCase].
   UseLoginUseCaseProvider call(
-    String phone,
+    (String, String) loginParams,
   ) {
     return UseLoginUseCaseProvider(
-      phone,
+      loginParams,
     );
   }
 
@@ -87,7 +87,7 @@ class UseLoginUseCaseFamily extends Family<AsyncValue<Credential>> {
     covariant UseLoginUseCaseProvider provider,
   ) {
     return call(
-      provider.phone,
+      provider.loginParams,
     );
   }
 
@@ -110,11 +110,11 @@ class UseLoginUseCaseFamily extends Family<AsyncValue<Credential>> {
 class UseLoginUseCaseProvider extends AutoDisposeFutureProvider<Credential> {
   /// See also [useLoginUseCase].
   UseLoginUseCaseProvider(
-    String phone,
+    (String, String) loginParams,
   ) : this._internal(
           (ref) => useLoginUseCase(
             ref as UseLoginUseCaseRef,
-            phone,
+            loginParams,
           ),
           from: useLoginUseCaseProvider,
           name: r'useLoginUseCaseProvider',
@@ -125,7 +125,7 @@ class UseLoginUseCaseProvider extends AutoDisposeFutureProvider<Credential> {
           dependencies: UseLoginUseCaseFamily._dependencies,
           allTransitiveDependencies:
               UseLoginUseCaseFamily._allTransitiveDependencies,
-          phone: phone,
+          loginParams: loginParams,
         );
 
   UseLoginUseCaseProvider._internal(
@@ -135,10 +135,10 @@ class UseLoginUseCaseProvider extends AutoDisposeFutureProvider<Credential> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.phone,
+    required this.loginParams,
   }) : super.internal();
 
-  final String phone;
+  final (String, String) loginParams;
 
   @override
   Override overrideWith(
@@ -153,7 +153,7 @@ class UseLoginUseCaseProvider extends AutoDisposeFutureProvider<Credential> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        phone: phone,
+        loginParams: loginParams,
       ),
     );
   }
@@ -165,21 +165,21 @@ class UseLoginUseCaseProvider extends AutoDisposeFutureProvider<Credential> {
 
   @override
   bool operator ==(Object other) {
-    return other is UseLoginUseCaseProvider && other.phone == phone;
+    return other is UseLoginUseCaseProvider && other.loginParams == loginParams;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, phone.hashCode);
+    hash = _SystemHash.combine(hash, loginParams.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 mixin UseLoginUseCaseRef on AutoDisposeFutureProviderRef<Credential> {
-  /// The parameter `phone` of this provider.
-  String get phone;
+  /// The parameter `loginParams` of this provider.
+  (String, String) get loginParams;
 }
 
 class _UseLoginUseCaseProviderElement
@@ -188,7 +188,8 @@ class _UseLoginUseCaseProviderElement
   _UseLoginUseCaseProviderElement(super.provider);
 
   @override
-  String get phone => (origin as UseLoginUseCaseProvider).phone;
+  (String, String) get loginParams =>
+      (origin as UseLoginUseCaseProvider).loginParams;
 }
 
 String _$useLogoutUseCaseHash() => r'ee226b4c2df646991fd4531fa9f48e1dc622e5b4';
