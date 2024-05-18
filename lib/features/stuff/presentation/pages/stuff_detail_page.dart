@@ -10,6 +10,7 @@ import 'package:stocktacking/core/routing/constants/routing_names.dart';
 import 'package:stocktacking/core/routing/constants/routing_params.dart';
 import 'package:stocktacking/features/stock/domain/entities/storage.dart';
 import 'package:stocktacking/features/stuff/presentation/providers/stuff_providers.dart';
+import 'package:stocktacking/features/stuff/presentation/widgets/stuff_image.dart';
 import '../../../../core/presentation/action_button/action_button.dart';
 
 class StuffDetailPage extends ConsumerWidget {
@@ -101,10 +102,7 @@ class StuffDetailPage extends ConsumerWidget {
                             side: BorderSide(color: Color(0x1113181A), width: 1)
                         ),
                         children: [
-                          Image.network(
-                            value.image,
-                            fit: BoxFit.contain,
-                          )
+                          StuffImage.fromNetworkLink(value.image)
                         ],
                       )
                     ],
