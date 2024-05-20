@@ -23,7 +23,8 @@ mixin _$StorageItemDto {
     required TResult Function(int id, String title, String address,
             double latitude, double longitude)
         stock,
-    required TResult Function(int id, String title, StorageItemDto? storageDto)
+    required TResult Function(
+            int id, String title, String fullName, int stockId)
         storage,
     required TResult Function(int id, String title) user,
   }) =>
@@ -33,7 +34,7 @@ mixin _$StorageItemDto {
     TResult? Function(int id, String title, String address, double latitude,
             double longitude)?
         stock,
-    TResult? Function(int id, String title, StorageItemDto? storageDto)?
+    TResult? Function(int id, String title, String fullName, int stockId)?
         storage,
     TResult? Function(int id, String title)? user,
   }) =>
@@ -43,7 +44,8 @@ mixin _$StorageItemDto {
     TResult Function(int id, String title, String address, double latitude,
             double longitude)?
         stock,
-    TResult Function(int id, String title, StorageItemDto? storageDto)? storage,
+    TResult Function(int id, String title, String fullName, int stockId)?
+        storage,
     TResult Function(int id, String title)? user,
     required TResult orElse(),
   }) =>
@@ -228,7 +230,8 @@ class _$StockDtoImpl implements StockDto {
     required TResult Function(int id, String title, String address,
             double latitude, double longitude)
         stock,
-    required TResult Function(int id, String title, StorageItemDto? storageDto)
+    required TResult Function(
+            int id, String title, String fullName, int stockId)
         storage,
     required TResult Function(int id, String title) user,
   }) {
@@ -241,7 +244,7 @@ class _$StockDtoImpl implements StockDto {
     TResult? Function(int id, String title, String address, double latitude,
             double longitude)?
         stock,
-    TResult? Function(int id, String title, StorageItemDto? storageDto)?
+    TResult? Function(int id, String title, String fullName, int stockId)?
         storage,
     TResult? Function(int id, String title)? user,
   }) {
@@ -254,7 +257,8 @@ class _$StockDtoImpl implements StockDto {
     TResult Function(int id, String title, String address, double latitude,
             double longitude)?
         stock,
-    TResult Function(int id, String title, StorageItemDto? storageDto)? storage,
+    TResult Function(int id, String title, String fullName, int stockId)?
+        storage,
     TResult Function(int id, String title)? user,
     required TResult orElse(),
   }) {
@@ -328,9 +332,7 @@ abstract class _$$StorageDtoImplCopyWith<$Res>
       __$$StorageDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, StorageItemDto? storageDto});
-
-  $StorageItemDtoCopyWith<$Res>? get storageDto;
+  $Res call({int id, String title, String fullName, int stockId});
 }
 
 /// @nodoc
@@ -346,7 +348,8 @@ class __$$StorageDtoImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? storageDto = freezed,
+    Object? fullName = null,
+    Object? stockId = null,
   }) {
     return _then(_$StorageDtoImpl(
       id: null == id
@@ -357,23 +360,15 @@ class __$$StorageDtoImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      storageDto: freezed == storageDto
-          ? _value.storageDto
-          : storageDto // ignore: cast_nullable_to_non_nullable
-              as StorageItemDto?,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      stockId: null == stockId
+          ? _value.stockId
+          : stockId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $StorageItemDtoCopyWith<$Res>? get storageDto {
-    if (_value.storageDto == null) {
-      return null;
-    }
-
-    return $StorageItemDtoCopyWith<$Res>(_value.storageDto!, (value) {
-      return _then(_value.copyWith(storageDto: value));
-    });
   }
 }
 
@@ -381,19 +376,23 @@ class __$$StorageDtoImplCopyWithImpl<$Res>
 
 class _$StorageDtoImpl implements StorageDto {
   _$StorageDtoImpl(
-      {required this.id, required this.title, this.storageDto = null});
+      {required this.id,
+      required this.title,
+      required this.fullName,
+      required this.stockId});
 
   @override
   final int id;
   @override
   final String title;
   @override
-  @JsonKey()
-  final StorageItemDto? storageDto;
+  final String fullName;
+  @override
+  final int stockId;
 
   @override
   String toString() {
-    return 'StorageItemDto.storage(id: $id, title: $title, storageDto: $storageDto)';
+    return 'StorageItemDto.storage(id: $id, title: $title, fullName: $fullName, stockId: $stockId)';
   }
 
   @override
@@ -403,12 +402,13 @@ class _$StorageDtoImpl implements StorageDto {
             other is _$StorageDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.storageDto, storageDto) ||
-                other.storageDto == storageDto));
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.stockId, stockId) || other.stockId == stockId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, storageDto);
+  int get hashCode => Object.hash(runtimeType, id, title, fullName, stockId);
 
   @JsonKey(ignore: true)
   @override
@@ -422,11 +422,12 @@ class _$StorageDtoImpl implements StorageDto {
     required TResult Function(int id, String title, String address,
             double latitude, double longitude)
         stock,
-    required TResult Function(int id, String title, StorageItemDto? storageDto)
+    required TResult Function(
+            int id, String title, String fullName, int stockId)
         storage,
     required TResult Function(int id, String title) user,
   }) {
-    return storage(id, title, storageDto);
+    return storage(id, title, fullName, stockId);
   }
 
   @override
@@ -435,11 +436,11 @@ class _$StorageDtoImpl implements StorageDto {
     TResult? Function(int id, String title, String address, double latitude,
             double longitude)?
         stock,
-    TResult? Function(int id, String title, StorageItemDto? storageDto)?
+    TResult? Function(int id, String title, String fullName, int stockId)?
         storage,
     TResult? Function(int id, String title)? user,
   }) {
-    return storage?.call(id, title, storageDto);
+    return storage?.call(id, title, fullName, stockId);
   }
 
   @override
@@ -448,12 +449,13 @@ class _$StorageDtoImpl implements StorageDto {
     TResult Function(int id, String title, String address, double latitude,
             double longitude)?
         stock,
-    TResult Function(int id, String title, StorageItemDto? storageDto)? storage,
+    TResult Function(int id, String title, String fullName, int stockId)?
+        storage,
     TResult Function(int id, String title)? user,
     required TResult orElse(),
   }) {
     if (storage != null) {
-      return storage(id, title, storageDto);
+      return storage(id, title, fullName, stockId);
     }
     return orElse();
   }
@@ -497,13 +499,15 @@ abstract class StorageDto implements StorageItemDto {
   factory StorageDto(
       {required final int id,
       required final String title,
-      final StorageItemDto? storageDto}) = _$StorageDtoImpl;
+      required final String fullName,
+      required final int stockId}) = _$StorageDtoImpl;
 
   @override
   int get id;
   @override
   String get title;
-  StorageItemDto? get storageDto;
+  String get fullName;
+  int get stockId;
   @override
   @JsonKey(ignore: true)
   _$$StorageDtoImplCopyWith<_$StorageDtoImpl> get copyWith =>
@@ -587,7 +591,8 @@ class _$UserDtoImpl implements UserDto {
     required TResult Function(int id, String title, String address,
             double latitude, double longitude)
         stock,
-    required TResult Function(int id, String title, StorageItemDto? storageDto)
+    required TResult Function(
+            int id, String title, String fullName, int stockId)
         storage,
     required TResult Function(int id, String title) user,
   }) {
@@ -600,7 +605,7 @@ class _$UserDtoImpl implements UserDto {
     TResult? Function(int id, String title, String address, double latitude,
             double longitude)?
         stock,
-    TResult? Function(int id, String title, StorageItemDto? storageDto)?
+    TResult? Function(int id, String title, String fullName, int stockId)?
         storage,
     TResult? Function(int id, String title)? user,
   }) {
@@ -613,7 +618,8 @@ class _$UserDtoImpl implements UserDto {
     TResult Function(int id, String title, String address, double latitude,
             double longitude)?
         stock,
-    TResult Function(int id, String title, StorageItemDto? storageDto)? storage,
+    TResult Function(int id, String title, String fullName, int stockId)?
+        storage,
     TResult Function(int id, String title)? user,
     required TResult orElse(),
   }) {

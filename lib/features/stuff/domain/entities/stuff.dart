@@ -17,20 +17,15 @@ class Stuff with _$Stuff {
     required final String title,
     required final String image,
     required final List<StuffOption> options,
-    required final StorageBase storage,
+    required final StorageItem storage,
     required final int? categoryId,
     @Default(false) final bool isBroken,
     @Default(null) final String? comment
   }) = _Stuff;
 
-  String get fullStorageName => _getStorageFullName(storage);
+  String get fullStorageName => storage.fullName;
 
   bool get isUsing => storage is User;
 
-  String _getStorageFullName(StorageBase storage) {
-    final nestedStorage = storage.storage;
-    if(nestedStorage == null) return storage.title;
-    return '${storage.title}/${_getStorageFullName(nestedStorage)}';
-  }
 }
 

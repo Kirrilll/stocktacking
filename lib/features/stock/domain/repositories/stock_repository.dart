@@ -4,7 +4,7 @@ import 'package:stocktacking/features/stock/domain/entities/storage.dart';
 
 abstract class StockRepository {
   Future<Either<IFailure, List<Stock>>> getOrgStocks(int orgId);
-  Future<Either<IFailure, List<StorageItem>>> getStoragesBySearch(String searchValue);
+  Future<Either<IFailure, List<StorageItem>>> getStoragesBySearch(String searchValue, int orgId);
   Future<Either<IFailure, Stock>> createStock({
     required int orgId,
     required String title,
@@ -20,4 +20,5 @@ abstract class StockRepository {
     required int orgId,
     required int stockId
   });
+  Future<Either<IFailure, List<Stock>>> searchStocks(String search, int orgId);
 }

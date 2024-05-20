@@ -19,27 +19,31 @@ mixin _$StorageItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String title, String address, (double, double) coordinates)
+            int id, String title, String address, (double, double) coordinates)
         stock,
-    required TResult Function(String title, StorageBase? storage) storage,
+    required TResult Function(
+            int id, String title, String fullTitle, int stockId)
+        storage,
     required TResult Function(String name, int userId) user,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String title, String address, (double, double) coordinates)?
+            int id, String title, String address, (double, double) coordinates)?
         stock,
-    TResult? Function(String title, StorageBase? storage)? storage,
+    TResult? Function(int id, String title, String fullTitle, int stockId)?
+        storage,
     TResult? Function(String name, int userId)? user,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String title, String address, (double, double) coordinates)?
+            int id, String title, String address, (double, double) coordinates)?
         stock,
-    TResult Function(String title, StorageBase? storage)? storage,
+    TResult Function(int id, String title, String fullTitle, int stockId)?
+        storage,
     TResult Function(String name, int userId)? user,
     required TResult orElse(),
   }) =>
@@ -92,7 +96,8 @@ abstract class _$$StockImplCopyWith<$Res> {
           _$StockImpl value, $Res Function(_$StockImpl) then) =
       __$$StockImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String title, String address, (double, double) coordinates});
+  $Res call(
+      {int id, String title, String address, (double, double) coordinates});
 }
 
 /// @nodoc
@@ -106,11 +111,16 @@ class __$$StockImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? address = null,
     Object? coordinates = null,
   }) {
     return _then(_$StockImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -130,8 +140,10 @@ class __$$StockImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$StockImpl extends Stock {
-  _$StockImpl(this.title, this.address, this.coordinates) : super._();
+  _$StockImpl(this.id, this.title, this.address, this.coordinates) : super._();
 
+  @override
+  final int id;
   @override
   final String title;
   @override
@@ -141,7 +153,7 @@ class _$StockImpl extends Stock {
 
   @override
   String toString() {
-    return 'StorageItem.stock(title: $title, address: $address, coordinates: $coordinates)';
+    return 'StorageItem.stock(id: $id, title: $title, address: $address, coordinates: $coordinates)';
   }
 
   @override
@@ -149,6 +161,7 @@ class _$StockImpl extends Stock {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StockImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.coordinates, coordinates) ||
@@ -156,7 +169,7 @@ class _$StockImpl extends Stock {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, address, coordinates);
+  int get hashCode => Object.hash(runtimeType, id, title, address, coordinates);
 
   @JsonKey(ignore: true)
   @override
@@ -168,38 +181,42 @@ class _$StockImpl extends Stock {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String title, String address, (double, double) coordinates)
+            int id, String title, String address, (double, double) coordinates)
         stock,
-    required TResult Function(String title, StorageBase? storage) storage,
+    required TResult Function(
+            int id, String title, String fullTitle, int stockId)
+        storage,
     required TResult Function(String name, int userId) user,
   }) {
-    return stock(title, address, coordinates);
+    return stock(id, title, address, coordinates);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String title, String address, (double, double) coordinates)?
+            int id, String title, String address, (double, double) coordinates)?
         stock,
-    TResult? Function(String title, StorageBase? storage)? storage,
+    TResult? Function(int id, String title, String fullTitle, int stockId)?
+        storage,
     TResult? Function(String name, int userId)? user,
   }) {
-    return stock?.call(title, address, coordinates);
+    return stock?.call(id, title, address, coordinates);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String title, String address, (double, double) coordinates)?
+            int id, String title, String address, (double, double) coordinates)?
         stock,
-    TResult Function(String title, StorageBase? storage)? storage,
+    TResult Function(int id, String title, String fullTitle, int stockId)?
+        storage,
     TResult Function(String name, int userId)? user,
     required TResult orElse(),
   }) {
     if (stock != null) {
-      return stock(title, address, coordinates);
+      return stock(id, title, address, coordinates);
     }
     return orElse();
   }
@@ -240,10 +257,11 @@ class _$StockImpl extends Stock {
 }
 
 abstract class Stock extends StorageItem implements StorageBase {
-  factory Stock(final String title, final String address,
+  factory Stock(final int id, final String title, final String address,
       final (double, double) coordinates) = _$StockImpl;
   Stock._() : super._();
 
+  int get id;
   String get title;
   String get address;
   (double, double) get coordinates;
@@ -258,7 +276,7 @@ abstract class _$$StorageImplCopyWith<$Res> {
           _$StorageImpl value, $Res Function(_$StorageImpl) then) =
       __$$StorageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String title, StorageBase? storage});
+  $Res call({int id, String title, String fullTitle, int stockId});
 }
 
 /// @nodoc
@@ -272,18 +290,28 @@ class __$$StorageImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
-    Object? storage = freezed,
+    Object? fullTitle = null,
+    Object? stockId = null,
   }) {
     return _then(_$StorageImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      freezed == storage
-          ? _value.storage
-          : storage // ignore: cast_nullable_to_non_nullable
-              as StorageBase?,
+      null == fullTitle
+          ? _value.fullTitle
+          : fullTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == stockId
+          ? _value.stockId
+          : stockId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -291,16 +319,20 @@ class __$$StorageImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$StorageImpl extends Storage {
-  _$StorageImpl(this.title, this.storage) : super._();
+  _$StorageImpl(this.id, this.title, this.fullTitle, this.stockId) : super._();
 
+  @override
+  final int id;
   @override
   final String title;
   @override
-  final StorageBase? storage;
+  final String fullTitle;
+  @override
+  final int stockId;
 
   @override
   String toString() {
-    return 'StorageItem.storage(title: $title, storage: $storage)';
+    return 'StorageItem.storage(id: $id, title: $title, fullTitle: $fullTitle, stockId: $stockId)';
   }
 
   @override
@@ -308,12 +340,15 @@ class _$StorageImpl extends Storage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StorageImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.storage, storage) || other.storage == storage));
+            (identical(other.fullTitle, fullTitle) ||
+                other.fullTitle == fullTitle) &&
+            (identical(other.stockId, stockId) || other.stockId == stockId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, storage);
+  int get hashCode => Object.hash(runtimeType, id, title, fullTitle, stockId);
 
   @JsonKey(ignore: true)
   @override
@@ -325,38 +360,42 @@ class _$StorageImpl extends Storage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String title, String address, (double, double) coordinates)
+            int id, String title, String address, (double, double) coordinates)
         stock,
-    required TResult Function(String title, StorageBase? storage) storage,
+    required TResult Function(
+            int id, String title, String fullTitle, int stockId)
+        storage,
     required TResult Function(String name, int userId) user,
   }) {
-    return storage(title, this.storage);
+    return storage(id, title, fullTitle, stockId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String title, String address, (double, double) coordinates)?
+            int id, String title, String address, (double, double) coordinates)?
         stock,
-    TResult? Function(String title, StorageBase? storage)? storage,
+    TResult? Function(int id, String title, String fullTitle, int stockId)?
+        storage,
     TResult? Function(String name, int userId)? user,
   }) {
-    return storage?.call(title, this.storage);
+    return storage?.call(id, title, fullTitle, stockId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String title, String address, (double, double) coordinates)?
+            int id, String title, String address, (double, double) coordinates)?
         stock,
-    TResult Function(String title, StorageBase? storage)? storage,
+    TResult Function(int id, String title, String fullTitle, int stockId)?
+        storage,
     TResult Function(String name, int userId)? user,
     required TResult orElse(),
   }) {
     if (storage != null) {
-      return storage(title, this.storage);
+      return storage(id, title, fullTitle, stockId);
     }
     return orElse();
   }
@@ -397,12 +436,14 @@ class _$StorageImpl extends Storage {
 }
 
 abstract class Storage extends StorageItem implements StorageBase {
-  factory Storage(final String title, final StorageBase? storage) =
-      _$StorageImpl;
+  factory Storage(final int id, final String title, final String fullTitle,
+      final int stockId) = _$StorageImpl;
   Storage._() : super._();
 
+  int get id;
   String get title;
-  StorageBase? get storage;
+  String get fullTitle;
+  int get stockId;
   @JsonKey(ignore: true)
   _$$StorageImplCopyWith<_$StorageImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -480,9 +521,11 @@ class _$UserImpl extends User {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String title, String address, (double, double) coordinates)
+            int id, String title, String address, (double, double) coordinates)
         stock,
-    required TResult Function(String title, StorageBase? storage) storage,
+    required TResult Function(
+            int id, String title, String fullTitle, int stockId)
+        storage,
     required TResult Function(String name, int userId) user,
   }) {
     return user(name, userId);
@@ -492,9 +535,10 @@ class _$UserImpl extends User {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String title, String address, (double, double) coordinates)?
+            int id, String title, String address, (double, double) coordinates)?
         stock,
-    TResult? Function(String title, StorageBase? storage)? storage,
+    TResult? Function(int id, String title, String fullTitle, int stockId)?
+        storage,
     TResult? Function(String name, int userId)? user,
   }) {
     return user?.call(name, userId);
@@ -504,9 +548,10 @@ class _$UserImpl extends User {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String title, String address, (double, double) coordinates)?
+            int id, String title, String address, (double, double) coordinates)?
         stock,
-    TResult Function(String title, StorageBase? storage)? storage,
+    TResult Function(int id, String title, String fullTitle, int stockId)?
+        storage,
     TResult Function(String name, int userId)? user,
     required TResult orElse(),
   }) {

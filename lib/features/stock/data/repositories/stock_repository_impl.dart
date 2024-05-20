@@ -35,15 +35,19 @@ class StockRepositoryImpl implements StockRepository {
   }
 
   @override
-  Future<Either<IFailure, List<StorageItem>>> getStoragesBySearch(String searchValue) {
-    // TODO: implement getStoragesBySearch
-    throw UnimplementedError();
+  Future<Either<IFailure, List<StorageItem>>> getStoragesBySearch(String searchValue, int orgId) async {
+    return (await stockRemoteDataSource.searchStorage(searchValue, orgId)).map((items) => items.map(_stockAdapter.fromDto).toList());
   }
 
   @override
   Future<Either<IFailure, List<Storage>>> getStoragesOfStorage({required int? parentStorageId, required int orgId, required int stockId}) {
     // TODO: implement getStoragesOfStorage
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<IFailure, List<Stock>>> searchStocks(String search, int orgId) async {
+    return (await stockRemoteDataSource.searchStocks(search, orgId)).map((a) => a.map(_stockAdapter.stockFromDto).toList());
   }
 
 }

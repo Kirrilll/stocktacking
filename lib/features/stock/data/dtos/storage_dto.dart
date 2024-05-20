@@ -15,7 +15,8 @@ sealed class StorageItemDto with _$StorageItemDto{
   factory StorageItemDto.storage({
     required int id,
     required String title,
-    @Default(null) StorageItemDto? storageDto
+    required String fullName,
+    required int stockId
   }) = StorageDto;
 
   factory StorageItemDto.user({
@@ -29,7 +30,7 @@ sealed class StorageItemDto with _$StorageItemDto{
     final title = json['title'];
     if(type == 'stock') return StockDto(id: id, title: title, address: json['address'], latitude: json['latitude'], longitude: json['longitude']);
     if(type == 'user') return UserDto(id: id, title: title);
-    return StorageDto(id: id, title: title, storageDto: StorageItemDto.fromMap(json['storage']));
+    return StorageDto(id: id, title: title, fullName: json['full_name'], stockId: json['stock_id']);
   }
 
 }

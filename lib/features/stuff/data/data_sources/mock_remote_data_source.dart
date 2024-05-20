@@ -10,18 +10,18 @@ class MockStuffRemoteDataSource implements RemoteStuffDataSource {
 
   
   static final List<StuffDto> _mockedUnusedData = [
-    StuffDto(
-        id: 1,
-        imageUrl: 'https://ae01.alicdn.com/kf/S5f1e73e78bb744e98d56e49c729269b49.jpg',
-        title: 'Мышь вертикальная',
-        options: [
-          const StuffOptionDto(code: 'Type', title: 'Тип', value: 'Беспроводная', type: 'text'),
-          const StuffOptionDto(code: 'dpi', title: 'dpi', value: '1200', type: 'num'),
-          const StuffOptionDto(code: 'is_gaming', title: 'Игровая', value: 'true', type: 'logic'),
-        ],
-        storageDto: StorageDto(id: 1, title: 'Шкаф', storageDto: StockDto(id: 1, address: 'ул. Жукова, д. 155', longitude: 0, latitude: 0, title: '5 корпус')),
-        isBroken: false
-    ),
+    // StuffDto(
+    //     id: 1,
+    //     imageUrl: 'https://ae01.alicdn.com/kf/S5f1e73e78bb744e98d56e49c729269b49.jpg',
+    //     title: 'Мышь вертикальная',
+    //     options: [
+    //       const StuffOptionDto(code: 'Type', title: 'Тип', value: 'Беспроводная', type: 'text'),
+    //       const StuffOptionDto(code: 'dpi', title: 'dpi', value: '1200', type: 'num'),
+    //       const StuffOptionDto(code: 'is_gaming', title: 'Игровая', value: 'true', type: 'logic'),
+    //     ],
+    //     storageDto: StorageDto(id: 1, title: 'Шкаф', storageDto: StockDto(id: 1, address: 'ул. Жукова, д. 155', longitude: 0, latitude: 0, title: '5 корпус')),
+    //     isBroken: false
+    // ),
     StuffDto(
         id: 2,
         imageUrl: 'https://img.health-tehnika.ru/images/products/1/1392/332785008/kompyuternaya-mysh-ergomouse-em03.jpg',

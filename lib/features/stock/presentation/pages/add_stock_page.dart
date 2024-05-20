@@ -5,7 +5,10 @@ import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
 import 'package:stocktacking/core/riverpod/async_state.dart';
 import 'package:stocktacking/core/toast_notifier/domain/toast_notifier.dart';
+import 'package:stocktacking/features/stock/domain/entities/storage.dart';
 import 'package:stocktacking/features/stock/presentation/notifiers/storage_create_page_notifier.dart';
+import 'package:stocktacking/features/stock/presentation/providers/stock_providers.dart';
+import 'package:stocktacking/features/stock/presentation/widget/storage_search.dart';
 
 class AddStockPage extends ConsumerStatefulWidget {
   const AddStockPage({super.key});
@@ -19,6 +22,11 @@ class _AddStockPageState extends ConsumerState<AddStockPage> {
   final _toastNotifier = const ToastNotifier();
   final _storageTitleController = TextEditingController();
   final _stockAddressController = TextEditingController();
+  StorageItem? selectedStorage;
+
+  void onSelectItem(StorageItem? storageItem) {
+    setState(() => selectedStorage = storageItem);
+  }
 
   var _isStock = false;
 
@@ -32,6 +40,20 @@ class _AddStockPageState extends ConsumerState<AddStockPage> {
           .read(storageAddPageNotifierProvider.notifier)
           .createStock(name: _storageTitleController.text, address: _stockAddressController.text);
     }
+    else {
+      ref
+          .read(storageAddPageNotifierProvider.notifier)
+          .createStorage(
+            name: _storageTitleController.text,
+            stockId: selectedStorage?.mapOrNull(
+                stock: (stock) => stock.id,
+                storage: (storage) => storage.stockId
+            ) ?? -1,
+            parentStorageId:   selectedStorage?.mapOrNull(
+                storage: (storage) => storage.id
+            )
+        );
+    }
   }
 
   @override
@@ -40,6 +62,7 @@ class _AddStockPageState extends ConsumerState<AddStockPage> {
       _storageTitleController.clear();
       _stockAddressController.clear();
       _toastNotifier.showToast(context, message: 'Успешно создано');
+      setState(() => selectedStorage = null);
     });
     ref.read(storageAddPageNotifierProvider.notifier).setupOnError((error) {
       _toastNotifier.showToast(context, message: error);
@@ -63,6 +86,7 @@ class _AddStockPageState extends ConsumerState<AddStockPage> {
         child: Panel(
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextField(
                 controller: _storageTitleController,
@@ -89,14 +113,14 @@ class _AddStockPageState extends ConsumerState<AddStockPage> {
                   ),
                 );
                 }
-                return const Text('Хранилище');
+                return StorageSearch(onSelect: onSelectItem, selectedItem: selectedStorage);
               }),
               const SizedBox(height: 14),
               Builder(
                 builder: (context) {
                   final creationState = ref.watch(storageAddPageNotifierProvider);
                   return switch(creationState) {
-                    Loading() => const CircularProgressIndicator(),
+                    Loading() => const Center(child: CircularProgressIndicator()),
                     _ => ElevatedButton(onPressed: onCreate, child: const Text('Создать'))
                   };
                 }

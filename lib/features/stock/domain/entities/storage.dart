@@ -10,6 +10,7 @@ sealed class StorageItem with _$StorageItem {
 
   @Implements<StorageBase>()
   factory StorageItem.stock(
+      int id,
     String title,
     String address,
     (double, double) coordinates
@@ -17,8 +18,10 @@ sealed class StorageItem with _$StorageItem {
 
   @Implements<StorageBase>()
   factory StorageItem.storage(
+      int id,
     String title,
-    StorageBase? storage
+    String fullTitle,
+    int stockId
   ) = Storage;
 
   @Implements<StorageBase>()
@@ -27,14 +30,14 @@ sealed class StorageItem with _$StorageItem {
       int userId
   ) = User;
 
-  StorageBase? get storage => switch(this) {
-    Storage(:final storage, :final title) => storage,
-    Stock(:final title) => null,
-    User(:final name, :final userId) => null
+  String get fullName => switch(this) {
+    Storage(:final fullTitle, :final title) => fullTitle,
+    Stock(:final title) => title,
+    User(:final name, :final userId) => name
   };
 
   String get title => switch(this) {
-    Storage(:final storage, :final title) => title,
+    Storage(:final fullTitle, :final title) => title,
     Stock(:final title) => title,
     User(:final name, :final userId) => name
   };

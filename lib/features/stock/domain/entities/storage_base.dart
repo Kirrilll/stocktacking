@@ -1,6 +1,6 @@
 abstract class StorageBase {
   final String title;
-  final StorageBase? storage;
+  final String fullName;
 
-  const StorageBase(this.title, this.storage);
+  const StorageBase(this.title, this.fullName);
 }

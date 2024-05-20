@@ -20,7 +20,7 @@ mixin _$Stuff {
   String get title => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   List<StuffOption> get options => throw _privateConstructorUsedError;
-  StorageBase get storage => throw _privateConstructorUsedError;
+  StorageItem get storage => throw _privateConstructorUsedError;
   int? get categoryId => throw _privateConstructorUsedError;
   bool get isBroken => throw _privateConstructorUsedError;
   String? get comment => throw _privateConstructorUsedError;
@@ -39,10 +39,12 @@ abstract class $StuffCopyWith<$Res> {
       String title,
       String image,
       List<StuffOption> options,
-      StorageBase storage,
+      StorageItem storage,
       int? categoryId,
       bool isBroken,
       String? comment});
+
+  $StorageItemCopyWith<$Res> get storage;
 }
 
 /// @nodoc
@@ -87,7 +89,7 @@ class _$StuffCopyWithImpl<$Res, $Val extends Stuff>
       storage: null == storage
           ? _value.storage
           : storage // ignore: cast_nullable_to_non_nullable
-              as StorageBase,
+              as StorageItem,
       categoryId: freezed == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -101,6 +103,14 @@ class _$StuffCopyWithImpl<$Res, $Val extends Stuff>
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StorageItemCopyWith<$Res> get storage {
+    return $StorageItemCopyWith<$Res>(_value.storage, (value) {
+      return _then(_value.copyWith(storage: value) as $Val);
+    });
   }
 }
 
@@ -116,10 +126,13 @@ abstract class _$$StuffImplCopyWith<$Res> implements $StuffCopyWith<$Res> {
       String title,
       String image,
       List<StuffOption> options,
-      StorageBase storage,
+      StorageItem storage,
       int? categoryId,
       bool isBroken,
       String? comment});
+
+  @override
+  $StorageItemCopyWith<$Res> get storage;
 }
 
 /// @nodoc
@@ -162,7 +175,7 @@ class __$$StuffImplCopyWithImpl<$Res>
       storage: null == storage
           ? _value.storage
           : storage // ignore: cast_nullable_to_non_nullable
-              as StorageBase,
+              as StorageItem,
       categoryId: freezed == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -209,7 +222,7 @@ class _$StuffImpl extends _Stuff {
   }
 
   @override
-  final StorageBase storage;
+  final StorageItem storage;
   @override
   final int? categoryId;
   @override
@@ -266,7 +279,7 @@ abstract class _Stuff extends Stuff {
       required final String title,
       required final String image,
       required final List<StuffOption> options,
-      required final StorageBase storage,
+      required final StorageItem storage,
       required final int? categoryId,
       final bool isBroken,
       final String? comment}) = _$StuffImpl;
@@ -281,7 +294,7 @@ abstract class _Stuff extends Stuff {
   @override
   List<StuffOption> get options;
   @override
-  StorageBase get storage;
+  StorageItem get storage;
   @override
   int? get categoryId;
   @override

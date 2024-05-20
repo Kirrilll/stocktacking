@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
 import 'package:stocktacking/features/stock/domain/entities/storage.dart';
+import 'package:stocktacking/features/stock/domain/entities/storage_base.dart';
 
-class StockCard extends StatelessWidget {
-  const StockCard({super.key, required this.stock, required this.onTap});
+class StorageItemCard extends StatelessWidget {
+  const StorageItemCard({super.key, required this.storage, required this.onTap});
 
-  final Stock stock;
+  final StorageItem storage;
   final void Function() onTap;
 
   @override
@@ -18,14 +19,34 @@ class StockCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(stock.title, style: Theme.of(context).textTheme.displayLarge),
+            Text(storage.title, style: Theme.of(context).textTheme.displayLarge),
             const SizedBox(height: 14),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.location_pin, color: Theme.of(context).colorScheme.primary,),
+                Icon(
+                  switch(storage) {
+                    Storage() => Icons.storage,
+                    User() => Icons.person,
+                    _ => Icons.location_pin
+                  },
+                  color: Theme.of(context).colorScheme.primary
+                ),
                 const SizedBox(width: 7),
-                Expanded(child: FittedBox(child: Text(stock.address)))
+                Expanded(
+                    child: FittedBox(
+                      alignment: Alignment.centerLeft,
+                      fit: BoxFit.scaleDown,
+                        child: Text(
+                            switch(storage) {
+                              Stock(:final address) => address,
+                              Storage(:final fullTitle) => fullTitle,
+                              _ => ''
+                            },
+                            textAlign: TextAlign.start,
+                        )
+                    )
+                )
               ],
             )
           ]

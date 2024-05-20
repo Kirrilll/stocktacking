@@ -7,15 +7,14 @@ class StockAdapter {
   const StockAdapter();
 
   Storage storageFromDto(StorageDto storageDto) {
-    final nestedStorage = storageDto.storageDto;
-    return Storage(storageDto.title, nestedStorage !=  null ? fromDto(nestedStorage) : null);
+    return Storage(storageDto.id, storageDto.title, storageDto.fullName, storageDto.stockId);
   }
 
   Stock stockFromDto(StockDto stock) {
-    return Stock(stock.title, stock.address, (stock.latitude, stock.longitude));
+    return Stock(stock.id ,stock.title, stock.address, (stock.latitude, stock.longitude));
   }
 
-  StorageBase fromDto(StorageItemDto storageDto) {
+  StorageItem fromDto(StorageItemDto storageDto) {
     return storageDto.map(
         stock: stockFromDto,
         storage: storageFromDto,

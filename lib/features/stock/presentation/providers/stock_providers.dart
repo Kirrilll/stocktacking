@@ -3,6 +3,7 @@ import 'package:stocktacking/core/supabase/supabase_provider.dart';
 import 'package:stocktacking/features/stock/data/data_source/supabase_remote_data_source.dart';
 import 'package:stocktacking/features/stock/data/repositories/stock_repository_impl.dart';
 import 'package:stocktacking/features/stock/domain/repositories/stock_repository.dart';
+import 'package:stocktacking/features/stock/domain/use_cases/search_storage_use_case.dart';
 import '../../../credential/domain/entities/credential.dart';
 import '../../../credential/presentation/notifiers/credential_notifier.dart';
 import '../../data/data_source/stock_remote_data_source.dart';
@@ -21,6 +22,18 @@ StockRemoteDataSource stockRemoteDataSource(StockRemoteDataSourceRef ref) {
 StockRepository stockRepository(StockRepositoryRef ref) {
   final stockDataSource = ref.watch(stockRemoteDataSourceProvider);
   return StockRepositoryImpl(stockDataSource);
+}
+
+@riverpod
+Future<List<StorageItem>> searchStorages(SearchStoragesRef ref, {required String search}) async {
+  final credential = ref.watch(credentialNotifierProvider);
+  final stockRepository = ref.watch(stockRepositoryProvider);
+  return switch(credential) {
+    Authorised(:final accessToken, :final profile) => (await SearchStorageUseCase(stockRepository)
+        .execute((search, profile?.orgId ?? -1)))
+        .match((l) => throw l, (r) => r),
+    _ => []
+  };
 }
 
 @riverpod

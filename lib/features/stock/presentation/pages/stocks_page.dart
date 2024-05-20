@@ -74,6 +74,7 @@ class _StocksPageState extends ConsumerState<StocksPage> {
           padding: const EdgeInsets.all(14),
           child: Column(
             children: [
+
               SizedBox(
                 height: 56,
                 child: TextField(
@@ -115,7 +116,7 @@ class _StocksPageState extends ConsumerState<StocksPage> {
                         AsyncData(:final value) => RefreshIndicator(
                           onRefresh: () => ref.refresh(getStocksProvider.future),
                           child: ListView.separated(
-                              itemBuilder: (_, index) => StockCard(stock: value[index], onTap: () {},),
+                              itemBuilder: (_, index) => StorageItemCard(storage: value[index], onTap: () {},),
                               separatorBuilder: (_, __) => const SizedBox(height: 7),
                               itemCount: value.length
                           ),
