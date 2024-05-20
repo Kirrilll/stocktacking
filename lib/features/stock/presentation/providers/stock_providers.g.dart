@@ -188,6 +188,152 @@ class _SearchStoragesProviderElement
   String get search => (origin as SearchStoragesProvider).search;
 }
 
+String _$getStoragesHash() => r'675c18adb964b8bb519b69beef3c93dbd016e54d';
+
+/// See also [getStorages].
+@ProviderFor(getStorages)
+const getStoragesProvider = GetStoragesFamily();
+
+/// See also [getStorages].
+class GetStoragesFamily extends Family<AsyncValue<List<StorageItem>>> {
+  /// See also [getStorages].
+  const GetStoragesFamily();
+
+  /// See also [getStorages].
+  GetStoragesProvider call({
+    String? search,
+    String? storagePath,
+  }) {
+    return GetStoragesProvider(
+      search: search,
+      storagePath: storagePath,
+    );
+  }
+
+  @override
+  GetStoragesProvider getProviderOverride(
+    covariant GetStoragesProvider provider,
+  ) {
+    return call(
+      search: provider.search,
+      storagePath: provider.storagePath,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getStoragesProvider';
+}
+
+/// See also [getStorages].
+class GetStoragesProvider extends AutoDisposeFutureProvider<List<StorageItem>> {
+  /// See also [getStorages].
+  GetStoragesProvider({
+    String? search,
+    String? storagePath,
+  }) : this._internal(
+          (ref) => getStorages(
+            ref as GetStoragesRef,
+            search: search,
+            storagePath: storagePath,
+          ),
+          from: getStoragesProvider,
+          name: r'getStoragesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getStoragesHash,
+          dependencies: GetStoragesFamily._dependencies,
+          allTransitiveDependencies:
+              GetStoragesFamily._allTransitiveDependencies,
+          search: search,
+          storagePath: storagePath,
+        );
+
+  GetStoragesProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.search,
+    required this.storagePath,
+  }) : super.internal();
+
+  final String? search;
+  final String? storagePath;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<StorageItem>> Function(GetStoragesRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetStoragesProvider._internal(
+        (ref) => create(ref as GetStoragesRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        search: search,
+        storagePath: storagePath,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<StorageItem>> createElement() {
+    return _GetStoragesProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetStoragesProvider &&
+        other.search == search &&
+        other.storagePath == storagePath;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, search.hashCode);
+    hash = _SystemHash.combine(hash, storagePath.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin GetStoragesRef on AutoDisposeFutureProviderRef<List<StorageItem>> {
+  /// The parameter `search` of this provider.
+  String? get search;
+
+  /// The parameter `storagePath` of this provider.
+  String? get storagePath;
+}
+
+class _GetStoragesProviderElement
+    extends AutoDisposeFutureProviderElement<List<StorageItem>>
+    with GetStoragesRef {
+  _GetStoragesProviderElement(super.provider);
+
+  @override
+  String? get search => (origin as GetStoragesProvider).search;
+  @override
+  String? get storagePath => (origin as GetStoragesProvider).storagePath;
+}
+
 String _$getStocksHash() => r'474e6063090f76f26a605ad7ba0ec11791a30174';
 
 /// See also [getStocks].

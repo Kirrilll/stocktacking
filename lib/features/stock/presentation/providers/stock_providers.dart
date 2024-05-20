@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:stocktacking/core/supabase/supabase_provider.dart';
+import 'package:stocktacking/core/utils/failure.dart';
 import 'package:stocktacking/features/stock/data/data_source/supabase_remote_data_source.dart';
 import 'package:stocktacking/features/stock/data/repositories/stock_repository_impl.dart';
 import 'package:stocktacking/features/stock/domain/repositories/stock_repository.dart';
@@ -34,6 +35,23 @@ Future<List<StorageItem>> searchStorages(SearchStoragesRef ref, {required String
         .match((l) => throw l, (r) => r),
     _ => []
   };
+}
+
+
+@riverpod
+Future<List<StorageItem>> getStorages(GetStoragesRef ref, {
+  String? search,
+  String? storagePath
+}) async {
+  final credential = ref.watch(credentialNotifierProvider);
+  if(credential is! Authorised) throw const UnauthorisedFailure();
+  if(storagePath == null &&( search?.isEmpty ?? false)) return await ref.read(getStocksProvider.future);
+  final searchPath = storagePath;
+  return (await ref.watch(stockRepositoryProvider).getStoragesBySearch(searchPath ?? '', credential.profile?.orgId ?? -1))
+      .match(
+          (l) => throw l,
+          (r) => r
+  );
 }
 
 @riverpod

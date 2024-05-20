@@ -26,14 +26,17 @@ class StocksPage extends ConsumerStatefulWidget {
 class _StocksPageState extends ConsumerState<StocksPage> {
 
   final _searchController = TextEditingController();
+  String? _selectedStoragePath;
+
+  void Function() _buildOnStorageTap(StorageItem storageItem) => () {
+    setState(() => _selectedStoragePath = storageItem.fullName);
+  };
+
+  void _onDeleteStoragePath() {
+    setState(() => _selectedStoragePath = null);
+  }
 
   void _onTapClear() => _searchController.clear();
-
-  // static final _stocks = [
-  //   Stock('Склад 3', 'Южная. д 55', (5.0, 1.3)),
-  //   Stock('Офис', 'Южная. д 55', (5.0, 1.3)),
-  //   Stock('Офис 2', 'Южная. д 55', (5.0, 1.3)),
-  // ];
 
   void Function() _buildOnStuffCreateTap(WidgetRef ref) => () => ref
       .read(locationServiceProvider)
@@ -74,7 +77,6 @@ class _StocksPageState extends ConsumerState<StocksPage> {
           padding: const EdgeInsets.all(14),
           child: Column(
             children: [
-
               SizedBox(
                 height: 56,
                 child: TextField(
@@ -108,15 +110,32 @@ class _StocksPageState extends ConsumerState<StocksPage> {
                 ),
               ),
               const SizedBox(height: 14),
+              if(_selectedStoragePath != null) Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(_selectedStoragePath ?? 'Организация', textAlign: TextAlign.start,),
+                  const SizedBox(width: 14),
+                  Material(
+                    borderRadius: BorderRadius.circular(50),
+                    child: InkWell(
+                        borderRadius: BorderRadius.circular(50),
+                        onTap: _onDeleteStoragePath,
+                        child: const Icon(Icons.clear)
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 14),
               Expanded(
                   child: Builder(
                     builder: (context) {
-                      final stocksState = ref.watch(getStocksProvider);
+                      final stocksState = ref.watch(getStoragesProvider.call(search: _searchController.text, storagePath: _selectedStoragePath));
                       return switch(stocksState) {
                         AsyncData(:final value) => RefreshIndicator(
                           onRefresh: () => ref.refresh(getStocksProvider.future),
                           child: ListView.separated(
-                              itemBuilder: (_, index) => StorageItemCard(storage: value[index], onTap: () {},),
+                              itemBuilder: (_, index) => StorageItemCard(storage: value[index], onTap: _buildOnStorageTap(value[index])),
                               separatorBuilder: (_, __) => const SizedBox(height: 7),
                               itemCount: value.length
                           ),
