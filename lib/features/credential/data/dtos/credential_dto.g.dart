@@ -9,8 +9,7 @@ part of 'credential_dto.dart';
 _$CredentialDtoImpl _$$CredentialDtoImplFromJson(Map<String, dynamic> json) =>
     _$CredentialDtoImpl(
       accessToken: json['accessToken'] as String,
-      refreshToken: json['refreshToken'] as String,
-      role: json['role'] as String,
+      isKeeper: json['isKeeper'] as bool,
       profileDto:
           ProfileDto.fromJson(json['profileDto'] as Map<String, dynamic>),
     );
@@ -18,7 +17,6 @@ _$CredentialDtoImpl _$$CredentialDtoImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$CredentialDtoImplToJson(_$CredentialDtoImpl instance) =>
     <String, dynamic>{
       'accessToken': instance.accessToken,
-      'refreshToken': instance.refreshToken,
-      'role': instance.role,
+      'isKeeper': instance.isKeeper,
       'profileDto': instance.profileDto,
     };

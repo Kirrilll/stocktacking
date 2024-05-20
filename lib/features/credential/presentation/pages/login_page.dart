@@ -26,7 +26,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   void initState() {
     ref.read(loginPageNotifierProvider.notifier).setupOnError((error) {
-
+      debugPrint('ERROR = $error');
     });
     super.initState();
   }

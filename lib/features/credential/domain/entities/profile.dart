@@ -10,7 +10,8 @@ class Profile with _$Profile {
 
   const factory Profile({
     required final int id,
-    required final String name
+    required final String name,
+    required final int orgId
   }) = _Profile;
 
   String get title => name;

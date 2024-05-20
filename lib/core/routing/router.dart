@@ -6,6 +6,7 @@ import 'package:stocktacking/core/routing/constants/routing_params.dart';
 import 'package:stocktacking/core/routing/utils/route_guard_base.dart';
 import 'package:stocktacking/features/credential/presentation/pages/login_page.dart';
 import 'package:stocktacking/features/home/presentation/pages/home_page.dart';
+import 'package:stocktacking/features/stock/presentation/pages/add_stock_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stock_filter_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stocks_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_add_page.dart';
@@ -162,6 +163,16 @@ GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
                         state: state,
                         child: const StuffAddPage()
                     )
+                  ),
+                  GoRoute(
+                    path: _stockAddPath,
+                    name: stockCreate,
+                    parentNavigatorKey: _rootNavigatorKey,
+                      pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                          context: context,
+                          state: state,
+                          child: const AddStockPage()
+                      )
                   )
 
                 ]

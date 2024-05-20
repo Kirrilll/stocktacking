@@ -20,9 +20,9 @@ CredentialDto _$CredentialDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CredentialDto {
-  String get accessToken => throw _privateConstructorUsedError;
-  String get refreshToken => throw _privateConstructorUsedError;
-  String get role => throw _privateConstructorUsedError;
+  String get accessToken =>
+      throw _privateConstructorUsedError; // required String refreshToken,
+  bool get isKeeper => throw _privateConstructorUsedError;
   ProfileDto get profileDto => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,11 +37,7 @@ abstract class $CredentialDtoCopyWith<$Res> {
           CredentialDto value, $Res Function(CredentialDto) then) =
       _$CredentialDtoCopyWithImpl<$Res, CredentialDto>;
   @useResult
-  $Res call(
-      {String accessToken,
-      String refreshToken,
-      String role,
-      ProfileDto profileDto});
+  $Res call({String accessToken, bool isKeeper, ProfileDto profileDto});
 
   $ProfileDtoCopyWith<$Res> get profileDto;
 }
@@ -60,8 +56,7 @@ class _$CredentialDtoCopyWithImpl<$Res, $Val extends CredentialDto>
   @override
   $Res call({
     Object? accessToken = null,
-    Object? refreshToken = null,
-    Object? role = null,
+    Object? isKeeper = null,
     Object? profileDto = null,
   }) {
     return _then(_value.copyWith(
@@ -69,14 +64,10 @@ class _$CredentialDtoCopyWithImpl<$Res, $Val extends CredentialDto>
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String,
-      refreshToken: null == refreshToken
-          ? _value.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      role: null == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as String,
+      isKeeper: null == isKeeper
+          ? _value.isKeeper
+          : isKeeper // ignore: cast_nullable_to_non_nullable
+              as bool,
       profileDto: null == profileDto
           ? _value.profileDto
           : profileDto // ignore: cast_nullable_to_non_nullable
@@ -101,11 +92,7 @@ abstract class _$$CredentialDtoImplCopyWith<$Res>
       __$$CredentialDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String accessToken,
-      String refreshToken,
-      String role,
-      ProfileDto profileDto});
+  $Res call({String accessToken, bool isKeeper, ProfileDto profileDto});
 
   @override
   $ProfileDtoCopyWith<$Res> get profileDto;
@@ -123,8 +110,7 @@ class __$$CredentialDtoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? accessToken = null,
-    Object? refreshToken = null,
-    Object? role = null,
+    Object? isKeeper = null,
     Object? profileDto = null,
   }) {
     return _then(_$CredentialDtoImpl(
@@ -132,14 +118,10 @@ class __$$CredentialDtoImplCopyWithImpl<$Res>
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String,
-      refreshToken: null == refreshToken
-          ? _value.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      role: null == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as String,
+      isKeeper: null == isKeeper
+          ? _value.isKeeper
+          : isKeeper // ignore: cast_nullable_to_non_nullable
+              as bool,
       profileDto: null == profileDto
           ? _value.profileDto
           : profileDto // ignore: cast_nullable_to_non_nullable
@@ -153,8 +135,7 @@ class __$$CredentialDtoImplCopyWithImpl<$Res>
 class _$CredentialDtoImpl implements _CredentialDto {
   const _$CredentialDtoImpl(
       {required this.accessToken,
-      required this.refreshToken,
-      required this.role,
+      required this.isKeeper,
       required this.profileDto});
 
   factory _$CredentialDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -162,16 +143,15 @@ class _$CredentialDtoImpl implements _CredentialDto {
 
   @override
   final String accessToken;
+// required String refreshToken,
   @override
-  final String refreshToken;
-  @override
-  final String role;
+  final bool isKeeper;
   @override
   final ProfileDto profileDto;
 
   @override
   String toString() {
-    return 'CredentialDto(accessToken: $accessToken, refreshToken: $refreshToken, role: $role, profileDto: $profileDto)';
+    return 'CredentialDto(accessToken: $accessToken, isKeeper: $isKeeper, profileDto: $profileDto)';
   }
 
   @override
@@ -181,9 +161,8 @@ class _$CredentialDtoImpl implements _CredentialDto {
             other is _$CredentialDtoImpl &&
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken) &&
-            (identical(other.refreshToken, refreshToken) ||
-                other.refreshToken == refreshToken) &&
-            (identical(other.role, role) || other.role == role) &&
+            (identical(other.isKeeper, isKeeper) ||
+                other.isKeeper == isKeeper) &&
             (identical(other.profileDto, profileDto) ||
                 other.profileDto == profileDto));
   }
@@ -191,7 +170,7 @@ class _$CredentialDtoImpl implements _CredentialDto {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, accessToken, refreshToken, role, profileDto);
+      Object.hash(runtimeType, accessToken, isKeeper, profileDto);
 
   @JsonKey(ignore: true)
   @override
@@ -210,8 +189,7 @@ class _$CredentialDtoImpl implements _CredentialDto {
 abstract class _CredentialDto implements CredentialDto {
   const factory _CredentialDto(
       {required final String accessToken,
-      required final String refreshToken,
-      required final String role,
+      required final bool isKeeper,
       required final ProfileDto profileDto}) = _$CredentialDtoImpl;
 
   factory _CredentialDto.fromJson(Map<String, dynamic> json) =
@@ -219,10 +197,8 @@ abstract class _CredentialDto implements CredentialDto {
 
   @override
   String get accessToken;
-  @override
-  String get refreshToken;
-  @override
-  String get role;
+  @override // required String refreshToken,
+  bool get isKeeper;
   @override
   ProfileDto get profileDto;
   @override

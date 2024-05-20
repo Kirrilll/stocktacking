@@ -22,6 +22,7 @@ ProfileDto _$ProfileDtoFromJson(Map<String, dynamic> json) {
 mixin _$ProfileDto {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  int get orgId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $ProfileDtoCopyWith<$Res> {
           ProfileDto value, $Res Function(ProfileDto) then) =
       _$ProfileDtoCopyWithImpl<$Res, ProfileDto>;
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, int orgId});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$ProfileDtoCopyWithImpl<$Res, $Val extends ProfileDto>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? orgId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -63,6 +65,10 @@ class _$ProfileDtoCopyWithImpl<$Res, $Val extends ProfileDto>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      orgId: null == orgId
+          ? _value.orgId
+          : orgId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -75,7 +81,7 @@ abstract class _$$ProfileDtoImplCopyWith<$Res>
       __$$ProfileDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, int orgId});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class __$$ProfileDtoImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? orgId = null,
   }) {
     return _then(_$ProfileDtoImpl(
       id: null == id
@@ -101,6 +108,10 @@ class __$$ProfileDtoImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      orgId: null == orgId
+          ? _value.orgId
+          : orgId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -108,7 +119,8 @@ class __$$ProfileDtoImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ProfileDtoImpl implements _ProfileDto {
-  const _$ProfileDtoImpl({required this.id, required this.name});
+  const _$ProfileDtoImpl(
+      {required this.id, required this.name, required this.orgId});
 
   factory _$ProfileDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileDtoImplFromJson(json);
@@ -117,10 +129,12 @@ class _$ProfileDtoImpl implements _ProfileDto {
   final int id;
   @override
   final String name;
+  @override
+  final int orgId;
 
   @override
   String toString() {
-    return 'ProfileDto(id: $id, name: $name)';
+    return 'ProfileDto(id: $id, name: $name, orgId: $orgId)';
   }
 
   @override
@@ -129,12 +143,13 @@ class _$ProfileDtoImpl implements _ProfileDto {
         (other.runtimeType == runtimeType &&
             other is _$ProfileDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.orgId, orgId) || other.orgId == orgId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, orgId);
 
   @JsonKey(ignore: true)
   @override
@@ -152,7 +167,9 @@ class _$ProfileDtoImpl implements _ProfileDto {
 
 abstract class _ProfileDto implements ProfileDto {
   const factory _ProfileDto(
-      {required final int id, required final String name}) = _$ProfileDtoImpl;
+      {required final int id,
+      required final String name,
+      required final int orgId}) = _$ProfileDtoImpl;
 
   factory _ProfileDto.fromJson(Map<String, dynamic> json) =
       _$ProfileDtoImpl.fromJson;
@@ -161,6 +178,8 @@ abstract class _ProfileDto implements ProfileDto {
   int get id;
   @override
   String get name;
+  @override
+  int get orgId;
   @override
   @JsonKey(ignore: true)
   _$$ProfileDtoImplCopyWith<_$ProfileDtoImpl> get copyWith =>

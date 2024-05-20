@@ -39,7 +39,7 @@ class _StocksPageState extends State<StocksPage> {
 
   void Function() _buildOnStockCreateTap(WidgetRef ref) => () => ref
       .read(locationServiceProvider)
-      .goNamed(name: '');
+      .goNamed(name: stockCreate);
 
   @override
   Widget build(BuildContext context) {

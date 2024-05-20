@@ -7,7 +7,7 @@ part of 'credentials_providers.dart';
 // **************************************************************************
 
 String _$remoteCredentialDataSourceHash() =>
-    r'6af89ec6934fd22cefd3f87938b842f5c8c5963e';
+    r'd0c740a80eb8489767ba02ee84c695d6e9843e44';
 
 /// See also [remoteCredentialDataSource].
 @ProviderFor(remoteCredentialDataSource)
@@ -41,7 +41,7 @@ final credentialRepositoryProvider =
 );
 
 typedef CredentialRepositoryRef = AutoDisposeProviderRef<CredentialRepository>;
-String _$useLoginUseCaseHash() => r'b95f2608034c6d4bfca4baff98f477b80a306de8';
+String _$useLoginUseCaseHash() => r'b7861130705465f0e3dba8237186fb8b39238a31';
 
 /// Copied from Dart SDK
 class _SystemHash {

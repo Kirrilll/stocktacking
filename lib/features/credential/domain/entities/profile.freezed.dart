@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Profile {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  int get orgId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileCopyWith<Profile> get copyWith => throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
       _$ProfileCopyWithImpl<$Res, Profile>;
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, int orgId});
 }
 
 /// @nodoc
@@ -46,6 +47,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? orgId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -56,6 +58,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      orgId: null == orgId
+          ? _value.orgId
+          : orgId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -67,7 +73,7 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       __$$ProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, int orgId});
 }
 
 /// @nodoc
@@ -83,6 +89,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? orgId = null,
   }) {
     return _then(_$ProfileImpl(
       id: null == id
@@ -93,6 +100,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      orgId: null == orgId
+          ? _value.orgId
+          : orgId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -100,16 +111,20 @@ class __$$ProfileImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ProfileImpl extends _Profile {
-  const _$ProfileImpl({required this.id, required this.name}) : super._();
+  const _$ProfileImpl(
+      {required this.id, required this.name, required this.orgId})
+      : super._();
 
   @override
   final int id;
   @override
   final String name;
+  @override
+  final int orgId;
 
   @override
   String toString() {
-    return 'Profile(id: $id, name: $name)';
+    return 'Profile(id: $id, name: $name, orgId: $orgId)';
   }
 
   @override
@@ -118,11 +133,12 @@ class _$ProfileImpl extends _Profile {
         (other.runtimeType == runtimeType &&
             other is _$ProfileImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.orgId, orgId) || other.orgId == orgId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, orgId);
 
   @JsonKey(ignore: true)
   @override
@@ -132,14 +148,18 @@ class _$ProfileImpl extends _Profile {
 }
 
 abstract class _Profile extends Profile {
-  const factory _Profile({required final int id, required final String name}) =
-      _$ProfileImpl;
+  const factory _Profile(
+      {required final int id,
+      required final String name,
+      required final int orgId}) = _$ProfileImpl;
   const _Profile._() : super._();
 
   @override
   int get id;
   @override
   String get name;
+  @override
+  int get orgId;
   @override
   @JsonKey(ignore: true)
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>

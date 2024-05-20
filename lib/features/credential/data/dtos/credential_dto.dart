@@ -8,11 +8,18 @@ part 'credential_dto.g.dart';
 class CredentialDto with _$CredentialDto{
   const factory CredentialDto({
     required String accessToken,
-    required String refreshToken,
-    required String role,
+    // required String refreshToken,
+    required bool isKeeper,
     required ProfileDto profileDto
   }) = _CredentialDto;
 
-  factory CredentialDto.fromJson(Map<String, Object?> json)
-  => _$CredentialDtoFromJson(json);
+  factory CredentialDto.fromJson(Map<String, String?> json) => CredentialDto(
+      accessToken: 'fake_token',
+      isKeeper: bool.tryParse(json['is_keeper'] ?? '') ?? false,
+      profileDto: ProfileDto(
+          id: int.parse(json['id'] ?? '-1'),
+          name: json['name'] ?? '',
+          orgId: int.parse(json['organization_id'] ?? '-1')
+      )
+  );
 }

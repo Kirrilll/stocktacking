@@ -8,6 +8,7 @@ class ProfileDto with _$ProfileDto{
   const factory ProfileDto({
     required final int id,
     required final String name,
+    required final int orgId
   }) = _ProfileDto;
 
 
