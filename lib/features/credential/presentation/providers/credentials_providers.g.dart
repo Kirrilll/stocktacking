@@ -41,7 +41,7 @@ final credentialRepositoryProvider =
 );
 
 typedef CredentialRepositoryRef = AutoDisposeProviderRef<CredentialRepository>;
-String _$useLoginUseCaseHash() => r'b7861130705465f0e3dba8237186fb8b39238a31';
+String _$useLoginUseCaseHash() => r'b242bebce3a94770f9e2f19a7482bcab2e5ba607';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -37,7 +37,10 @@ Future<Credential> useLoginUseCase(UseLoginUseCaseRef ref, (String, String) logi
   return (await loginUseCase.execute((phone, password)))
       .match(
           (l) => throw l,
-          (r) =>  credential.credential = r
+          (r) {
+            debugPrint(r.toString());
+            return credential.credential = r;
+          }
   );
 }
 

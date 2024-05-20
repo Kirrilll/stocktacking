@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:stocktacking/features/credential/data/dtos/credential_dto.dart';
 import 'package:stocktacking/features/credential/domain/entities/credential.dart';
+import 'package:stocktacking/features/credential/domain/entities/profile.dart';
 import 'package:stocktacking/features/credential/domain/entities/role.dart';
 
 class CredentialAdapter {
@@ -12,6 +13,6 @@ class CredentialAdapter {
   return Credential.authorised(
       credentialDto.accessToken,
       credentialDto.isKeeper ? Role.storekeeper : Role.worker,
-      null
+      Profile(orgId: credentialDto.profileDto.orgId, id: credentialDto.profileDto.id, name: credentialDto.profileDto.name)
   );}
 }
