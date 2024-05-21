@@ -14,3 +14,4 @@ const _stuffCreateReport = 'report/:$stuffIdParam/:$stuffReportIsPutParam';
 const _stuffAddPath = 'stuff-add';
 const _stuffPhysicalIdentifierPath ='stuff-physical-id/:$stuffIdParam';
 const _stockAddPath = 'stock-add';
+const _stuffCreatedIdentifiersPath = 'stuff-created-list';

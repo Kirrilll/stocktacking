@@ -5,10 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
 import 'package:stocktacking/core/riverpod/async_state.dart';
+import 'package:stocktacking/core/routing/constants/routing_names.dart';
 import 'package:stocktacking/core/toast_notifier/domain/toast_notifier.dart';
 import 'package:stocktacking/features/stock/domain/entities/storage.dart';
 import 'package:stocktacking/features/stock/presentation/widget/storage_search.dart';
@@ -62,11 +64,8 @@ class _StuffAddPageState extends ConsumerState<StuffAddPage> {
     ref.read(addStuffPageNotifierProvider.notifier)
         .setupOnCreateResult(
           onError: (message) => _toastNotifier.showToast(context, message: message, isError: true),
-          onSuccessful: () {
-            selectStorage(null);
-            _stuffTitleController.clear();
-            _countController.clear();
-            _toastNotifier.showToast(context, message: 'Предмет успешно создан');
+          onSuccessful: (v) {
+            context.replaceNamed(stuffCreatedPhysicalIdentifier, extra: v);
           }
     );
     super.initState();

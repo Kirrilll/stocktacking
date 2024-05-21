@@ -13,17 +13,17 @@ part 'add_stuff_page_notifier.g.dart';
 @riverpod
 class AddStuffPageNotifier extends _$AddStuffPageNotifier {
   @override
-  AsyncState build() {
+  AsyncState<List<(int, String)>> build() {
     return AsyncState.initial();
   }
 
   void setupOnCreateResult({
     required void Function(String error) onError,
-    required void Function() onSuccessful
+    required void Function(List<(int, String)> data) onSuccessful
   }) => ref.listenSelf((previous, curr) {
     switch(curr) {
       case Error(:final message): onError(message ?? 'Упс... что-то пошло не так');
-      case Successful(): onSuccessful();
+      case Successful<List<(int, String)>>(:final v): onSuccessful(v);
       default:
     }
   });

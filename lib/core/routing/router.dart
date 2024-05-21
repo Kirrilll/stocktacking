@@ -9,6 +9,7 @@ import 'package:stocktacking/features/home/presentation/pages/home_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/add_stock_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stock_filter_page.dart';
 import 'package:stocktacking/features/stock/presentation/pages/stocks_page.dart';
+import 'package:stocktacking/features/stuff/presentation/pages/create_physical_identificators_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_add_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_detail_page.dart';
 import 'package:stocktacking/features/stuff/presentation/pages/stuff_physical_Identifier_page.dart';
@@ -173,6 +174,16 @@ GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
                           state: state,
                           child: const AddStockPage()
                       )
+                  ),
+                  GoRoute(
+                      path: _stuffCreatedIdentifiersPath,
+                    name: stuffCreatedPhysicalIdentifier,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                        context: context,
+                        state: state,
+                        child: CreatePhysicalIdentificatorPage(createdStuffs: (state.extra as List<(int, String)>? ) ?? [])
+                    )
                   )
 
                 ]

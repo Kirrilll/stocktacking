@@ -12,3 +12,4 @@ const stuffCreate = 'stuffCreate';
 const stockCreate = 'stockCreate';
 
 const stuffPhysicalIdentifier = 'stuffPhysicalIdentifier';
+const stuffCreatedPhysicalIdentifier = 'stuffCreatedPhysicalIdentifier';

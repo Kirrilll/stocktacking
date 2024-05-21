@@ -7,12 +7,12 @@ part of 'add_stuff_page_notifier.dart';
 // **************************************************************************
 
 String _$addStuffPageNotifierHash() =>
-    r'b52f88cc34871ed99b0f4bb4da11400357cc4ece';
+    r'7f25794bbf0a64a9fbc0a0ae9dcd636bf03b42d1';
 
 /// See also [AddStuffPageNotifier].
 @ProviderFor(AddStuffPageNotifier)
-final addStuffPageNotifierProvider =
-    AutoDisposeNotifierProvider<AddStuffPageNotifier, AsyncState>.internal(
+final addStuffPageNotifierProvider = AutoDisposeNotifierProvider<
+    AddStuffPageNotifier, AsyncState<List<(int, String)>>>.internal(
   AddStuffPageNotifier.new,
   name: r'addStuffPageNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,7 @@ final addStuffPageNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$AddStuffPageNotifier = AutoDisposeNotifier<AsyncState>;
+typedef _$AddStuffPageNotifier
+    = AutoDisposeNotifier<AsyncState<List<(int, String)>>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
