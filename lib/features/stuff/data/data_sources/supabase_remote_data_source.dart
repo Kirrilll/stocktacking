@@ -18,9 +18,52 @@ class SupabaseStuffRemoteDataSource implements RemoteStuffDataSource {
 
 
   @override
-  Future<Either<IFailure, StuffDto>> getStuffById(int stuffId) {
-    // TODO: implement getStuffById
-    throw UnimplementedError();
+  Future<Either<IFailure, StuffDto>> getStuffById(int stuffId) async {
+    final res = await supabaseClient.from('items')
+        .select(''' 
+      id,
+      name,
+      photo_link,
+      storage_id,
+      is_broken,
+      comment,
+      users (id, name),
+      branches (id, name, address)
+    ''')
+        .eq('id', stuffId)
+        .single();
+    
+    StorageItemDto storageItemDto;
+    if(res['storage_id'] != null) {
+      final storageMap = (await supabaseClient
+          .rpc('get_storage_by_id', params: {'storage_id': res['storage_id']})
+          .select()
+          .single())
+          .map((key, value) => MapEntry(key, value.toString()));
+      storageItemDto = StorageDto(
+          id: int.tryParse(storageMap['id'] ?? '') ?? -1,
+          title: storageMap['name'] ?? '',
+          fullName: storageMap['full_name'] ?? '',
+          stockId: int.parse(storageMap['branch_id'] ?? '-1'));
+    }
+    else if(res['users'] != null) {
+      storageItemDto = UserDto(id: res['users']['id'], title: res['users']['name']);
+    }
+    else {
+      storageItemDto = StockDto(id: res['branches']['name'], title: res['branches']['name'], address: res['branches']['address'], latitude: 0, longitude: 0);
+    }
+
+    return Right( StuffDto(
+        id: res['id'],
+        imageUrl: res['photo_link'],
+        title: res['name'],
+        options: [],
+        storageDto: storageItemDto,
+        isBroken: res['is_broken'],
+        comment: res['comment']
+    ));
+
+    return const Left(AppFailure(message: ''));
   }
 
   @override
@@ -49,7 +92,7 @@ class SupabaseStuffRemoteDataSource implements RemoteStuffDataSource {
           .storage
           .from('stocktacking')
           .uploadBinary(filePath, await image.readAsBytes());
-      final publicPath =supabaseClient.storage.from('stocktacking').getPublicUrl(filePath);
+      final publicPath = supabaseClient.storage.from('stocktacking').getPublicUrl(filePath);
       return Right(publicPath);
     }
     catch(e) {
