@@ -31,12 +31,8 @@ class StuffRepositoryImpl implements StuffRepository {
   }
 
   @override
-  Future<Either<IFailure, List<Stuff>>> getUserKeepingStuff() async {
-    return (await remoteStuffDataSource
-        .getUsingStuff())
-        .map((a) => a
-          .map(_stuffAdapter.fromDto)
-          .toList());
+  Future<Either<IFailure, List<(int, String)>>> getStuffByUserId(int userId) async {
+    return await remoteStuffDataSource.getStuffByUserId(userId);
   }
 
 

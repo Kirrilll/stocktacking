@@ -7,7 +7,7 @@ import 'package:stocktacking/features/stock/domain/entities/storage.dart';
 import 'package:stocktacking/features/stuff/domain/entities/stuff.dart';
 
 abstract class StuffRepository {
-  Future<Either<IFailure, List<Stuff>>> getUserKeepingStuff();
+  Future<Either<IFailure, List<(int, String)>>> getStuffByUserId(int userId);
   Future<Either<IFailure, List<Stuff>>> getStuffBySearchAndFilters(String searchParams);
   Future<Either<IFailure, Stuff>> getStuffById(int id);
 

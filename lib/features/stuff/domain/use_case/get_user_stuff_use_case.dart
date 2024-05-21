@@ -4,14 +4,14 @@ import 'package:stocktacking/core/utils/use_case_base.dart';
 import 'package:stocktacking/features/stuff/domain/entities/stuff.dart';
 import 'package:stocktacking/features/stuff/domain/repositories/stuff_repository.dart';
 
-class GetUserStuffUseCase implements UseCase<Future<Either<IFailure, List<Stuff>>>, void > {
+class GetUserStuffUseCase implements UseCase<Future<Either<IFailure, List<(int, String)>>>, int > {
 
   final StuffRepository stuffRepository;
 
   const GetUserStuffUseCase(this.stuffRepository);
 
   @override
-  Future<Either<IFailure, List<Stuff>>> execute(void args) async {
-    return stuffRepository.getUserKeepingStuff();
+  Future<Either<IFailure, List<(int, String)>>> execute(int userId) async {
+    return stuffRepository.getStuffByUserId(userId);
   }
 }

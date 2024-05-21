@@ -33,7 +33,7 @@ Future<void> useTakeStuffUseCase(UseTakeStuffUseCaseRef ref, {
           (l) => throw l,
           (r) async {
             final stuff = await ref.watch(getStuffByIdProvider.call(stuffId).future);
-            ref.read(usingStuffNotifierProvider.notifier).addStuff(stuff);
+            ref.read(usingStuffNotifierProvider.notifier).addStuff((stuff.id, stuff.title));
           }
   );
 }

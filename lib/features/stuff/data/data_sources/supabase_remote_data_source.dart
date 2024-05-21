@@ -24,9 +24,15 @@ class SupabaseStuffRemoteDataSource implements RemoteStuffDataSource {
   }
 
   @override
-  Future<Either<IFailure, List<StuffDto>>> getUsingStuff() {
-    // TODO: implement getUsingStuff
-    throw UnimplementedError();
+  Future<Either<IFailure, List<(int, String)>>> getStuffByUserId(int userId) async {
+   return Right ((await supabaseClient
+        .from('items')
+        .select('id, name')
+        .eq('user_id', userId))
+        .map((e) => (e['id'] as int,  e['name'] as String))
+       .toList()
+   );
+
   }
 
   @override

@@ -58,11 +58,11 @@ class _UserStuffPageState extends ConsumerState<UserStuffPage> {
                         : ListView.separated(
                             controller: _scrollController,
                             itemBuilder: (_, index) => StuffCard(
-                                title: value[index].title,
-                                id: value[index].id,
+                                title: value[index].$2,
+                                id: value[index].$1,
                                 onTap: () => ref
                                     .read(locationServiceProvider)
-                                    .goNamed(name: stuffDetail, params: {stuffIdParam: value[index].id.toString()}),
+                                    .goNamed(name: stuffDetail, params: {stuffIdParam: value[index].$1.toString()}),
                             ),
                             separatorBuilder: (_, __) => const SizedBox(height: 16),
                             itemCount: value.length,

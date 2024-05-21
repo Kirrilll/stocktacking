@@ -43,7 +43,7 @@ final stuffKeepingReportRepositoryProvider =
 typedef StuffKeepingReportRepositoryRef
     = AutoDisposeProviderRef<StuffKeepingReportRepository>;
 String _$useTakeStuffUseCaseHash() =>
-    r'0aac0d235fad87c6f254acca4fb5860c389f2b54';
+    r'906a61e2fb6d30ed7f311d65385d5c4e9deda256';
 
 /// Copied from Dart SDK
 class _SystemHash {

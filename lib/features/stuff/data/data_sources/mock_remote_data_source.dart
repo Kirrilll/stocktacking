@@ -56,12 +56,12 @@ class MockStuffRemoteDataSource implements RemoteStuffDataSource {
       .where((stuff) => stuff.storageDto is UserDto && stuff.storageDto.id == 1)
       .toList();
 
-  @override
-  Future<Either<IFailure, List<StuffDto>>> getUsingStuff() async {
-    return await TaskEither<IFailure, List<StuffDto>>
-        .rightTask(Task(() => Future.delayed(const Duration(milliseconds: 500), () => _usingStuff)))
-        .run();
-  }
+  // @override
+  // Future<Either<IFailure, List<StuffDto>>> getUsingStuffShort() async {
+  //   return await TaskEither<IFailure, List<StuffDto>>
+  //       .rightTask(Task(() => Future.delayed(const Duration(milliseconds: 500), () => _usingStuff)))
+  //       .run();
+  // }
 
   @override
   Future<Either<IFailure, StuffDto>> getStuffById(int stuffId) async {
@@ -91,6 +91,13 @@ class MockStuffRemoteDataSource implements RemoteStuffDataSource {
     // TODO: implement createStuff
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<IFailure, List<(int, String)>>> getStuffByUserId(int userId) {
+    // TODO: implement getStuffByUserId
+    throw UnimplementedError();
+  }
+  
 
   
 
