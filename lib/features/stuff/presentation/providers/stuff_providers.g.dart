@@ -7,7 +7,7 @@ part of 'stuff_providers.dart';
 // **************************************************************************
 
 String _$remoteStuffDataSourceHash() =>
-    r'7442334193e88dc540dae22f6900ac5c07123031';
+    r'28a5379431d1a9140e155a05a2e899248f676adc';
 
 /// See also [remoteStuffDataSource].
 @ProviderFor(remoteStuffDataSource)
@@ -39,7 +39,8 @@ final stuffRepositoryProvider = AutoDisposeProvider<StuffRepository>.internal(
 );
 
 typedef StuffRepositoryRef = AutoDisposeProviderRef<StuffRepository>;
-String _$getStuffByIdHash() => r'221fb9978079cbe0338d4f3d0f798073e39f484c';
+String _$createStuffUseCaseHash() =>
+    r'2a5d8589d558d051523d6f39d50f306169f6d832';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -61,6 +62,187 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+/// See also [createStuffUseCase].
+@ProviderFor(createStuffUseCase)
+const createStuffUseCaseProvider = CreateStuffUseCaseFamily();
+
+/// See also [createStuffUseCase].
+class CreateStuffUseCaseFamily extends Family<AsyncValue<List<(int, String)>>> {
+  /// See also [createStuffUseCase].
+  const CreateStuffUseCaseFamily();
+
+  /// See also [createStuffUseCase].
+  CreateStuffUseCaseProvider call({
+    required String title,
+    required StorageItem? storage,
+    required XFile file,
+    int? count = 1,
+  }) {
+    return CreateStuffUseCaseProvider(
+      title: title,
+      storage: storage,
+      file: file,
+      count: count,
+    );
+  }
+
+  @override
+  CreateStuffUseCaseProvider getProviderOverride(
+    covariant CreateStuffUseCaseProvider provider,
+  ) {
+    return call(
+      title: provider.title,
+      storage: provider.storage,
+      file: provider.file,
+      count: provider.count,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'createStuffUseCaseProvider';
+}
+
+/// See also [createStuffUseCase].
+class CreateStuffUseCaseProvider
+    extends AutoDisposeFutureProvider<List<(int, String)>> {
+  /// See also [createStuffUseCase].
+  CreateStuffUseCaseProvider({
+    required String title,
+    required StorageItem? storage,
+    required XFile file,
+    int? count = 1,
+  }) : this._internal(
+          (ref) => createStuffUseCase(
+            ref as CreateStuffUseCaseRef,
+            title: title,
+            storage: storage,
+            file: file,
+            count: count,
+          ),
+          from: createStuffUseCaseProvider,
+          name: r'createStuffUseCaseProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$createStuffUseCaseHash,
+          dependencies: CreateStuffUseCaseFamily._dependencies,
+          allTransitiveDependencies:
+              CreateStuffUseCaseFamily._allTransitiveDependencies,
+          title: title,
+          storage: storage,
+          file: file,
+          count: count,
+        );
+
+  CreateStuffUseCaseProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.title,
+    required this.storage,
+    required this.file,
+    required this.count,
+  }) : super.internal();
+
+  final String title;
+  final StorageItem? storage;
+  final XFile file;
+  final int? count;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<(int, String)>> Function(CreateStuffUseCaseRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: CreateStuffUseCaseProvider._internal(
+        (ref) => create(ref as CreateStuffUseCaseRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        title: title,
+        storage: storage,
+        file: file,
+        count: count,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<(int, String)>> createElement() {
+    return _CreateStuffUseCaseProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is CreateStuffUseCaseProvider &&
+        other.title == title &&
+        other.storage == storage &&
+        other.file == file &&
+        other.count == count;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, title.hashCode);
+    hash = _SystemHash.combine(hash, storage.hashCode);
+    hash = _SystemHash.combine(hash, file.hashCode);
+    hash = _SystemHash.combine(hash, count.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin CreateStuffUseCaseRef
+    on AutoDisposeFutureProviderRef<List<(int, String)>> {
+  /// The parameter `title` of this provider.
+  String get title;
+
+  /// The parameter `storage` of this provider.
+  StorageItem? get storage;
+
+  /// The parameter `file` of this provider.
+  XFile get file;
+
+  /// The parameter `count` of this provider.
+  int? get count;
+}
+
+class _CreateStuffUseCaseProviderElement
+    extends AutoDisposeFutureProviderElement<List<(int, String)>>
+    with CreateStuffUseCaseRef {
+  _CreateStuffUseCaseProviderElement(super.provider);
+
+  @override
+  String get title => (origin as CreateStuffUseCaseProvider).title;
+  @override
+  StorageItem? get storage => (origin as CreateStuffUseCaseProvider).storage;
+  @override
+  XFile get file => (origin as CreateStuffUseCaseProvider).file;
+  @override
+  int? get count => (origin as CreateStuffUseCaseProvider).count;
+}
+
+String _$getStuffByIdHash() => r'221fb9978079cbe0338d4f3d0f798073e39f484c';
 
 /// See also [getStuffById].
 @ProviderFor(getStuffById)

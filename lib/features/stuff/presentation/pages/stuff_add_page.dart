@@ -1,26 +1,40 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
+import 'package:stocktacking/core/riverpod/async_state.dart';
+import 'package:stocktacking/core/toast_notifier/domain/toast_notifier.dart';
+import 'package:stocktacking/features/stock/domain/entities/storage.dart';
+import 'package:stocktacking/features/stock/presentation/widget/storage_search.dart';
+import 'package:stocktacking/features/stuff/presentation/notifiers/add_stuff_page_notifier.dart';
 import 'package:stocktacking/features/stuff/presentation/widgets/stuff_image.dart';
 
 import '../../../../core/presentation/dashed_painter/dashed_path_painter.dart';
 
-class StuffAddPage extends StatefulWidget {
+class StuffAddPage extends ConsumerStatefulWidget {
   const StuffAddPage({super.key});
 
   @override
-  State<StuffAddPage> createState() => _StuffAddPageState();
+  ConsumerState<StuffAddPage> createState() => _StuffAddPageState();
 }
 
-class _StuffAddPageState extends State<StuffAddPage> {
+class _StuffAddPageState extends ConsumerState<StuffAddPage> {
+  final _toastNotifier = const ToastNotifier();
   final _stuffTitleController = TextEditingController();
   final _countController = TextEditingController(text: 1.toString());
+  StorageItem? _selectedStorage;
+
   final ImagePicker _picker = ImagePicker();
 
   XFile? image;
+
+  void selectStorage(StorageItem? item) => setState(() => _selectedStorage = item);
 
   Future<void> _loadAsPhoto() async {
     final galleryRes = await _picker.pickImage(source: ImageSource.camera);
@@ -32,6 +46,37 @@ class _StuffAddPageState extends State<StuffAddPage> {
     final galleryRes = await _picker.pickImage(source: ImageSource.gallery);
     if(galleryRes == null) return;
     setState(() => image = galleryRes);
+  }
+
+  Future<void> onCreate() async {
+
+    if(image != null) {
+      ref
+          .read(addStuffPageNotifierProvider.notifier)
+          .createStuff(name: _stuffTitleController.text, image: image!, count: int.tryParse(_countController.text) ?? 1, storage: _selectedStorage);
+    }
+  }
+
+  @override
+  void initState() {
+    ref.read(addStuffPageNotifierProvider.notifier)
+        .setupOnCreateResult(
+          onError: (message) => _toastNotifier.showToast(context, message: message, isError: true),
+          onSuccessful: () {
+            selectStorage(null);
+            _stuffTitleController.clear();
+            _countController.clear();
+            _toastNotifier.showToast(context, message: 'Предмет успешно создан');
+          }
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _stuffTitleController.dispose();
+    _countController.dispose();
+    super.dispose();
   }
 
   void Function() buildOnLoadImage(BuildContext context) => () => {
@@ -148,6 +193,8 @@ class _StuffAddPageState extends State<StuffAddPage> {
                     ),
                   ),
                   const SizedBox(height: 14),
+                  StorageSearch(onSelect: selectStorage, selectedItem: _selectedStorage),
+                  const SizedBox(height: 14),
                   TextField(
                     controller: _countController,
                     style: Theme.of(context).textTheme.displayMedium,
@@ -156,9 +203,17 @@ class _StuffAddPageState extends State<StuffAddPage> {
                     ),
                   ),
                   const SizedBox(height: 14),
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Продолжить')
+                  Builder(
+                    builder: (_)  {
+                      final creationState = ref.watch(addStuffPageNotifierProvider);
+                      return switch(creationState) {
+                        Loading() => const Center(child: CircularProgressIndicator()),
+                        _ =>  ElevatedButton(
+                            onPressed: onCreate,
+                            child: const Text('Продолжить')
+                        )
+                      };
+                    }
                   )
                 ],
               )

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:fpdart/fpdart.dart';
 import 'package:fpdart/src/either.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:stocktacking/core/utils/failure.dart';
 import 'package:stocktacking/features/stock/data/dtos/storage_dto.dart';
 import 'package:stocktacking/features/stuff/data/data_sources/remote_stuff_data_source.dart';
@@ -69,5 +72,27 @@ class MockStuffRemoteDataSource implements RemoteStuffDataSource {
     )
         .run();
   }
+
+  @override
+  Future<Either<IFailure, List<StuffDto>>> searchStuff(String search) {
+    // TODO: implement searchStuff
+    throw UnimplementedError();
+  }
+
+
+  @override
+  Future<Either<IFailure, String>> uploadStuffImage({required XFile image, required String name, required int orgId}) {
+    // TODO: implement uploadStuffImage
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<IFailure, List<(int, String)>>> createStuff({required String imageUrl, required String name, required int orgId, int? userId, int? storageId, int? stockId, int count = 1}) {
+    // TODO: implement createStuff
+    throw UnimplementedError();
+  }
+
+  
+
 
 }
