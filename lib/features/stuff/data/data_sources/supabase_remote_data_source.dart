@@ -50,7 +50,7 @@ class SupabaseStuffRemoteDataSource implements RemoteStuffDataSource {
       storageItemDto = UserDto(id: res['users']['id'], title: res['users']['name']);
     }
     else {
-      storageItemDto = StockDto(id: res['branches']['name'], title: res['branches']['name'], address: res['branches']['address'], latitude: 0, longitude: 0);
+      storageItemDto = StockDto(id: res['branches']['id'], title: res['branches']['name'], address: res['branches']['address'], latitude: 0, longitude: 0);
     }
 
     return Right( StuffDto(

@@ -76,6 +76,7 @@ GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
               GoRoute(
                   path: _userStuffPath,
                   name: userStuff,
+                  parentNavigatorKey: _shellNavigatorKey,
                   pageBuilder: (context, state) =>
                       buildPageWithDefaultTransition(
                           context: context,
@@ -120,7 +121,8 @@ GoRouter configureRouter(List<RouteGuardBase> guards) => GoRouter(
                           context: context,
                           state: state,
                           child: StuffReportPage(
-                              isPut: bool.tryParse(state.pathParameters[stuffReportIsPutParam] ?? '') ?? false,
+                              reportId: int.tryParse(state.pathParameters[stuffReportIdParam] ?? ''),
+                              prevUserId: int.tryParse(state.pathParameters[stuffPrevUserIdParam] ?? ''),
                               stuffId: int.tryParse(state.pathParameters[stuffIdParam] ?? '') ?? -1
                           )
                       )

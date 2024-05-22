@@ -505,7 +505,7 @@ class _GetStuffByIdProviderElement
 }
 
 String _$usePutStuffUseCaseHash() =>
-    r'b2d59fc015982415602971a8aa56a12d4326a988';
+    r'16fd7b99508cc1df2770aa5c2c37de392c20e4b9';
 
 /// See also [usePutStuffUseCase].
 @ProviderFor(usePutStuffUseCase)
@@ -680,6 +680,139 @@ class _UsePutStuffUseCaseProviderElement
   bool get isBroken => (origin as UsePutStuffUseCaseProvider).isBroken;
   @override
   String? get comment => (origin as UsePutStuffUseCaseProvider).comment;
+}
+
+String _$getReportActionStateHash() =>
+    r'5787711eb3566b82664a27fa9fce522c29dbae52';
+
+/// See also [getReportActionState].
+@ProviderFor(getReportActionState)
+const getReportActionStateProvider = GetReportActionStateFamily();
+
+/// See also [getReportActionState].
+class GetReportActionStateFamily extends Family<AsyncValue<ReportActionState>> {
+  /// See also [getReportActionState].
+  const GetReportActionStateFamily();
+
+  /// See also [getReportActionState].
+  GetReportActionStateProvider call(
+    int stuffId,
+  ) {
+    return GetReportActionStateProvider(
+      stuffId,
+    );
+  }
+
+  @override
+  GetReportActionStateProvider getProviderOverride(
+    covariant GetReportActionStateProvider provider,
+  ) {
+    return call(
+      provider.stuffId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getReportActionStateProvider';
+}
+
+/// See also [getReportActionState].
+class GetReportActionStateProvider
+    extends AutoDisposeFutureProvider<ReportActionState> {
+  /// See also [getReportActionState].
+  GetReportActionStateProvider(
+    int stuffId,
+  ) : this._internal(
+          (ref) => getReportActionState(
+            ref as GetReportActionStateRef,
+            stuffId,
+          ),
+          from: getReportActionStateProvider,
+          name: r'getReportActionStateProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getReportActionStateHash,
+          dependencies: GetReportActionStateFamily._dependencies,
+          allTransitiveDependencies:
+              GetReportActionStateFamily._allTransitiveDependencies,
+          stuffId: stuffId,
+        );
+
+  GetReportActionStateProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.stuffId,
+  }) : super.internal();
+
+  final int stuffId;
+
+  @override
+  Override overrideWith(
+    FutureOr<ReportActionState> Function(GetReportActionStateRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetReportActionStateProvider._internal(
+        (ref) => create(ref as GetReportActionStateRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        stuffId: stuffId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<ReportActionState> createElement() {
+    return _GetReportActionStateProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetReportActionStateProvider && other.stuffId == stuffId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, stuffId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin GetReportActionStateRef
+    on AutoDisposeFutureProviderRef<ReportActionState> {
+  /// The parameter `stuffId` of this provider.
+  int get stuffId;
+}
+
+class _GetReportActionStateProviderElement
+    extends AutoDisposeFutureProviderElement<ReportActionState>
+    with GetReportActionStateRef {
+  _GetReportActionStateProviderElement(super.provider);
+
+  @override
+  int get stuffId => (origin as GetReportActionStateProvider).stuffId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

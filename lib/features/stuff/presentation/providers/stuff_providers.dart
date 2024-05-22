@@ -22,6 +22,7 @@ import 'package:stocktacking/features/stuff/presentation/notifiers/using_stuff_n
 import 'package:stocktacking/features/stuff/presentation/providers/stuff_keeping_providers.dart';
 
 import '../../domain/entities/stuff.dart';
+import '../states/report_action_state.dart';
 
 part 'stuff_providers.g.dart';
 
@@ -105,8 +106,23 @@ Future<void> usePutStuffUseCase(UsePutStuffUseCaseRef ref, {
         .execute(PutStuffParams(reportId: reportId, item: item, userId: profile?.id ?? -1, isBroken: isBroken, comment: comment)))
         .match(
             (l) => throw l,
-            (r) => r
+            (r) {
+              ref.read(usingStuffNotifierProvider.notifier).deleteStuff(r);
+            }
     ),
     _ => throw const UnauthorisedFailure()
   };
+}
+
+
+@riverpod
+Future<ReportActionState> getReportActionState(GetReportActionStateRef ref, int stuffId) async {
+  final credential = ref.watch(credentialNotifierProvider);
+  if(credential is! Authorised) throw const UnauthorisedFailure();
+  final stuff = await ref.watch(getStuffByIdProvider.call(stuffId).future);
+  if(!stuff.isUsing) return ReportActionState.take(stuffId);
+  final unfinishedReport = await ref.watch(getUnfinishedReportProvider.call(stuffId).future);
+  if(unfinishedReport == null) return ReportActionState.take(stuffId);
+  if(credential.profile?.id == unfinishedReport.takeInfo.user.userId) return ReportActionState.put(unfinishedReport.id);
+  return ReportActionState.retake(unfinishedReport.id, unfinishedReport.takeInfo.user.userId);
 }

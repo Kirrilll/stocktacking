@@ -22,7 +22,7 @@ class PutStuffParams {
 
 }
 
-class PutStuffUseCase implements UseCase<Future<Either<IFailure, bool>>, PutStuffParams> {
+class PutStuffUseCase implements UseCase<Future<Either<IFailure, int>>, PutStuffParams> {
 
   final StuffKeepingReportRepository stuffKeepingReportRepository;
   final StuffRepository stuffRepository;
@@ -30,7 +30,7 @@ class PutStuffUseCase implements UseCase<Future<Either<IFailure, bool>>, PutStuf
   const PutStuffUseCase(this.stuffKeepingReportRepository, this.stuffRepository);
 
   @override
-  Future<Either<IFailure, bool>> execute(PutStuffParams args) async {
+  Future<Either<IFailure, int>> execute(PutStuffParams args) async {
 
     //2. Закончить репорт
     //3. Изменить у предмета userId - null, storageId- value, stockId - value
@@ -58,7 +58,7 @@ class PutStuffUseCase implements UseCase<Future<Either<IFailure, bool>>, PutStuf
                   isBroken: args.isBroken,
                   comment: args.comment,
                   userId: null
-              )).map((a) => true);
+              )).map((a) => a.id);
             }
     );
   }

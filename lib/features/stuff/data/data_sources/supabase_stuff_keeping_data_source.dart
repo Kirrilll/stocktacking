@@ -52,7 +52,8 @@ class SupabaseStuffKeepingDataSource implements RemoteStuffKeepingReportDataSour
           'storage_id': storageId,
           'user_end_id': userId,
           'comment_end': comment,
-          'is_broken_end': isBroken
+          'is_broken_end': isBroken,
+          'closed_at':  DateTime.now().toUtc().toString()
         })
         .eq('id', reportId)
         .select(_baseReportsSelectQuery)

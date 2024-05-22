@@ -197,7 +197,7 @@ class _GetStuffReportsProviderElement
 }
 
 String _$useTakeStuffUseCaseHash() =>
-    r'4412110a0fcc1dd78b1676f52fca3acd31270a76';
+    r'6b7054bf0efc954e8e2ceb6c034707b01d457d32';
 
 /// See also [useTakeStuffUseCase].
 @ProviderFor(useTakeStuffUseCase)
@@ -356,6 +356,169 @@ class _UseTakeStuffUseCaseProviderElement
   bool get isBroken => (origin as UseTakeStuffUseCaseProvider).isBroken;
   @override
   String? get comment => (origin as UseTakeStuffUseCaseProvider).comment;
+}
+
+String _$useRetakeStuffUseCaseHash() =>
+    r'0c8ae28867f71f4c6390bcb6d9120434ccdc1897';
+
+/// See also [useRetakeStuffUseCase].
+@ProviderFor(useRetakeStuffUseCase)
+const useRetakeStuffUseCaseProvider = UseRetakeStuffUseCaseFamily();
+
+/// See also [useRetakeStuffUseCase].
+class UseRetakeStuffUseCaseFamily extends Family<AsyncValue<void>> {
+  /// See also [useRetakeStuffUseCase].
+  const UseRetakeStuffUseCaseFamily();
+
+  /// See also [useRetakeStuffUseCase].
+  UseRetakeStuffUseCaseProvider call({
+    required int stuffId,
+    required int reportId,
+    required int prevUserId,
+  }) {
+    return UseRetakeStuffUseCaseProvider(
+      stuffId: stuffId,
+      reportId: reportId,
+      prevUserId: prevUserId,
+    );
+  }
+
+  @override
+  UseRetakeStuffUseCaseProvider getProviderOverride(
+    covariant UseRetakeStuffUseCaseProvider provider,
+  ) {
+    return call(
+      stuffId: provider.stuffId,
+      reportId: provider.reportId,
+      prevUserId: provider.prevUserId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'useRetakeStuffUseCaseProvider';
+}
+
+/// See also [useRetakeStuffUseCase].
+class UseRetakeStuffUseCaseProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [useRetakeStuffUseCase].
+  UseRetakeStuffUseCaseProvider({
+    required int stuffId,
+    required int reportId,
+    required int prevUserId,
+  }) : this._internal(
+          (ref) => useRetakeStuffUseCase(
+            ref as UseRetakeStuffUseCaseRef,
+            stuffId: stuffId,
+            reportId: reportId,
+            prevUserId: prevUserId,
+          ),
+          from: useRetakeStuffUseCaseProvider,
+          name: r'useRetakeStuffUseCaseProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$useRetakeStuffUseCaseHash,
+          dependencies: UseRetakeStuffUseCaseFamily._dependencies,
+          allTransitiveDependencies:
+              UseRetakeStuffUseCaseFamily._allTransitiveDependencies,
+          stuffId: stuffId,
+          reportId: reportId,
+          prevUserId: prevUserId,
+        );
+
+  UseRetakeStuffUseCaseProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.stuffId,
+    required this.reportId,
+    required this.prevUserId,
+  }) : super.internal();
+
+  final int stuffId;
+  final int reportId;
+  final int prevUserId;
+
+  @override
+  Override overrideWith(
+    FutureOr<void> Function(UseRetakeStuffUseCaseRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: UseRetakeStuffUseCaseProvider._internal(
+        (ref) => create(ref as UseRetakeStuffUseCaseRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        stuffId: stuffId,
+        reportId: reportId,
+        prevUserId: prevUserId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<void> createElement() {
+    return _UseRetakeStuffUseCaseProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UseRetakeStuffUseCaseProvider &&
+        other.stuffId == stuffId &&
+        other.reportId == reportId &&
+        other.prevUserId == prevUserId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, stuffId.hashCode);
+    hash = _SystemHash.combine(hash, reportId.hashCode);
+    hash = _SystemHash.combine(hash, prevUserId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin UseRetakeStuffUseCaseRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `stuffId` of this provider.
+  int get stuffId;
+
+  /// The parameter `reportId` of this provider.
+  int get reportId;
+
+  /// The parameter `prevUserId` of this provider.
+  int get prevUserId;
+}
+
+class _UseRetakeStuffUseCaseProviderElement
+    extends AutoDisposeFutureProviderElement<void>
+    with UseRetakeStuffUseCaseRef {
+  _UseRetakeStuffUseCaseProviderElement(super.provider);
+
+  @override
+  int get stuffId => (origin as UseRetakeStuffUseCaseProvider).stuffId;
+  @override
+  int get reportId => (origin as UseRetakeStuffUseCaseProvider).reportId;
+  @override
+  int get prevUserId => (origin as UseRetakeStuffUseCaseProvider).prevUserId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

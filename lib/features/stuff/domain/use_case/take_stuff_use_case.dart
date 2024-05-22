@@ -24,7 +24,7 @@ class TakeStuffArgs {
   });
 }
 
-class TakeStuffUseCase implements UseCase<Future<Either<IFailure, void>>, TakeStuffArgs> {
+class TakeStuffUseCase implements UseCase<Future<Either<IFailure, (int, String)>>, TakeStuffArgs> {
 
   final StuffKeepingReportRepository stuffKeepingReportRepository;
   final StuffRepository stuffRepository;
@@ -32,7 +32,7 @@ class TakeStuffUseCase implements UseCase<Future<Either<IFailure, void>>, TakeSt
   const TakeStuffUseCase(this.stuffKeepingReportRepository, this.stuffRepository);
 
   @override
-  Future<Either<IFailure, void>> execute(TakeStuffArgs stuffParams) async {
+  Future<Either<IFailure, (int, String)>> execute(TakeStuffArgs stuffParams) async {
     final res = await stuffKeepingReportRepository.createReport(
          stuffId: stuffParams.stuffId,
          userId: stuffParams.userId,
@@ -40,8 +40,11 @@ class TakeStuffUseCase implements UseCase<Future<Either<IFailure, void>>, TakeSt
          comment: stuffParams.comment
      );
 
-    if(res.isLeft()) return res;
-    return await stuffRepository.updateStuff(id: stuffParams.stuffId, storageId: null, stockId: null, userId: stuffParams.userId, comment: stuffParams.comment);
+    if(res.isLeft()) return Left(res.getLeft().getOrElse(() => const AppFailure(message: 'Что-то пошло не так')));
+    return (await stuffRepository
+        .updateStuff(id: stuffParams.stuffId, storageId: null, stockId: null, userId: stuffParams.userId, comment: stuffParams.comment, isBroken: stuffParams.isBroken))
+        .map((a) => (a.id, a.title)
+    );
   }
 
 }

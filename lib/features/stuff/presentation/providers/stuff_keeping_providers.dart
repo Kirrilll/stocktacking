@@ -6,6 +6,7 @@ import 'package:stocktacking/features/credential/presentation/notifiers/credenti
 import 'package:stocktacking/features/stuff/data/data_sources/supabase_stuff_keeping_data_source.dart';
 import 'package:stocktacking/features/stuff/data/repositories/stuff_keeping_repository_impl.dart';
 import 'package:stocktacking/features/stuff/domain/repositories/stuff_keeping_report_repository.dart';
+import 'package:stocktacking/features/stuff/domain/use_case/retake_stuff_use_case.dart';
 import 'package:stocktacking/features/stuff/domain/use_case/take_stuff_use_case.dart';
 import 'package:stocktacking/features/stuff/presentation/notifiers/using_stuff_notifier.dart';
 import 'package:stocktacking/features/stuff/presentation/providers/stuff_providers.dart';
@@ -52,9 +53,30 @@ Future<void> useTakeStuffUseCase(UseTakeStuffUseCaseRef ref, {
         .execute(TakeStuffArgs(userId: profile?.id ?? -1, stuffId: stuffId, isBroken: isBroken, comment: comment)))
         .match(
             (l) => throw l,
-            (r) => r
+            (r) {
+              ref.read(usingStuffNotifierProvider.notifier).addStuff(r);
+            }
     ),
    _ => throw const UnauthorisedFailure()
   };
+}
 
+@riverpod
+Future<void> useRetakeStuffUseCase(UseRetakeStuffUseCaseRef ref, {
+  required int stuffId,
+  required int reportId,
+  required int prevUserId
+}) async {
+  final stuffKeepingRepository = ref.watch(stuffKeepingReportRepositoryProvider);
+  final stuffRepository = ref.watch(stuffRepositoryProvider);
+  final credential = ref.watch(credentialNotifierProvider);
+  if(credential is! Authorised) throw const UnauthorisedFailure();
+  return (await RetakeStuffUseCase(stuffKeepingRepository, stuffRepository)
+      .execute(RetakeStuffArgs(reportId: reportId, prevUserId: prevUserId, userId: credential.profile?.id ?? -1, stuffId: stuffId)))
+      .match(
+          (l) => throw l,
+          (r) {
+            ref.read(usingStuffNotifierProvider.notifier).addStuff(r);
+          }
+  );
 }

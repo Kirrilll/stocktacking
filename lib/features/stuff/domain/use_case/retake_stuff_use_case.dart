@@ -22,7 +22,7 @@ class RetakeStuffArgs {
   });
 }
 
-class RetakeStuffUseCase implements UseCase<Future<Either<IFailure, void>>, RetakeStuffArgs> {
+class RetakeStuffUseCase implements UseCase<Future<Either<IFailure, (int, String)>>, RetakeStuffArgs> {
 
   final StuffRepository stuffRepository;
   final StuffKeepingReportRepository stuffKeepingReportRepository;
@@ -30,7 +30,7 @@ class RetakeStuffUseCase implements UseCase<Future<Either<IFailure, void>>, Reta
   const RetakeStuffUseCase(this.stuffKeepingReportRepository, this.stuffRepository);
 
   @override
-  Future<Either<IFailure, void>> execute(RetakeStuffArgs args) async {
+  Future<Either<IFailure, (int, String)>> execute(RetakeStuffArgs args) async {
     await stuffKeepingReportRepository.endStuffReport(
         reportId: args.reportId,
         isBroken: args.isBroken,
@@ -38,8 +38,9 @@ class RetakeStuffUseCase implements UseCase<Future<Either<IFailure, void>>, Reta
         comment: args.comment
     );
     await stuffKeepingReportRepository.createReport(stuffId: args.stuffId, userId: args.userId, isBroken: args.isBroken, comment: args.comment);
-    await stuffRepository.updateStuff(id: args.stuffId, storageId: null, stockId: null, userId: args.userId);
-    return const Right(null);
+    return (await stuffRepository
+        .updateStuff(id: args.stuffId, storageId: null, stockId: null, userId: args.userId, isBroken: args.isBroken, comment: args.comment))
+        .map((a) => (a.id, a.title));
   }
 
 }
