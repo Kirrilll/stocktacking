@@ -18,8 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CreateStuffArgs {
   String get name => throw _privateConstructorUsedError;
   XFile get image => throw _privateConstructorUsedError;
-  StorageItem get storageItem => throw _privateConstructorUsedError;
+  StorageItem? get storageItem => throw _privateConstructorUsedError;
   int get orgId => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,11 +37,12 @@ abstract class $CreateStuffArgsCopyWith<$Res> {
   $Res call(
       {String name,
       XFile image,
-      StorageItem storageItem,
+      StorageItem? storageItem,
       int orgId,
+      int userId,
       int count});
 
-  $StorageItemCopyWith<$Res> get storageItem;
+  $StorageItemCopyWith<$Res>? get storageItem;
 }
 
 /// @nodoc
@@ -58,8 +60,9 @@ class _$CreateStuffArgsCopyWithImpl<$Res, $Val extends CreateStuffArgs>
   $Res call({
     Object? name = null,
     Object? image = null,
-    Object? storageItem = null,
+    Object? storageItem = freezed,
     Object? orgId = null,
+    Object? userId = null,
     Object? count = null,
   }) {
     return _then(_value.copyWith(
@@ -71,13 +74,17 @@ class _$CreateStuffArgsCopyWithImpl<$Res, $Val extends CreateStuffArgs>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as XFile,
-      storageItem: null == storageItem
+      storageItem: freezed == storageItem
           ? _value.storageItem
           : storageItem // ignore: cast_nullable_to_non_nullable
-              as StorageItem,
+              as StorageItem?,
       orgId: null == orgId
           ? _value.orgId
           : orgId // ignore: cast_nullable_to_non_nullable
+              as int,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as int,
       count: null == count
           ? _value.count
@@ -88,8 +95,12 @@ class _$CreateStuffArgsCopyWithImpl<$Res, $Val extends CreateStuffArgs>
 
   @override
   @pragma('vm:prefer-inline')
-  $StorageItemCopyWith<$Res> get storageItem {
-    return $StorageItemCopyWith<$Res>(_value.storageItem, (value) {
+  $StorageItemCopyWith<$Res>? get storageItem {
+    if (_value.storageItem == null) {
+      return null;
+    }
+
+    return $StorageItemCopyWith<$Res>(_value.storageItem!, (value) {
       return _then(_value.copyWith(storageItem: value) as $Val);
     });
   }
@@ -106,12 +117,13 @@ abstract class _$$CreateStuffArgsImplCopyWith<$Res>
   $Res call(
       {String name,
       XFile image,
-      StorageItem storageItem,
+      StorageItem? storageItem,
       int orgId,
+      int userId,
       int count});
 
   @override
-  $StorageItemCopyWith<$Res> get storageItem;
+  $StorageItemCopyWith<$Res>? get storageItem;
 }
 
 /// @nodoc
@@ -127,8 +139,9 @@ class __$$CreateStuffArgsImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? image = null,
-    Object? storageItem = null,
+    Object? storageItem = freezed,
     Object? orgId = null,
+    Object? userId = null,
     Object? count = null,
   }) {
     return _then(_$CreateStuffArgsImpl(
@@ -140,13 +153,17 @@ class __$$CreateStuffArgsImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as XFile,
-      storageItem: null == storageItem
+      storageItem: freezed == storageItem
           ? _value.storageItem
           : storageItem // ignore: cast_nullable_to_non_nullable
-              as StorageItem,
+              as StorageItem?,
       orgId: null == orgId
           ? _value.orgId
           : orgId // ignore: cast_nullable_to_non_nullable
+              as int,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as int,
       count: null == count
           ? _value.count
@@ -162,8 +179,9 @@ class _$CreateStuffArgsImpl implements _CreateStuffArgs {
   _$CreateStuffArgsImpl(
       {required this.name,
       required this.image,
-      required this.storageItem,
+      this.storageItem,
       required this.orgId,
+      required this.userId,
       this.count = 1});
 
   @override
@@ -171,16 +189,18 @@ class _$CreateStuffArgsImpl implements _CreateStuffArgs {
   @override
   final XFile image;
   @override
-  final StorageItem storageItem;
+  final StorageItem? storageItem;
   @override
   final int orgId;
+  @override
+  final int userId;
   @override
   @JsonKey()
   final int count;
 
   @override
   String toString() {
-    return 'CreateStuffArgs(name: $name, image: $image, storageItem: $storageItem, orgId: $orgId, count: $count)';
+    return 'CreateStuffArgs(name: $name, image: $image, storageItem: $storageItem, orgId: $orgId, userId: $userId, count: $count)';
   }
 
   @override
@@ -193,12 +213,13 @@ class _$CreateStuffArgsImpl implements _CreateStuffArgs {
             (identical(other.storageItem, storageItem) ||
                 other.storageItem == storageItem) &&
             (identical(other.orgId, orgId) || other.orgId == orgId) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.count, count) || other.count == count));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, image, storageItem, orgId, count);
+      Object.hash(runtimeType, name, image, storageItem, orgId, userId, count);
 
   @JsonKey(ignore: true)
   @override
@@ -212,8 +233,9 @@ abstract class _CreateStuffArgs implements CreateStuffArgs {
   factory _CreateStuffArgs(
       {required final String name,
       required final XFile image,
-      required final StorageItem storageItem,
+      final StorageItem? storageItem,
       required final int orgId,
+      required final int userId,
       final int count}) = _$CreateStuffArgsImpl;
 
   @override
@@ -221,9 +243,11 @@ abstract class _CreateStuffArgs implements CreateStuffArgs {
   @override
   XFile get image;
   @override
-  StorageItem get storageItem;
+  StorageItem? get storageItem;
   @override
   int get orgId;
+  @override
+  int get userId;
   @override
   int get count;
   @override

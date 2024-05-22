@@ -46,15 +46,20 @@ class StuffRepositoryImpl implements StuffRepository {
     required String imageUrl,
     required String name,
     required int orgId,
-    required StorageItem storage,
+    int? storageId,
+    int? stockId,
     int count = 1
   }) {
-    final (userId, storageId, stockId) = switch(storage) {
-      Stock(:final id) => (null, null, id),
-      User(:final userId) => (userId, null, null),
-      Storage(:final id, :final stockId) => (null, id, stockId)
-    };
-    return remoteStuffDataSource.createStuff(imageUrl: imageUrl, name: name, orgId: orgId, userId: userId, stockId: stockId, storageId: storageId, count: count);
+    return remoteStuffDataSource.createStuff(imageUrl: imageUrl, name: name, orgId: orgId, userId: null, stockId: stockId, storageId: storageId, count: count);
   }
+
+  @override
+  Future<Either<IFailure, Stuff>> updateStuff({required int id, required int? storageId, required int? stockId, required int? userId, String? comment, bool isBroken = false}) async {
+    return (await remoteStuffDataSource
+        .updateStuff(id: id, storageId: storageId, stockId: stockId, userId: userId, isBroken: isBroken, comment: comment))
+        .map(_stuffAdapter.fromDto
+    );
+  }
+
 
 }

@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$StuffKeepingInfo {
   DateTime get time => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
-  StorageItem get place => throw _privateConstructorUsedError;
   bool get isBroken => throw _privateConstructorUsedError;
   String? get comment => throw _privateConstructorUsedError;
 
@@ -33,14 +32,7 @@ abstract class $StuffKeepingInfoCopyWith<$Res> {
           StuffKeepingInfo value, $Res Function(StuffKeepingInfo) then) =
       _$StuffKeepingInfoCopyWithImpl<$Res, StuffKeepingInfo>;
   @useResult
-  $Res call(
-      {DateTime time,
-      User user,
-      StorageItem place,
-      bool isBroken,
-      String? comment});
-
-  $StorageItemCopyWith<$Res> get place;
+  $Res call({DateTime time, User user, bool isBroken, String? comment});
 }
 
 /// @nodoc
@@ -58,7 +50,6 @@ class _$StuffKeepingInfoCopyWithImpl<$Res, $Val extends StuffKeepingInfo>
   $Res call({
     Object? time = null,
     Object? user = freezed,
-    Object? place = null,
     Object? isBroken = null,
     Object? comment = freezed,
   }) {
@@ -71,10 +62,6 @@ class _$StuffKeepingInfoCopyWithImpl<$Res, $Val extends StuffKeepingInfo>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      place: null == place
-          ? _value.place
-          : place // ignore: cast_nullable_to_non_nullable
-              as StorageItem,
       isBroken: null == isBroken
           ? _value.isBroken
           : isBroken // ignore: cast_nullable_to_non_nullable
@@ -84,14 +71,6 @@ class _$StuffKeepingInfoCopyWithImpl<$Res, $Val extends StuffKeepingInfo>
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $StorageItemCopyWith<$Res> get place {
-    return $StorageItemCopyWith<$Res>(_value.place, (value) {
-      return _then(_value.copyWith(place: value) as $Val);
-    });
   }
 }
 
@@ -103,15 +82,7 @@ abstract class _$$StuffKeepingInfoImplCopyWith<$Res>
       __$$StuffKeepingInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {DateTime time,
-      User user,
-      StorageItem place,
-      bool isBroken,
-      String? comment});
-
-  @override
-  $StorageItemCopyWith<$Res> get place;
+  $Res call({DateTime time, User user, bool isBroken, String? comment});
 }
 
 /// @nodoc
@@ -127,7 +98,6 @@ class __$$StuffKeepingInfoImplCopyWithImpl<$Res>
   $Res call({
     Object? time = null,
     Object? user = freezed,
-    Object? place = null,
     Object? isBroken = null,
     Object? comment = freezed,
   }) {
@@ -140,10 +110,6 @@ class __$$StuffKeepingInfoImplCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      place: null == place
-          ? _value.place
-          : place // ignore: cast_nullable_to_non_nullable
-              as StorageItem,
       isBroken: null == isBroken
           ? _value.isBroken
           : isBroken // ignore: cast_nullable_to_non_nullable
@@ -162,7 +128,6 @@ class _$StuffKeepingInfoImpl implements _StuffKeepingInfo {
   const _$StuffKeepingInfoImpl(
       {required this.time,
       required this.user,
-      required this.place,
       required this.isBroken,
       this.comment});
 
@@ -171,15 +136,13 @@ class _$StuffKeepingInfoImpl implements _StuffKeepingInfo {
   @override
   final User user;
   @override
-  final StorageItem place;
-  @override
   final bool isBroken;
   @override
   final String? comment;
 
   @override
   String toString() {
-    return 'StuffKeepingInfo(time: $time, user: $user, place: $place, isBroken: $isBroken, comment: $comment)';
+    return 'StuffKeepingInfo(time: $time, user: $user, isBroken: $isBroken, comment: $comment)';
   }
 
   @override
@@ -189,7 +152,6 @@ class _$StuffKeepingInfoImpl implements _StuffKeepingInfo {
             other is _$StuffKeepingInfoImpl &&
             (identical(other.time, time) || other.time == time) &&
             const DeepCollectionEquality().equals(other.user, user) &&
-            (identical(other.place, place) || other.place == place) &&
             (identical(other.isBroken, isBroken) ||
                 other.isBroken == isBroken) &&
             (identical(other.comment, comment) || other.comment == comment));
@@ -197,7 +159,7 @@ class _$StuffKeepingInfoImpl implements _StuffKeepingInfo {
 
   @override
   int get hashCode => Object.hash(runtimeType, time,
-      const DeepCollectionEquality().hash(user), place, isBroken, comment);
+      const DeepCollectionEquality().hash(user), isBroken, comment);
 
   @JsonKey(ignore: true)
   @override
@@ -211,7 +173,6 @@ abstract class _StuffKeepingInfo implements StuffKeepingInfo {
   const factory _StuffKeepingInfo(
       {required final DateTime time,
       required final User user,
-      required final StorageItem place,
       required final bool isBroken,
       final String? comment}) = _$StuffKeepingInfoImpl;
 
@@ -219,8 +180,6 @@ abstract class _StuffKeepingInfo implements StuffKeepingInfo {
   DateTime get time;
   @override
   User get user;
-  @override
-  StorageItem get place;
   @override
   bool get isBroken;
   @override

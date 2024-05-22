@@ -20,5 +20,13 @@ abstract class RemoteStuffDataSource {
     int count = 1
 });
 
+  Future<Either<IFailure, StuffDto>> updateStuff({
+    required int id,
+    required int? storageId,
+    required int? stockId,
+    required int? userId,
+    String? comment,
+    bool isBroken = false
+  });
   Future<Either<IFailure, String>> uploadStuffImage({required XFile image, required String name, required int orgId});
 }

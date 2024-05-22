@@ -7,7 +7,7 @@ part of 'stuff_keeping_providers.dart';
 // **************************************************************************
 
 String _$remoteStuffKeepingReportDataSourceHash() =>
-    r'4635797a61fa7d41db91e594a921157e0f92262c';
+    r'676cc171ac011fe00baf88ee45fb6896ec1f25a7';
 
 /// See also [remoteStuffKeepingReportDataSource].
 @ProviderFor(remoteStuffKeepingReportDataSource)
@@ -42,8 +42,7 @@ final stuffKeepingReportRepositoryProvider =
 
 typedef StuffKeepingReportRepositoryRef
     = AutoDisposeProviderRef<StuffKeepingReportRepository>;
-String _$useTakeStuffUseCaseHash() =>
-    r'906a61e2fb6d30ed7f311d65385d5c4e9deda256';
+String _$getStuffReportsHash() => r'c4caf08184fc1278a25057ad626d32e2dd736856';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -65,6 +64,140 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+/// See also [getStuffReports].
+@ProviderFor(getStuffReports)
+const getStuffReportsProvider = GetStuffReportsFamily();
+
+/// See also [getStuffReports].
+class GetStuffReportsFamily
+    extends Family<AsyncValue<List<StuffKeepingReport>>> {
+  /// See also [getStuffReports].
+  const GetStuffReportsFamily();
+
+  /// See also [getStuffReports].
+  GetStuffReportsProvider call(
+    int stuffId,
+  ) {
+    return GetStuffReportsProvider(
+      stuffId,
+    );
+  }
+
+  @override
+  GetStuffReportsProvider getProviderOverride(
+    covariant GetStuffReportsProvider provider,
+  ) {
+    return call(
+      provider.stuffId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getStuffReportsProvider';
+}
+
+/// See also [getStuffReports].
+class GetStuffReportsProvider
+    extends AutoDisposeFutureProvider<List<StuffKeepingReport>> {
+  /// See also [getStuffReports].
+  GetStuffReportsProvider(
+    int stuffId,
+  ) : this._internal(
+          (ref) => getStuffReports(
+            ref as GetStuffReportsRef,
+            stuffId,
+          ),
+          from: getStuffReportsProvider,
+          name: r'getStuffReportsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getStuffReportsHash,
+          dependencies: GetStuffReportsFamily._dependencies,
+          allTransitiveDependencies:
+              GetStuffReportsFamily._allTransitiveDependencies,
+          stuffId: stuffId,
+        );
+
+  GetStuffReportsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.stuffId,
+  }) : super.internal();
+
+  final int stuffId;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<StuffKeepingReport>> Function(GetStuffReportsRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetStuffReportsProvider._internal(
+        (ref) => create(ref as GetStuffReportsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        stuffId: stuffId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<StuffKeepingReport>> createElement() {
+    return _GetStuffReportsProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetStuffReportsProvider && other.stuffId == stuffId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, stuffId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin GetStuffReportsRef
+    on AutoDisposeFutureProviderRef<List<StuffKeepingReport>> {
+  /// The parameter `stuffId` of this provider.
+  int get stuffId;
+}
+
+class _GetStuffReportsProviderElement
+    extends AutoDisposeFutureProviderElement<List<StuffKeepingReport>>
+    with GetStuffReportsRef {
+  _GetStuffReportsProviderElement(super.provider);
+
+  @override
+  int get stuffId => (origin as GetStuffReportsProvider).stuffId;
+}
+
+String _$useTakeStuffUseCaseHash() =>
+    r'4412110a0fcc1dd78b1676f52fca3acd31270a76';
 
 /// See also [useTakeStuffUseCase].
 @ProviderFor(useTakeStuffUseCase)

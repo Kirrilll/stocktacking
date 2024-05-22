@@ -8,7 +8,6 @@ class StuffKeepingInfo with _$StuffKeepingInfo {
   const factory StuffKeepingInfo({
     required final DateTime time,
     required final User user,
-    required final StorageItem place,
     required final bool isBroken,
     final String? comment,
   }) = _StuffKeepingInfo;

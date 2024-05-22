@@ -19,12 +19,13 @@ mixin _$StuffKeepingReportDto {
   int get id => throw _privateConstructorUsedError;
   int get stuffId => throw _privateConstructorUsedError;
   DateTime get takeTime => throw _privateConstructorUsedError;
-  int get takeUserId => throw _privateConstructorUsedError;
+  UserDto get takeUser => throw _privateConstructorUsedError;
   bool get takeIsBroken => throw _privateConstructorUsedError;
   String? get takeComment => throw _privateConstructorUsedError;
-  DateTime get putTime => throw _privateConstructorUsedError;
-  int get putUserId => throw _privateConstructorUsedError;
-  bool get putIsBroken => throw _privateConstructorUsedError;
+  DateTime? get putTime => throw _privateConstructorUsedError;
+  UserDto? get putUser => throw _privateConstructorUsedError;
+  bool? get putIsBroken => throw _privateConstructorUsedError;
+  StorageItemDto? get putPlace => throw _privateConstructorUsedError;
   String? get putComment => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,13 +43,16 @@ abstract class $StuffKeepingReportDtoCopyWith<$Res> {
       {int id,
       int stuffId,
       DateTime takeTime,
-      int takeUserId,
+      UserDto takeUser,
       bool takeIsBroken,
       String? takeComment,
-      DateTime putTime,
-      int putUserId,
-      bool putIsBroken,
+      DateTime? putTime,
+      UserDto? putUser,
+      bool? putIsBroken,
+      StorageItemDto? putPlace,
       String? putComment});
+
+  $StorageItemDtoCopyWith<$Res>? get putPlace;
 }
 
 /// @nodoc
@@ -68,12 +72,13 @@ class _$StuffKeepingReportDtoCopyWithImpl<$Res,
     Object? id = null,
     Object? stuffId = null,
     Object? takeTime = null,
-    Object? takeUserId = null,
+    Object? takeUser = freezed,
     Object? takeIsBroken = null,
     Object? takeComment = freezed,
-    Object? putTime = null,
-    Object? putUserId = null,
-    Object? putIsBroken = null,
+    Object? putTime = freezed,
+    Object? putUser = freezed,
+    Object? putIsBroken = freezed,
+    Object? putPlace = freezed,
     Object? putComment = freezed,
   }) {
     return _then(_value.copyWith(
@@ -89,10 +94,10 @@ class _$StuffKeepingReportDtoCopyWithImpl<$Res,
           ? _value.takeTime
           : takeTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      takeUserId: null == takeUserId
-          ? _value.takeUserId
-          : takeUserId // ignore: cast_nullable_to_non_nullable
-              as int,
+      takeUser: freezed == takeUser
+          ? _value.takeUser
+          : takeUser // ignore: cast_nullable_to_non_nullable
+              as UserDto,
       takeIsBroken: null == takeIsBroken
           ? _value.takeIsBroken
           : takeIsBroken // ignore: cast_nullable_to_non_nullable
@@ -101,23 +106,39 @@ class _$StuffKeepingReportDtoCopyWithImpl<$Res,
           ? _value.takeComment
           : takeComment // ignore: cast_nullable_to_non_nullable
               as String?,
-      putTime: null == putTime
+      putTime: freezed == putTime
           ? _value.putTime
           : putTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      putUserId: null == putUserId
-          ? _value.putUserId
-          : putUserId // ignore: cast_nullable_to_non_nullable
-              as int,
-      putIsBroken: null == putIsBroken
+              as DateTime?,
+      putUser: freezed == putUser
+          ? _value.putUser
+          : putUser // ignore: cast_nullable_to_non_nullable
+              as UserDto?,
+      putIsBroken: freezed == putIsBroken
           ? _value.putIsBroken
           : putIsBroken // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
+      putPlace: freezed == putPlace
+          ? _value.putPlace
+          : putPlace // ignore: cast_nullable_to_non_nullable
+              as StorageItemDto?,
       putComment: freezed == putComment
           ? _value.putComment
           : putComment // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StorageItemDtoCopyWith<$Res>? get putPlace {
+    if (_value.putPlace == null) {
+      return null;
+    }
+
+    return $StorageItemDtoCopyWith<$Res>(_value.putPlace!, (value) {
+      return _then(_value.copyWith(putPlace: value) as $Val);
+    });
   }
 }
 
@@ -134,13 +155,17 @@ abstract class _$$StuffKeepingReportDtoImplCopyWith<$Res>
       {int id,
       int stuffId,
       DateTime takeTime,
-      int takeUserId,
+      UserDto takeUser,
       bool takeIsBroken,
       String? takeComment,
-      DateTime putTime,
-      int putUserId,
-      bool putIsBroken,
+      DateTime? putTime,
+      UserDto? putUser,
+      bool? putIsBroken,
+      StorageItemDto? putPlace,
       String? putComment});
+
+  @override
+  $StorageItemDtoCopyWith<$Res>? get putPlace;
 }
 
 /// @nodoc
@@ -158,12 +183,13 @@ class __$$StuffKeepingReportDtoImplCopyWithImpl<$Res>
     Object? id = null,
     Object? stuffId = null,
     Object? takeTime = null,
-    Object? takeUserId = null,
+    Object? takeUser = freezed,
     Object? takeIsBroken = null,
     Object? takeComment = freezed,
-    Object? putTime = null,
-    Object? putUserId = null,
-    Object? putIsBroken = null,
+    Object? putTime = freezed,
+    Object? putUser = freezed,
+    Object? putIsBroken = freezed,
+    Object? putPlace = freezed,
     Object? putComment = freezed,
   }) {
     return _then(_$StuffKeepingReportDtoImpl(
@@ -179,10 +205,10 @@ class __$$StuffKeepingReportDtoImplCopyWithImpl<$Res>
           ? _value.takeTime
           : takeTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      takeUserId: null == takeUserId
-          ? _value.takeUserId
-          : takeUserId // ignore: cast_nullable_to_non_nullable
-              as int,
+      takeUser: freezed == takeUser
+          ? _value.takeUser
+          : takeUser // ignore: cast_nullable_to_non_nullable
+              as UserDto,
       takeIsBroken: null == takeIsBroken
           ? _value.takeIsBroken
           : takeIsBroken // ignore: cast_nullable_to_non_nullable
@@ -191,18 +217,22 @@ class __$$StuffKeepingReportDtoImplCopyWithImpl<$Res>
           ? _value.takeComment
           : takeComment // ignore: cast_nullable_to_non_nullable
               as String?,
-      putTime: null == putTime
+      putTime: freezed == putTime
           ? _value.putTime
           : putTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      putUserId: null == putUserId
-          ? _value.putUserId
-          : putUserId // ignore: cast_nullable_to_non_nullable
-              as int,
-      putIsBroken: null == putIsBroken
+              as DateTime?,
+      putUser: freezed == putUser
+          ? _value.putUser
+          : putUser // ignore: cast_nullable_to_non_nullable
+              as UserDto?,
+      putIsBroken: freezed == putIsBroken
           ? _value.putIsBroken
           : putIsBroken // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
+      putPlace: freezed == putPlace
+          ? _value.putPlace
+          : putPlace // ignore: cast_nullable_to_non_nullable
+              as StorageItemDto?,
       putComment: freezed == putComment
           ? _value.putComment
           : putComment // ignore: cast_nullable_to_non_nullable
@@ -218,12 +248,13 @@ class _$StuffKeepingReportDtoImpl implements _StuffKeepingReportDto {
       {required this.id,
       required this.stuffId,
       required this.takeTime,
-      required this.takeUserId,
+      required this.takeUser,
       required this.takeIsBroken,
       this.takeComment,
       required this.putTime,
-      required this.putUserId,
+      required this.putUser,
       required this.putIsBroken,
+      this.putPlace,
       this.putComment});
 
   @override
@@ -233,23 +264,25 @@ class _$StuffKeepingReportDtoImpl implements _StuffKeepingReportDto {
   @override
   final DateTime takeTime;
   @override
-  final int takeUserId;
+  final UserDto takeUser;
   @override
   final bool takeIsBroken;
   @override
   final String? takeComment;
   @override
-  final DateTime putTime;
+  final DateTime? putTime;
   @override
-  final int putUserId;
+  final UserDto? putUser;
   @override
-  final bool putIsBroken;
+  final bool? putIsBroken;
+  @override
+  final StorageItemDto? putPlace;
   @override
   final String? putComment;
 
   @override
   String toString() {
-    return 'StuffKeepingReportDto(id: $id, stuffId: $stuffId, takeTime: $takeTime, takeUserId: $takeUserId, takeIsBroken: $takeIsBroken, takeComment: $takeComment, putTime: $putTime, putUserId: $putUserId, putIsBroken: $putIsBroken, putComment: $putComment)';
+    return 'StuffKeepingReportDto(id: $id, stuffId: $stuffId, takeTime: $takeTime, takeUser: $takeUser, takeIsBroken: $takeIsBroken, takeComment: $takeComment, putTime: $putTime, putUser: $putUser, putIsBroken: $putIsBroken, putPlace: $putPlace, putComment: $putComment)';
   }
 
   @override
@@ -261,17 +294,17 @@ class _$StuffKeepingReportDtoImpl implements _StuffKeepingReportDto {
             (identical(other.stuffId, stuffId) || other.stuffId == stuffId) &&
             (identical(other.takeTime, takeTime) ||
                 other.takeTime == takeTime) &&
-            (identical(other.takeUserId, takeUserId) ||
-                other.takeUserId == takeUserId) &&
+            const DeepCollectionEquality().equals(other.takeUser, takeUser) &&
             (identical(other.takeIsBroken, takeIsBroken) ||
                 other.takeIsBroken == takeIsBroken) &&
             (identical(other.takeComment, takeComment) ||
                 other.takeComment == takeComment) &&
             (identical(other.putTime, putTime) || other.putTime == putTime) &&
-            (identical(other.putUserId, putUserId) ||
-                other.putUserId == putUserId) &&
+            const DeepCollectionEquality().equals(other.putUser, putUser) &&
             (identical(other.putIsBroken, putIsBroken) ||
                 other.putIsBroken == putIsBroken) &&
+            (identical(other.putPlace, putPlace) ||
+                other.putPlace == putPlace) &&
             (identical(other.putComment, putComment) ||
                 other.putComment == putComment));
   }
@@ -282,12 +315,13 @@ class _$StuffKeepingReportDtoImpl implements _StuffKeepingReportDto {
       id,
       stuffId,
       takeTime,
-      takeUserId,
+      const DeepCollectionEquality().hash(takeUser),
       takeIsBroken,
       takeComment,
       putTime,
-      putUserId,
+      const DeepCollectionEquality().hash(putUser),
       putIsBroken,
+      putPlace,
       putComment);
 
   @JsonKey(ignore: true)
@@ -303,12 +337,13 @@ abstract class _StuffKeepingReportDto implements StuffKeepingReportDto {
       {required final int id,
       required final int stuffId,
       required final DateTime takeTime,
-      required final int takeUserId,
+      required final UserDto takeUser,
       required final bool takeIsBroken,
       final String? takeComment,
-      required final DateTime putTime,
-      required final int putUserId,
-      required final bool putIsBroken,
+      required final DateTime? putTime,
+      required final UserDto? putUser,
+      required final bool? putIsBroken,
+      final StorageItemDto? putPlace,
       final String? putComment}) = _$StuffKeepingReportDtoImpl;
 
   @override
@@ -318,17 +353,19 @@ abstract class _StuffKeepingReportDto implements StuffKeepingReportDto {
   @override
   DateTime get takeTime;
   @override
-  int get takeUserId;
+  UserDto get takeUser;
   @override
   bool get takeIsBroken;
   @override
   String? get takeComment;
   @override
-  DateTime get putTime;
+  DateTime? get putTime;
   @override
-  int get putUserId;
+  UserDto? get putUser;
   @override
-  bool get putIsBroken;
+  bool? get putIsBroken;
+  @override
+  StorageItemDto? get putPlace;
   @override
   String? get putComment;
   @override

@@ -7,17 +7,41 @@ import 'package:fpdart/fpdart.dart';
 import 'package:stocktacking/core/utils/failure.dart';
 import 'package:stocktacking/core/utils/use_case_base.dart';
 import 'package:stocktacking/features/stuff/domain/repositories/stuff_keeping_report_repository.dart';
+import 'package:stocktacking/features/stuff/domain/repositories/stuff_repository.dart';
 
-class TakeStuffUseCase implements UseCase<Future<Either<IFailure, void>>, (int, bool, String?)> {
+
+class TakeStuffArgs {
+  final int userId;
+  final int stuffId;
+  final bool isBroken;
+  final String? comment;
+
+  const TakeStuffArgs({
+    required this.userId,
+    required this.stuffId,
+    required this.isBroken,
+    this.comment,
+  });
+}
+
+class TakeStuffUseCase implements UseCase<Future<Either<IFailure, void>>, TakeStuffArgs> {
 
   final StuffKeepingReportRepository stuffKeepingReportRepository;
+  final StuffRepository stuffRepository;
 
-  const TakeStuffUseCase(this.stuffKeepingReportRepository);
+  const TakeStuffUseCase(this.stuffKeepingReportRepository, this.stuffRepository);
 
   @override
-  Future<Either<IFailure, void>> execute((int, bool, String?) stuffParams) {
-    final (stuffId, isBroken, comment) = stuffParams;
-    return stuffKeepingReportRepository.takeStuff(stuffId: stuffId, isBroken: isBroken, comment: comment);
+  Future<Either<IFailure, void>> execute(TakeStuffArgs stuffParams) async {
+    final res = await stuffKeepingReportRepository.createReport(
+         stuffId: stuffParams.stuffId,
+         userId: stuffParams.userId,
+         isBroken: stuffParams.isBroken,
+         comment: stuffParams.comment
+     );
+
+    if(res.isLeft()) return res;
+    return await stuffRepository.updateStuff(id: stuffParams.stuffId, storageId: null, stockId: null, userId: stuffParams.userId, comment: stuffParams.comment);
   }
 
 }

@@ -40,7 +40,7 @@ final stuffRepositoryProvider = AutoDisposeProvider<StuffRepository>.internal(
 
 typedef StuffRepositoryRef = AutoDisposeProviderRef<StuffRepository>;
 String _$createStuffUseCaseHash() =>
-    r'2a5d8589d558d051523d6f39d50f306169f6d832';
+    r'f8a54ae8e5412d5f11715160198118cec036a5d5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -242,6 +242,140 @@ class _CreateStuffUseCaseProviderElement
   int? get count => (origin as CreateStuffUseCaseProvider).count;
 }
 
+String _$getUnfinishedReportHash() =>
+    r'62f69bb4411afe71b17a2134d3f66296c9249577';
+
+/// See also [getUnfinishedReport].
+@ProviderFor(getUnfinishedReport)
+const getUnfinishedReportProvider = GetUnfinishedReportFamily();
+
+/// See also [getUnfinishedReport].
+class GetUnfinishedReportFamily
+    extends Family<AsyncValue<StuffKeepingReport?>> {
+  /// See also [getUnfinishedReport].
+  const GetUnfinishedReportFamily();
+
+  /// See also [getUnfinishedReport].
+  GetUnfinishedReportProvider call(
+    int stuffId,
+  ) {
+    return GetUnfinishedReportProvider(
+      stuffId,
+    );
+  }
+
+  @override
+  GetUnfinishedReportProvider getProviderOverride(
+    covariant GetUnfinishedReportProvider provider,
+  ) {
+    return call(
+      provider.stuffId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getUnfinishedReportProvider';
+}
+
+/// See also [getUnfinishedReport].
+class GetUnfinishedReportProvider
+    extends AutoDisposeFutureProvider<StuffKeepingReport?> {
+  /// See also [getUnfinishedReport].
+  GetUnfinishedReportProvider(
+    int stuffId,
+  ) : this._internal(
+          (ref) => getUnfinishedReport(
+            ref as GetUnfinishedReportRef,
+            stuffId,
+          ),
+          from: getUnfinishedReportProvider,
+          name: r'getUnfinishedReportProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getUnfinishedReportHash,
+          dependencies: GetUnfinishedReportFamily._dependencies,
+          allTransitiveDependencies:
+              GetUnfinishedReportFamily._allTransitiveDependencies,
+          stuffId: stuffId,
+        );
+
+  GetUnfinishedReportProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.stuffId,
+  }) : super.internal();
+
+  final int stuffId;
+
+  @override
+  Override overrideWith(
+    FutureOr<StuffKeepingReport?> Function(GetUnfinishedReportRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetUnfinishedReportProvider._internal(
+        (ref) => create(ref as GetUnfinishedReportRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        stuffId: stuffId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<StuffKeepingReport?> createElement() {
+    return _GetUnfinishedReportProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetUnfinishedReportProvider && other.stuffId == stuffId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, stuffId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin GetUnfinishedReportRef
+    on AutoDisposeFutureProviderRef<StuffKeepingReport?> {
+  /// The parameter `stuffId` of this provider.
+  int get stuffId;
+}
+
+class _GetUnfinishedReportProviderElement
+    extends AutoDisposeFutureProviderElement<StuffKeepingReport?>
+    with GetUnfinishedReportRef {
+  _GetUnfinishedReportProviderElement(super.provider);
+
+  @override
+  int get stuffId => (origin as GetUnfinishedReportProvider).stuffId;
+}
+
 String _$getStuffByIdHash() => r'221fb9978079cbe0338d4f3d0f798073e39f484c';
 
 /// See also [getStuffById].
@@ -368,6 +502,184 @@ class _GetStuffByIdProviderElement
 
   @override
   int get stuffId => (origin as GetStuffByIdProvider).stuffId;
+}
+
+String _$usePutStuffUseCaseHash() =>
+    r'b2d59fc015982415602971a8aa56a12d4326a988';
+
+/// See also [usePutStuffUseCase].
+@ProviderFor(usePutStuffUseCase)
+const usePutStuffUseCaseProvider = UsePutStuffUseCaseFamily();
+
+/// See also [usePutStuffUseCase].
+class UsePutStuffUseCaseFamily extends Family<AsyncValue<void>> {
+  /// See also [usePutStuffUseCase].
+  const UsePutStuffUseCaseFamily();
+
+  /// See also [usePutStuffUseCase].
+  UsePutStuffUseCaseProvider call({
+    required StorageItem item,
+    required int reportId,
+    bool isBroken = false,
+    String? comment,
+  }) {
+    return UsePutStuffUseCaseProvider(
+      item: item,
+      reportId: reportId,
+      isBroken: isBroken,
+      comment: comment,
+    );
+  }
+
+  @override
+  UsePutStuffUseCaseProvider getProviderOverride(
+    covariant UsePutStuffUseCaseProvider provider,
+  ) {
+    return call(
+      item: provider.item,
+      reportId: provider.reportId,
+      isBroken: provider.isBroken,
+      comment: provider.comment,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'usePutStuffUseCaseProvider';
+}
+
+/// See also [usePutStuffUseCase].
+class UsePutStuffUseCaseProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [usePutStuffUseCase].
+  UsePutStuffUseCaseProvider({
+    required StorageItem item,
+    required int reportId,
+    bool isBroken = false,
+    String? comment,
+  }) : this._internal(
+          (ref) => usePutStuffUseCase(
+            ref as UsePutStuffUseCaseRef,
+            item: item,
+            reportId: reportId,
+            isBroken: isBroken,
+            comment: comment,
+          ),
+          from: usePutStuffUseCaseProvider,
+          name: r'usePutStuffUseCaseProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$usePutStuffUseCaseHash,
+          dependencies: UsePutStuffUseCaseFamily._dependencies,
+          allTransitiveDependencies:
+              UsePutStuffUseCaseFamily._allTransitiveDependencies,
+          item: item,
+          reportId: reportId,
+          isBroken: isBroken,
+          comment: comment,
+        );
+
+  UsePutStuffUseCaseProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.item,
+    required this.reportId,
+    required this.isBroken,
+    required this.comment,
+  }) : super.internal();
+
+  final StorageItem item;
+  final int reportId;
+  final bool isBroken;
+  final String? comment;
+
+  @override
+  Override overrideWith(
+    FutureOr<void> Function(UsePutStuffUseCaseRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: UsePutStuffUseCaseProvider._internal(
+        (ref) => create(ref as UsePutStuffUseCaseRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        item: item,
+        reportId: reportId,
+        isBroken: isBroken,
+        comment: comment,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<void> createElement() {
+    return _UsePutStuffUseCaseProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UsePutStuffUseCaseProvider &&
+        other.item == item &&
+        other.reportId == reportId &&
+        other.isBroken == isBroken &&
+        other.comment == comment;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, item.hashCode);
+    hash = _SystemHash.combine(hash, reportId.hashCode);
+    hash = _SystemHash.combine(hash, isBroken.hashCode);
+    hash = _SystemHash.combine(hash, comment.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin UsePutStuffUseCaseRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `item` of this provider.
+  StorageItem get item;
+
+  /// The parameter `reportId` of this provider.
+  int get reportId;
+
+  /// The parameter `isBroken` of this provider.
+  bool get isBroken;
+
+  /// The parameter `comment` of this provider.
+  String? get comment;
+}
+
+class _UsePutStuffUseCaseProviderElement
+    extends AutoDisposeFutureProviderElement<void> with UsePutStuffUseCaseRef {
+  _UsePutStuffUseCaseProviderElement(super.provider);
+
+  @override
+  StorageItem get item => (origin as UsePutStuffUseCaseProvider).item;
+  @override
+  int get reportId => (origin as UsePutStuffUseCaseProvider).reportId;
+  @override
+  bool get isBroken => (origin as UsePutStuffUseCaseProvider).isBroken;
+  @override
+  String? get comment => (origin as UsePutStuffUseCaseProvider).comment;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

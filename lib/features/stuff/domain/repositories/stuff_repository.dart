@@ -16,8 +16,18 @@ abstract class StuffRepository {
     required String imageUrl,
     required String name,
     required int orgId,
-    required StorageItem storage,
+    int? storageId,
+    int? stockId,
     int count = 1
+  });
+
+  Future<Either<IFailure, Stuff>> updateStuff({
+    required int id,
+    required int? storageId,
+    required int? stockId,
+    required int? userId,
+    String? comment,
+    bool isBroken = false
   });
 
 }

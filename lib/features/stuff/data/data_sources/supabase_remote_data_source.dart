@@ -132,4 +132,28 @@ class SupabaseStuffRemoteDataSource implements RemoteStuffDataSource {
 
   }
 
+  @override
+  Future<Either<IFailure, StuffDto>> updateStuff({
+    required int id,
+    required int? storageId,
+    required int? stockId,
+    required int? userId,
+    bool isBroken = false,
+    String? comment
+  }) async {
+    await supabaseClient
+        .from('items')
+        .update({
+          'storage_id': storageId,
+          'branch_id': stockId,
+          'user_id': userId,
+          'is_broken': isBroken,
+          'comment': comment
+        })
+        .eq('id', id)
+        .select()
+        .single();
+    return getStuffById(id);
+  }
+
 }
