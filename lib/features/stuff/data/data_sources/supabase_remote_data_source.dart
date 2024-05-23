@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:fpdart/src/either.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stocktacking/core/utils/failure.dart';
@@ -79,9 +80,54 @@ class SupabaseStuffRemoteDataSource implements RemoteStuffDataSource {
   }
 
   @override
-  Future<Either<IFailure, List<StuffDto>>> searchStuff(String search) {
-    // TODO: implement searchStuff
-    throw UnimplementedError();
+  Future<Either<IFailure, List<StuffDto>>> searchStuff(String? search, int orgId, int? storageId, int? stockId) async {
+    try {
+      debugPrint('SEARCH - $search \n orgId - $orgId \n storageIf - $storageId \n stockId - $stockId ');
+      var res = supabaseClient
+          .from('items')
+          .select('id, name, storage_id, branches (id, organization_id), branch_id')
+          .eq('branches.organization_id', orgId);
+      if(stockId != null) {
+        res = res.not('branch_id', 'is', null).eq('branch_id', stockId);
+        debugPrint('STOCKS - ${await res}');
+      }
+      if(storageId != null) {
+        res = res.not('storage_id', 'is', null).eq('storage_id', storageId);
+      }
+      if(search?.isNotEmpty ?? false) {
+        debugPrint('SEARCH PARAM - $search');
+        res = res.ilike('name', '%$search%');
+      }
+      final queryRes = await res;
+      final s = (await Future
+          .wait(queryRes
+          .map((e) => getStuffById(e['id']))
+      ));
+
+      IFailure? firstFailure;
+      final List<StuffDto> searchedStuff = List.empty(growable: true);
+      for(final getBtIdRes in s) {
+        final isError = getBtIdRes.match(
+                (l) {
+              firstFailure = l;
+              return true;
+            },
+                (r) {
+              searchedStuff.add(r);
+              return false;
+            }
+        );
+        if(isError) break;
+      }
+
+      if(firstFailure != null) return Left(firstFailure ?? const AppFailure(message: 'Неизвестаня ошибка'));
+      return Right(searchedStuff);
+    }
+    catch(e) {
+      debugPrint('ERROR - $e');
+      return const Left(AppFailure(message: 'Ошибка при получении предметов'));
+    }
+
   }
 
   @override

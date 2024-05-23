@@ -9,7 +9,7 @@ import 'package:stocktacking/features/stuff/data/dtos/stuff_dto.dart';
 abstract class RemoteStuffDataSource {
   Future<Either<IFailure, List<(int, String)>>> getStuffByUserId(int userId);
   Future<Either<IFailure, StuffDto>> getStuffById(int stuffId);
-  Future<Either<IFailure, List<StuffDto>>> searchStuff(String search);
+  Future<Either<IFailure, List<StuffDto>>> searchStuff(String? search, int orgId, int? storageId, int? stockId);
   Future<Either<IFailure, List<(int, String)>>> createStuff({
     required String imageUrl,
     required String name,

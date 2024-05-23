@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:stocktacking/core/utils/failure.dart';
 import 'package:stocktacking/core/utils/use_case_base.dart';
@@ -47,10 +48,9 @@ class PutStuffUseCase implements UseCase<Future<Either<IFailure, int>>, PutStuff
             (r) async {
               final (stockId, storageId) = switch(args.item) {
                 Stock(:final id) => (id, null),
-                Storage(:final id, :final stockId) => (id, stockId),
+                Storage(:final id, :final stockId) => (stockId, id),
                 _ => (0, 0)
               };
-
               return (await stuffRepository.updateStuff(
                   id: r.stuffId,
                   storageId: storageId,

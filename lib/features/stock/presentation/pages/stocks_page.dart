@@ -9,6 +9,8 @@ import 'package:stocktacking/app/routing_provider.dart';
 import 'package:stocktacking/core/presentation/app_bar/build_app_bar.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
 import 'package:stocktacking/core/routing/constants/routing_names.dart';
+import 'package:stocktacking/core/routing/constants/routing_params.dart';
+import 'package:stocktacking/core/utils/failure.dart';
 import 'package:stocktacking/features/credential/presentation/widgets/logout_button.dart';
 import 'package:stocktacking/features/stock/presentation/providers/stock_providers.dart';
 import 'package:stocktacking/features/stock/presentation/widget/stock_card.dart';
@@ -24,19 +26,22 @@ class StocksPage extends ConsumerStatefulWidget {
 }
 
 class _StocksPageState extends ConsumerState<StocksPage> {
-
-  final _searchController = TextEditingController();
-  String? _selectedStoragePath;
+  StorageItem? _selectedStorage;
 
   void Function() _buildOnStorageTap(StorageItem storageItem) => () {
-    setState(() => _selectedStoragePath = storageItem.fullName);
+    setState(() => _selectedStorage = storageItem);
+  };
+
+  void Function() _buildOnStuffTap(int stuffId) => () {
+    ref
+        .read(locationServiceProvider)
+        .goNamed(name: stuffDetail, params: {stuffIdParam: stuffId.toString()});
   };
 
   void _onDeleteStoragePath() {
-    setState(() => _selectedStoragePath = null);
+    setState(() => _selectedStorage = null);
   }
 
-  void _onTapClear() => _searchController.clear();
 
   void Function() _buildOnStuffCreateTap(WidgetRef ref) => () => ref
       .read(locationServiceProvider)
@@ -45,6 +50,7 @@ class _StocksPageState extends ConsumerState<StocksPage> {
   void Function() _buildOnStockCreateTap(WidgetRef ref) => () => ref
       .read(locationServiceProvider)
       .goNamed(name: stockCreate);
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +86,7 @@ class _StocksPageState extends ConsumerState<StocksPage> {
               SizedBox(
                 height: 56,
                 child: TextField(
-                  controller: _searchController,
+                  onChanged: (value) => ref.read(searchInputProvider.notifier).state = value,
                   textAlignVertical: TextAlignVertical.center,
                   style: Theme.of(context).textTheme.displayMedium,
                   decoration: InputDecoration(
@@ -94,14 +100,6 @@ class _StocksPageState extends ConsumerState<StocksPage> {
                           child: const Icon(Icons.filter_list_outlined)
                       ),
                     ),
-                    suffix: Material(
-                      borderRadius: BorderRadius.circular(50),
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(50),
-                          onTap: _onTapClear,
-                          child: const Icon(Icons.clear)
-                      ),
-                    ),
                     enabledBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                       borderSide: BorderSide(color: Colors.transparent, width: 2)
@@ -110,11 +108,11 @@ class _StocksPageState extends ConsumerState<StocksPage> {
                 ),
               ),
               const SizedBox(height: 14),
-              if(_selectedStoragePath != null) Row(
+              if(_selectedStorage != null) Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_selectedStoragePath ?? 'Организация', textAlign: TextAlign.start,),
+                  Text(_selectedStorage?.fullName ?? 'Организация', textAlign: TextAlign.start,),
                   const SizedBox(width: 14),
                   Material(
                     borderRadius: BorderRadius.circular(50),
@@ -130,15 +128,28 @@ class _StocksPageState extends ConsumerState<StocksPage> {
               Expanded(
                   child: Builder(
                     builder: (context) {
-                      final stocksState = ref.watch(getStoragesProvider.call(search: _searchController.text, storagePath: _selectedStoragePath));
+                      final searchValue = ref.watch(searchInputProvider);
+                      final stocksState = ref.watch(getStoragesProvider.call(search: searchValue, storageItem: _selectedStorage));
                       return switch(stocksState) {
                         AsyncData(:final value) => RefreshIndicator(
                           onRefresh: () => ref.refresh(getStocksProvider.future),
                           child: ListView.separated(
-                              itemBuilder: (_, index) => StorageItemCard(storage: value[index], onTap: _buildOnStorageTap(value[index])),
+                              itemBuilder: (_, index) {
+                                final isStuff = index >= value.storages.length;
+                                if(isStuff) {
+                                  return  StorageItemCard.fromStuff(
+                                    stuff: value.stuffs[index - value.storages.length],
+                                    onTap: _buildOnStuffTap(value.stuffs[index - value.storages.length].id)
+                                   );
+                                }
+                                return StorageItemCard.fromStorage(item: value.storages[index], onTap: _buildOnStorageTap(value.storages[index]));
+                              } ,
                               separatorBuilder: (_, __) => const SizedBox(height: 7),
-                              itemCount: value.length
+                              itemCount: value.storages.length + value.stuffs.length
                           ),
+                        ),
+                        AsyncError(:final error) => const Center(
+                          child: Text('Ошибка'),
                         ),
                         AsyncLoading() => Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary,)),
                         _ => const SizedBox()

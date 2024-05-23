@@ -26,7 +26,7 @@ class StorageSearch extends ConsumerWidget {
       popupProps:  PopupProps<StorageItem>.menu(
         searchDelay: const Duration(milliseconds: 200),
         showSearchBox: true,
-        itemBuilder: (_, storage, __) => StorageItemCard(storage: storage, onTap: (){})
+        itemBuilder: (_, storage, __) => StorageItemCard.fromStorage(item: storage, onTap: (){})
       ),
       onChanged: onSelect,
     );

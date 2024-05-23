@@ -188,25 +188,25 @@ class _SearchStoragesProviderElement
   String get search => (origin as SearchStoragesProvider).search;
 }
 
-String _$getStoragesHash() => r'675c18adb964b8bb519b69beef3c93dbd016e54d';
+String _$getStoragesHash() => r'f991c790454669ac90536105f54a9e82c422132c';
 
 /// See also [getStorages].
 @ProviderFor(getStorages)
 const getStoragesProvider = GetStoragesFamily();
 
 /// See also [getStorages].
-class GetStoragesFamily extends Family<AsyncValue<List<StorageItem>>> {
+class GetStoragesFamily extends Family<AsyncValue<StoragesAndStuffState>> {
   /// See also [getStorages].
   const GetStoragesFamily();
 
   /// See also [getStorages].
   GetStoragesProvider call({
     String? search,
-    String? storagePath,
+    StorageItem? storageItem,
   }) {
     return GetStoragesProvider(
       search: search,
-      storagePath: storagePath,
+      storageItem: storageItem,
     );
   }
 
@@ -216,7 +216,7 @@ class GetStoragesFamily extends Family<AsyncValue<List<StorageItem>>> {
   ) {
     return call(
       search: provider.search,
-      storagePath: provider.storagePath,
+      storageItem: provider.storageItem,
     );
   }
 
@@ -236,16 +236,17 @@ class GetStoragesFamily extends Family<AsyncValue<List<StorageItem>>> {
 }
 
 /// See also [getStorages].
-class GetStoragesProvider extends AutoDisposeFutureProvider<List<StorageItem>> {
+class GetStoragesProvider
+    extends AutoDisposeFutureProvider<StoragesAndStuffState> {
   /// See also [getStorages].
   GetStoragesProvider({
     String? search,
-    String? storagePath,
+    StorageItem? storageItem,
   }) : this._internal(
           (ref) => getStorages(
             ref as GetStoragesRef,
             search: search,
-            storagePath: storagePath,
+            storageItem: storageItem,
           ),
           from: getStoragesProvider,
           name: r'getStoragesProvider',
@@ -257,7 +258,7 @@ class GetStoragesProvider extends AutoDisposeFutureProvider<List<StorageItem>> {
           allTransitiveDependencies:
               GetStoragesFamily._allTransitiveDependencies,
           search: search,
-          storagePath: storagePath,
+          storageItem: storageItem,
         );
 
   GetStoragesProvider._internal(
@@ -268,15 +269,15 @@ class GetStoragesProvider extends AutoDisposeFutureProvider<List<StorageItem>> {
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.search,
-    required this.storagePath,
+    required this.storageItem,
   }) : super.internal();
 
   final String? search;
-  final String? storagePath;
+  final StorageItem? storageItem;
 
   @override
   Override overrideWith(
-    FutureOr<List<StorageItem>> Function(GetStoragesRef provider) create,
+    FutureOr<StoragesAndStuffState> Function(GetStoragesRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -288,13 +289,13 @@ class GetStoragesProvider extends AutoDisposeFutureProvider<List<StorageItem>> {
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         search: search,
-        storagePath: storagePath,
+        storageItem: storageItem,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<StorageItem>> createElement() {
+  AutoDisposeFutureProviderElement<StoragesAndStuffState> createElement() {
     return _GetStoragesProviderElement(this);
   }
 
@@ -302,36 +303,36 @@ class GetStoragesProvider extends AutoDisposeFutureProvider<List<StorageItem>> {
   bool operator ==(Object other) {
     return other is GetStoragesProvider &&
         other.search == search &&
-        other.storagePath == storagePath;
+        other.storageItem == storageItem;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, search.hashCode);
-    hash = _SystemHash.combine(hash, storagePath.hashCode);
+    hash = _SystemHash.combine(hash, storageItem.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin GetStoragesRef on AutoDisposeFutureProviderRef<List<StorageItem>> {
+mixin GetStoragesRef on AutoDisposeFutureProviderRef<StoragesAndStuffState> {
   /// The parameter `search` of this provider.
   String? get search;
 
-  /// The parameter `storagePath` of this provider.
-  String? get storagePath;
+  /// The parameter `storageItem` of this provider.
+  StorageItem? get storageItem;
 }
 
 class _GetStoragesProviderElement
-    extends AutoDisposeFutureProviderElement<List<StorageItem>>
+    extends AutoDisposeFutureProviderElement<StoragesAndStuffState>
     with GetStoragesRef {
   _GetStoragesProviderElement(super.provider);
 
   @override
   String? get search => (origin as GetStoragesProvider).search;
   @override
-  String? get storagePath => (origin as GetStoragesProvider).storagePath;
+  StorageItem? get storageItem => (origin as GetStoragesProvider).storageItem;
 }
 
 String _$getStocksHash() => r'474e6063090f76f26a605ad7ba0ec11791a30174';

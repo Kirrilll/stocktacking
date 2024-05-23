@@ -23,7 +23,7 @@ class Stuff with _$Stuff {
     @Default(null) final String? comment
   }) = _Stuff;
 
-  String get fullStorageName => storage.fullName;
+  String get fullName => '${storage.fullName}/$title';
 
   bool get isUsing => storage is User;
 

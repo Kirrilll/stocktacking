@@ -25,12 +25,6 @@ class StuffRepositoryImpl implements StuffRepository {
   }
 
   @override
-  Future<Either<IFailure, List<Stuff>>> getStuffBySearchAndFilters(String searchParams) {
-    // TODO: implement getStuffBySearchAndFilters
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Either<IFailure, List<(int, String)>>> getStuffByUserId(int userId) async {
     return await remoteStuffDataSource.getStuffByUserId(userId);
   }
@@ -58,6 +52,16 @@ class StuffRepositoryImpl implements StuffRepository {
     return (await remoteStuffDataSource
         .updateStuff(id: id, storageId: storageId, stockId: stockId, userId: userId, isBroken: isBroken, comment: comment))
         .map(_stuffAdapter.fromDto
+    );
+  }
+
+  @override
+  Future<Either<IFailure, List<Stuff>>> getStuffBySearchAndStorageId(int orgId, String? search, int? storageId, int? stockId) async {
+    return (await remoteStuffDataSource
+        .searchStuff(search, orgId, storageId, stockId))
+        .map((a) => a
+          .map(_stuffAdapter.fromDto)
+          .toList()
     );
   }
 

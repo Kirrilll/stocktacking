@@ -18,7 +18,7 @@ class StuffUsingHistoryItem extends StatelessWidget {
     final putInfo = report.putInfo;
 
     return ExpansionTile(
-      title: Text('${report.takeInfo.time.format('hh:ss')}-${(report.putInfo?.time.format('hh:ss') ?? 'Сейчас')}'),
+      title: Text('${report.takeInfo.time.format('hh:mm')}-${(report.putInfo?.time.format('hh:mm') ?? 'Сейчас')}'),
       childrenPadding: const EdgeInsets.all(16),
       backgroundColor: report.isBroken
           ? const Color(0xFFFF4545).withOpacity(0.05)

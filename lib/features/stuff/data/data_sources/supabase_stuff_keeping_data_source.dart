@@ -53,7 +53,7 @@ class SupabaseStuffKeepingDataSource implements RemoteStuffKeepingReportDataSour
           'user_end_id': userId,
           'comment_end': comment,
           'is_broken_end': isBroken,
-          'closed_at':  DateTime.now().toUtc().toString()
+          'closed_at':  DateTime.now().toString()
         })
         .eq('id', reportId)
         .select(_baseReportsSelectQuery)
@@ -67,7 +67,7 @@ class SupabaseStuffKeepingDataSource implements RemoteStuffKeepingReportDataSour
       final res = (await supabaseClient
           .from('reports')
           .insert({
-        'created_at': DateTime.now().toUtc().toString(),
+        'created_at': DateTime.now().toString(),
         'item_id': stuffId,
         'is_broken_start': isBroken,
         'comment_start': comment,

@@ -8,6 +8,7 @@ import 'package:stocktacking/core/utils/failure.dart';
 import 'package:stocktacking/features/credential/domain/entities/credential.dart';
 import 'package:stocktacking/features/credential/presentation/notifiers/credential_notifier.dart';
 import 'package:stocktacking/features/stock/domain/entities/storage.dart';
+import 'package:stocktacking/features/stock/domain/use_cases/search_storage_use_case.dart';
 import 'package:stocktacking/features/stuff/data/data_sources/remote_stuff_data_source.dart';
 import 'package:stocktacking/features/stuff/data/data_sources/remote_stuff_keeping_report_data_source.dart';
 import 'package:stocktacking/features/stuff/data/data_sources/supabase_remote_data_source.dart';
@@ -17,6 +18,7 @@ import 'package:stocktacking/features/stuff/domain/repositories/stuff_repository
 import 'package:stocktacking/features/stuff/domain/use_case/create_stuff_use_case.dart';
 import 'package:stocktacking/features/stuff/domain/use_case/get_user_stuff_use_case.dart';
 import 'package:stocktacking/features/stuff/domain/use_case/put_stuff_use_case.dart';
+import 'package:stocktacking/features/stuff/domain/use_case/search_stuff_use_case.dart';
 import 'package:stocktacking/features/stuff/domain/use_case/take_stuff_use_case.dart';
 import 'package:stocktacking/features/stuff/presentation/notifiers/using_stuff_notifier.dart';
 import 'package:stocktacking/features/stuff/presentation/providers/stuff_keeping_providers.dart';
@@ -125,4 +127,23 @@ Future<ReportActionState> getReportActionState(GetReportActionStateRef ref, int 
   if(unfinishedReport == null) return ReportActionState.take(stuffId);
   if(credential.profile?.id == unfinishedReport.takeInfo.user.userId) return ReportActionState.put(unfinishedReport.id);
   return ReportActionState.retake(unfinishedReport.id, unfinishedReport.takeInfo.user.userId);
+}
+
+@riverpod
+Future<List<Stuff>> useSearchStuff(UseSearchStuffRef ref, {
+  int? stockId,
+  int? storageId,
+  String? search
+}) async {
+  final stuffRepository = ref.watch(stuffRepositoryProvider);
+  final credential = ref.watch(credentialNotifierProvider);
+  return switch(credential) {
+    Authorised(:final profile) => (await SearchStuffUseCase(stuffRepository, profile?.orgId ?? -1)
+        .execute(SearchParams(storageId: storageId, stockId: stockId, search: search)))
+        .match(
+            (l) => throw l,
+            (r) => r
+    ),
+    _ => throw const UnauthorisedFailure()
+  };
 }

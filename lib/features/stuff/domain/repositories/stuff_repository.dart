@@ -8,7 +8,7 @@ import 'package:stocktacking/features/stuff/domain/entities/stuff.dart';
 
 abstract class StuffRepository {
   Future<Either<IFailure, List<(int, String)>>> getStuffByUserId(int userId);
-  Future<Either<IFailure, List<Stuff>>> getStuffBySearchAndFilters(String searchParams);
+  Future<Either<IFailure, List<Stuff>>> getStuffBySearchAndStorageId(int orgId, String? search, int? storageId, int? stockId);
   Future<Either<IFailure, Stuff>> getStuffById(int id);
 
   Future<Either<IFailure, String>> uploadFile({required XFile image, required String name, required int orgId});

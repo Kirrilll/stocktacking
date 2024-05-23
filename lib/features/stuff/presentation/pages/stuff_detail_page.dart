@@ -129,7 +129,7 @@ class StuffDetailPage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text('Находится'),
-                            Text(value.fullStorageName),
+                            Text(value.fullName),
                           ],
                         ),
                         const SizedBox(height: 14),

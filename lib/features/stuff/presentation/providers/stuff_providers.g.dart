@@ -814,5 +814,167 @@ class _GetReportActionStateProviderElement
   @override
   int get stuffId => (origin as GetReportActionStateProvider).stuffId;
 }
+
+String _$useSearchStuffHash() => r'4f211fea99705384cac9be122961325302466a35';
+
+/// See also [useSearchStuff].
+@ProviderFor(useSearchStuff)
+const useSearchStuffProvider = UseSearchStuffFamily();
+
+/// See also [useSearchStuff].
+class UseSearchStuffFamily extends Family<AsyncValue<List<Stuff>>> {
+  /// See also [useSearchStuff].
+  const UseSearchStuffFamily();
+
+  /// See also [useSearchStuff].
+  UseSearchStuffProvider call({
+    int? stockId,
+    int? storageId,
+    String? search,
+  }) {
+    return UseSearchStuffProvider(
+      stockId: stockId,
+      storageId: storageId,
+      search: search,
+    );
+  }
+
+  @override
+  UseSearchStuffProvider getProviderOverride(
+    covariant UseSearchStuffProvider provider,
+  ) {
+    return call(
+      stockId: provider.stockId,
+      storageId: provider.storageId,
+      search: provider.search,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'useSearchStuffProvider';
+}
+
+/// See also [useSearchStuff].
+class UseSearchStuffProvider extends AutoDisposeFutureProvider<List<Stuff>> {
+  /// See also [useSearchStuff].
+  UseSearchStuffProvider({
+    int? stockId,
+    int? storageId,
+    String? search,
+  }) : this._internal(
+          (ref) => useSearchStuff(
+            ref as UseSearchStuffRef,
+            stockId: stockId,
+            storageId: storageId,
+            search: search,
+          ),
+          from: useSearchStuffProvider,
+          name: r'useSearchStuffProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$useSearchStuffHash,
+          dependencies: UseSearchStuffFamily._dependencies,
+          allTransitiveDependencies:
+              UseSearchStuffFamily._allTransitiveDependencies,
+          stockId: stockId,
+          storageId: storageId,
+          search: search,
+        );
+
+  UseSearchStuffProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.stockId,
+    required this.storageId,
+    required this.search,
+  }) : super.internal();
+
+  final int? stockId;
+  final int? storageId;
+  final String? search;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<Stuff>> Function(UseSearchStuffRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: UseSearchStuffProvider._internal(
+        (ref) => create(ref as UseSearchStuffRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        stockId: stockId,
+        storageId: storageId,
+        search: search,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<Stuff>> createElement() {
+    return _UseSearchStuffProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UseSearchStuffProvider &&
+        other.stockId == stockId &&
+        other.storageId == storageId &&
+        other.search == search;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, stockId.hashCode);
+    hash = _SystemHash.combine(hash, storageId.hashCode);
+    hash = _SystemHash.combine(hash, search.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin UseSearchStuffRef on AutoDisposeFutureProviderRef<List<Stuff>> {
+  /// The parameter `stockId` of this provider.
+  int? get stockId;
+
+  /// The parameter `storageId` of this provider.
+  int? get storageId;
+
+  /// The parameter `search` of this provider.
+  String? get search;
+}
+
+class _UseSearchStuffProviderElement
+    extends AutoDisposeFutureProviderElement<List<Stuff>>
+    with UseSearchStuffRef {
+  _UseSearchStuffProviderElement(super.provider);
+
+  @override
+  int? get stockId => (origin as UseSearchStuffProvider).stockId;
+  @override
+  int? get storageId => (origin as UseSearchStuffProvider).storageId;
+  @override
+  String? get search => (origin as UseSearchStuffProvider).search;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

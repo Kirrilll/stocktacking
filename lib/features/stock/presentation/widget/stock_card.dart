@@ -4,11 +4,42 @@ import 'package:flutter/widgets.dart';
 import 'package:stocktacking/core/presentation/panel/panel.dart';
 import 'package:stocktacking/features/stock/domain/entities/storage.dart';
 import 'package:stocktacking/features/stock/domain/entities/storage_base.dart';
+import 'package:stocktacking/features/stuff/domain/entities/stuff.dart';
 
 class StorageItemCard extends StatelessWidget {
-  const StorageItemCard({super.key, required this.storage, required this.onTap});
+  const StorageItemCard({super.key, required this.icon, required this.onTap, required this.fullName, required this.title});
 
-  final StorageItem storage;
+  factory StorageItemCard.fromStorage({
+    required StorageItem item,
+    required void Function()? onTap
+}) => StorageItemCard(
+      icon: switch(item) {
+        Storage() => Icons.storage,
+        User() => Icons.person,
+        _ => Icons.location_pin
+      },
+      onTap: onTap,
+      fullName: switch(item) {
+        Storage() => item.fullTitle,
+        Stock(:final address) => address,
+        _ => item.fullName
+      },
+      title: item.title
+  );
+
+  factory StorageItemCard.fromStuff({
+    required Stuff stuff,
+    required void Function()? onTap
+  }) => StorageItemCard(
+      icon: Icons.category,
+      onTap: onTap,
+      fullName: stuff.fullName,
+      title: stuff.title
+  );
+
+  final IconData icon;
+  final String title;
+  final String fullName;
   final void Function()? onTap;
 
   @override
@@ -21,17 +52,13 @@ class StorageItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(storage.title, style: Theme.of(context).textTheme.displayLarge),
+              Text(title, style: Theme.of(context).textTheme.displayLarge),
               const SizedBox(height: 14),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
-                    switch(storage) {
-                      Storage() => Icons.storage,
-                      User() => Icons.person,
-                      _ => Icons.location_pin
-                    },
+                    icon,
                     color: Theme.of(context).colorScheme.primary
                   ),
                   const SizedBox(width: 7),
@@ -40,11 +67,7 @@ class StorageItemCard extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         fit: BoxFit.scaleDown,
                           child: Text(
-                              switch(storage) {
-                                Stock(:final address) => address,
-                                Storage(:final fullTitle) => fullTitle,
-                                _ => ''
-                              },
+                              fullName,
                               textAlign: TextAlign.start,
                           )
                       )
