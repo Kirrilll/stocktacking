@@ -34,13 +34,11 @@ class CreateStuffUseCase implements UseCase<Future<Either<IFailure, List<(int, S
     final uploadPathRes = await stuffRepository.uploadFile(image: args.image, name: args.name, orgId: args.orgId);
     if(uploadPathRes.isLeft()) return Left(uploadPathRes.getLeft().getOrElse(() => const AppFailure(message: 'Упс.. что-то пошло нет так')));
     final uploadPath = uploadPathRes.getOrElse((l) => '');
-    final (storageId, stockId) = args.storageItem == null
-        ? (null, null)
-        : switch(args.storageItem) {
+    final (storageId, stockId) = switch(args.storageItem) {
             Stock(:final id) => (null, id),
             Storage(:final id, :final stockId) => (id, stockId),
             _ => (null, null)
-        };
+    };
     return (await stuffRepository.createStuff(
         imageUrl: uploadPath,
         name: args.name,
@@ -52,6 +50,7 @@ class CreateStuffUseCase implements UseCase<Future<Either<IFailure, List<(int, S
         .match(
             (l) => Left(l),
             (r) async {
+              if(args.storageItem != null) return Right(r);
               await Future.wait(r.map((e) => takeStuffUseCase.execute(
                   TakeStuffArgs(
                       userId: args.userId,
@@ -61,7 +60,6 @@ class CreateStuffUseCase implements UseCase<Future<Either<IFailure, List<(int, S
               return Right(r);
             }
     );
-
   }
 
 }
